@@ -7,7 +7,7 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-# ENSEA PLT Project 2021-2022: ?
+# ENSEA PLT Project 2021-2022: [Insert game name here] 
 
 <p align="center">
  
@@ -26,18 +26,25 @@
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
-* [About the Game](#about-the-game)
-  * [Presentation](#Presentation)
-  * [Rules](#rules)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Usage](#usage)
-  * [Basic Testing](#basic-testing)
-* [Release History](#release-history)
-* [Built With](#built-with)
-* [Contributing](#contributing)
-* [License](#license)
+- [ENSEA PLT Project 2021-2022: [Insert game name here]](#ensea-plt-project-2021-2022-insert-game-name-here)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+- [About the game](#about-the-game)
+  - [Presentation](#presentation)
+  - [Rules](#rules)
+    - [Starting](#starting)
+    - [Permitted moves](#permitted-moves)
+      - [move 1](#move-1)
+      - [move 2](#move-2)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+  - [Usage](#usage)
+  - [Basic Testing](#basic-testing)
+  - [Release History](#release-history)
+  - [Built With](#built-with)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 <!-- Introduction -->
 ## Introduction
@@ -49,8 +56,8 @@ The [*PLT*] **P**rojet **L**ogiciel **T**ransversal (Transversal Software Projec
 
 ## Presentation
 
-* Genre : ?
-* Players : ? to N players
+* Genre : Tactical RPG
+* Players : 1 to 2 players
 
 *Game presentation here ...*
 

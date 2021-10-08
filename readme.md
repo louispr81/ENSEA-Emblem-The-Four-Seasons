@@ -7,7 +7,7 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-# ENSEA PLT Project 2021-2022: [Insert game name here] 
+# ENSEA PLT Project 2021-2022: ENSEA Emblem: The Four Seasons
 
 <p align="center">
  
@@ -26,7 +26,7 @@
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
-- [ENSEA PLT Project 2021-2022: [Insert game name here]](#ensea-plt-project-2021-2022-insert-game-name-here)
+- [ENSEA PLT Project 2021-2022: ENSEA Emblem: The Four Seasons](#ensea-plt-project-2021-2022-ensea-emblem-the-four-seasons)
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
 - [About the game](#about-the-game)
@@ -59,14 +59,10 @@ The [*PLT*] **P**rojet **L**ogiciel **T**ransversal (Transversal Software Projec
 * Genre : Tactical RPG
 * Players : 1 to 2 players
 
-*Game presentation here ...*
-
-*Object of the game here ...*
-
-*Gameplay here ...*
+2 players compete on a board, they each have 5 characters that are influenced by the seasons. The first one to kill all the characters of his opponent wins.
 
 ## Rules
-
+The game is played on a turn by turn basis, a player's turn ends when all his characters have played. A character during his turn must move and then attack or use a potion or wait.
 ### Starting
 
 *When the game starts ...*

@@ -113,7 +113,7 @@ pip install gcovr
 
 1. Clone the repo
 ```sh
-git clone https://github.com/[username]/[reponame]
+git clone https://github.com/louispr81/pradineswangbenmira
 cd plt
 ```
 
@@ -145,49 +145,49 @@ plt$ bin/client render
 <!-- RELEASE HISTORY-->
 ## Release History
 
-* <a href="/[username]/[reponame]/releases/tag/1.1">1.1</a>
+* <a href="/louispr81/pradineswangbenmira/releases/tag/1.1">1.1</a>
     * Environnement de d´eveloppement
     * Ressources
     * Rapport section 1 : Présentation générale
     * Code : affichage message `./bin/client hello`
 
-* <a href="/[username]/[reponame]/releases/tag/1.final">1.final</a>
+* <a href="/louispr81/pradineswangbenmira/releases/tag/1.final">1.final</a>
     * Rapport section 2 : Description et Conception des états
     * Code : implantation et tests unitaires états `./bin/client state`
 
-* <a href="/[username]/[reponame]/releases/tag/2.1">2.1</a>
+* <a href="/louispr81/pradineswangbenmira/releases/tag/2.1">2.1</a>
     * Rapport section 3 : Description et Conception du Rendu
     * Code : rendu d’un état `./bin/client render`
 
-* <a href="/[username]/[reponame]/releases/tag/2.2">2.2</a>
+* <a href="/louispr81/pradineswangbenmira/releases/tag/2.2">2.2</a>
     * Rapport section 4 : Règles de changement d’états et moteur de jeu
     * Code : changement d’état `./bin/client engine`
 
-* <a href="/[username]/[reponame]/releases/tag/2.final">2.final</a>
+* <a href="/louispr81/pradineswangbenmira/releases/tag/2.final">2.final</a>
     * Rapport section 5 : Intelligence Artificielle
     * Code : IA `./bin/client random_ai`
 
-* <a href="/[username]/[reponame]/releases/tag/3.1">3.1</a>
+* <a href="/louispr81/pradineswangbenmira/releases/tag/3.1">3.1</a>
     * Rapport section 5 : Intelligence Artificielle
     * Code : IA `./bin/client heuristic_ai`
 
-* <a href="/[username]/[reponame]/releases/tag/3.final">3.final</a>
+* <a href="/louispr81/pradineswangbenmira/releases/tag/3.final">3.final</a>
     * Rapport section 5 : Intelligence Artificielle
     * Code : IA `./bin/client rollback`
     * Code : IA `./bin/client deep_ai`
 
-* <a href="/[username]/[reponame]/releases/tag/4.1">4.1</a>
+* <a href="/louispr81/pradineswangbenmira/releases/tag/4.1">4.1</a>
     * Rapport section 6 : Modularisation
     * Code : Threads `./bin/client thread`
     * Code : Enregistrer `./bin/server record`
     * Code : Rejouer `./bin/client play`
 
-* <a href="/[username]/[reponame]/releases/tag/4.2">4.2</a>
+* <a href="/louispr81/pradineswangbenmira/releases/tag/4.2">4.2</a>
     * Rapport section 6 : Modularisation
     * Code : Serveur `./bin/server listen`
     * Code : Client réseau `./bin/client network`
 
-* <a href="/[username]/[reponame]/releases/tag/4.final">4.final</a>
+* <a href="/louispr81/pradineswangbenmira/releases/tag/4.final">4.final</a>
     * Rapport section 6 : Modularisation
     * Code : Serveur `./bin/server listen`
     * Code : Client réseau  `./bin/client network`
@@ -219,25 +219,25 @@ Distributed under the *license* License. See [LICENSE](license-url) for more inf
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/[username]/[reponame].svg?style=flat-square
-[contributors-url]: https://github.com/[username]/[reponame]/graphs/contributors
+[contributors-shield]: https://img.shields.io/github/contributors/louispr81/pradineswangbenmira.svg?style=flat-square
+[contributors-url]: https://github.com/louispr81/pradineswangbenmira/graphs/contributors
 
-[forks-shield]: https://img.shields.io/github/forks/[username]/[reponame].svg?style=flat-square
-[forks-url]: https://github.com/[username]/[reponame]/network/members
+[forks-shield]: https://img.shields.io/github/forks/louispr81/pradineswangbenmira.svg?style=flat-square
+[forks-url]: https://github.com/louispr81/pradineswangbenmira/network/members
 
-[stars-shield]: https://img.shields.io/github/stars/[username]/[reponame].svg?style=flat-square
-[stars-url]: https://github.com/[username]/[reponame]/stargazers
+[stars-shield]: https://img.shields.io/github/stars/louispr81/pradineswangbenmira.svg?style=flat-square
+[stars-url]: https://github.com/louispr81/pradineswangbenmira/stargazers
 
-[issues-shield]: https://img.shields.io/github/issues/[username]/[reponame].svg?style=flat-square
-[issues-url]: https://github.com/[username]/[reponame]/issues
+[issues-shield]: https://img.shields.io/github/issues/louispr81/pradineswangbenmira.svg?style=flat-square
+[issues-url]: https://github.com/louispr81/pradineswangbenmira/issues
 
-[license-shield]: https://img.shields.io/github/license/[username]/[reponame].svg?style=flat-square
-[license-url]: https://github.com/[username]/[reponame]/blob/[branch]/LICENSE
+[license-shield]: https://img.shields.io/github/license/louispr81/pradineswangbenmira.svg?style=flat-square
+[license-url]: https://github.com/louispr81/pradineswangbenmira/blob/[branch]/LICENSE
 
 [cpp-ver-shield]: https://img.shields.io/badge/C%2B%2B-11-blue.svg
 [cpp-ver]: https://en.wikipedia.org/wiki/C%2B%2B11
 
-[build-status-shield]: https://github.com/[username]/[reponame]/workflows/CI/badge.svg
-[build-status]: https://github.com/[username]/[reponame]/actions
+[build-status-shield]: https://github.com/louispr81/pradineswangbenmira/workflows/CI/badge.svg
+[build-status]: https://github.com/louispr81/pradineswangbenmira/actions
 
 [version-shield]: https://img.shields.io/badge/version-0.0-blue.svg?cacheSeconds=2592000

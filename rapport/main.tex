@@ -167,19 +167,51 @@ La police du jeu est la suivante
 \end{figure}
 \clearpage
 \section{Description et conception des états}
-
+\paragraph{} Un état du jeu est formée par un ensemble d’éléments fixes (le plateau) et un ensemble d’éléments mobiles (les 10 personnages). Tous les éléments possèdent un identifiant de type d'élément qui permet de connaître leur type.
+\paragraph{} L'id de chaque élément possède 2 chiffres, le chiffre de la dizaine indique la catégorie de l'élément, ainsi si c'est un joueur il commence par un 4, par 3 si c'est une saison, par 2 si c'est un objet, par 1 si c'est une case du plateau (cell) et par 0 si c'est un personnage. Le deuxième chiffre indique plus en détail dans quel état est l'élément.     
 \subsection{Description des états}
-
-
+\subsubsection{États des personnages}
+Chaque personnage possède une classe unique, il peut être :
+\begin{itemize}
+\item un assassin
+\item un mage
+\item un chevalier
+\item un combattant
+\end{itemize}
+\subsubsection{États des cases}
+Chaque case (cell) possède un type, elle peut être :
+\begin{itemize}
+\item de type grass
+\item de type forest
+\item de type stone
+\item de type river
+\item de type bridge
+\item de type passage
+\item de type mountains
+\item de type chest
+\end{itemize}
+\subsubsection{États des saisons}
+Il y a quatres types de saisons :
+\begin{itemize}
+\item le printemps
+\item l'été
+\item l'automne
+\item l'hiver
+\end{itemize}
+\subsubsection{États des joueurs}
+Il y a deux joueurs
+\begin{itemize}
+\item Joueur 1
+\item Joueur 2
+\end{itemize}
 \subsection{Conception Logiciel}
-
-
-%\begin{landscape}
-%\begin{figure}[p]
-%\includegraphics[width=0.9\paperheight]{state.pdf}
-%\caption{\label{uml:state}Diagramme des classes d'état.} 
-%\end{figure}
-%\end{landscape}
+\newpage
+\begin{landscape}
+\begin{figure}[p]
+\includegraphics[width=0.9\paperheight]{state.pdf}
+\caption{\label{uml:state}Diagramme des classes d'état.} 
+\end{figure}
+\end{landscape}
 
 \clearpage
 \section{Rendu: Stratégie et Conception}

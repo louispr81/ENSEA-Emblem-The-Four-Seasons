@@ -5,3 +5,12 @@ nbproject
 src/*/*.h
 src/*/*/*.h
 .idea
+res/pngorigine/default_chest_lock.png
+res/pngorigine/default_grass.png
+res/pngorigine/default_ice.png
+res/pngorigine/default_snow.png
+res/pngorigine/default_stone_block.png
+res/pngorigine/default_stone_brick.png
+res/pngorigine/default_water.png
+res/pngorigine/default_leaves_simple.png
+res/pngorigine/pngorigine2.zip

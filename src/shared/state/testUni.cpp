@@ -1,7 +1,7 @@
 #include <boost/test/unit_test.hpp>
 
-#include "../../src/shared/state/jeu.h"
-#include "../../src/shared/state/cell.h"
+#include "../../src/shared/state/Jeu.h"
+#include "../../src/shared/state/Cell.h"
 
 using namespace ::state;
 

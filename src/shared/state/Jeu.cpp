@@ -15,27 +15,30 @@ Jeu::Jeu(){
     bool gameover     = false;
     Joueur joueur1;
     Joueur joueur2;
-    Saison hiver;
+    Saison saison;
+    saison.nom ="automne"  ;
     Plateau plateau1;
   
    
 }
 
-void Jeu::tourSuivant(){
-   if (joueur1.gameover== false and joueur2.gameover==false){
+void Jeu::tourSuivant(Jeu jeu){
+   if (jeu.gameover== false ){
     tour++;
     }
 };
 
-void Jeu::abandonner (){
-    if (joueur1.gameover== false and joueur2.gameover==false){
+void Jeu::abandonner (Jeu jeu){
+    if (jeu.gameover== false){
      gameover     = true;
     }
     
 };
-    void updateSaison (){
-        if (joueur1.gameover== false and joueur2.gameover==false){
-        saison++;
+    void Jeu::updateSaison (Jeu jeu){
+        if (jeu.gameover== false){
+            if(jeu.saison.nom == "automne"){
+                jeu.saison.nom ="hiver";
+           }
         }
 
     };

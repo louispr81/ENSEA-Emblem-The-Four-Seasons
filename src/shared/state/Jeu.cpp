@@ -22,22 +22,22 @@ Jeu::Jeu(){
    
 }
 
-void Jeu::tourSuivant(Jeu jeu){
-   if (jeu.gameover== false ){
+void Jeu::tourSuivant(){
+   if ((*this).gameover== false ){
     tour++;
     }
 };
 
-void Jeu::abandonner (Jeu jeu){
-    if (jeu.gameover== false){
+void Jeu::abandonner (){
+    if ((*this).gameover== false){
      gameover     = true;
     }
     
 };
-    void Jeu::updateSaison (Jeu jeu){
-        if (jeu.gameover== false){
-            if(jeu.saison.nom == "automne"){
-                jeu.saison.nom ="hiver";
+    void Jeu::updateSaison (){
+        if ((*this).gameover== false){
+            if((*this).saison.nom == "automne"){
+                (*this).saison.nom ="hiver";
            }
         }
 

@@ -1650,7 +1650,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#cell&amp;#</dia:string>
+            <dia:string>#cell#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#Cell#</dia:string>
@@ -6109,7 +6109,7 @@
         <dia:point val="-325.494,-376.429"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-325.544,-376.613;-321.661,-373.808"/>
+        <dia:rectangle val="-325.544,-376.614;-321.661,-373.808"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

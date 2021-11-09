@@ -12,7 +12,7 @@
 <p align="center">
  
   <!-- logo of the project/game here -->
-  <img height="300" src="https://zupimages.net/viewer.php?id=21/45/owy8.png" alt="logo"/>  
+  <img height="300" src="https://zupimages.net/up/21/45/owy8.png" alt="logo"/>  
 
   <div align="center">
 

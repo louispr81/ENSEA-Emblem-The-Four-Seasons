@@ -7,6 +7,7 @@ void Personnage::attendre(){
         (*this).played=true;
     }
 }
+
     
     
 

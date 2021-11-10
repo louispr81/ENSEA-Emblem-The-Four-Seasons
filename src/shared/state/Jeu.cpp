@@ -8,24 +8,59 @@
 using namespace state;
 using namespace std;
 
+/*
+Jeu::Jeu(){
+    std::vector<Joueur> joueurs;
+    int tour     = 1;
+    bool gameover     = false;
+    Joueur joueur1;
+    Joueur joueur2;
+    Saison saison;
+    Plateau plateau1;
+  
+   
+}
+*/
+
+string Joueur::getNom(){
+    return (*this).nom;
+};
+
+
+
 void Jeu::tourSuivant(){
    if ((*this).gameover== false ){
     (*this).tour++;
+    
+    
     }
 };
 
-void Jeu::abandonner (){
+void Jeu::abandonner (Joueur joueur){
     if ((*this).gameover== false){
      (*this).gameover     = true;
+     
+     cout<<"le joueur: "<<joueur.getNom()<<" a abandonné la partie "<< endl;
     }
     
 };
     void Jeu::updateSaison (){
+        
         if ((*this).gameover== false){
-            if((*this).saison.nom == "automne"){
-                (*this).saison.nom ="hiver";
+            if((*this).saison.getId() ==printemps){
+               // (*this).saison=ete;
+           }
+           if((*this).saison.getId() == ete){
+               // (*this).saison=automne;                         //les objets printemps ,automne,ete,hiver
+           }                                                      // sont à créer !!
+           if((*this).saison.getId() == automne){   
+               // (*this).saison=hiver;
+           }
+           if((*this).saison.getId() == hiver){
+               // (*this).saison=printemps; 
            }
         }
+        
 
     };
 

@@ -1,3 +1,4 @@
+/*
 #include <boost/test/unit_test.hpp>
 
 #include "Jeu.h" // header in local directory
@@ -10,11 +11,11 @@ using namespace state;
 using namespace std;
 
 using namespace ::state;
-/*
+
 BOOST_AUTO_TEST_CASE(TestStaticAssert)
 {
   BOOST_CHECK(1);
-} */
+} 
 
 BOOST_AUTO_TEST_CASE(TestJeu)
 {
@@ -38,4 +39,4 @@ BOOST_AUTO_TEST_CASE(TestJeu)
   }
 }
 
-/* vim: set sw=2 sts=2 et : */
+ vim: set sw=2 sts=2 et : */

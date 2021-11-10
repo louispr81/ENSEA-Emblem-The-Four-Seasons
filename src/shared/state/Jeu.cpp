@@ -8,7 +8,7 @@
 using namespace state;
 using namespace std;
 
-
+/*
 Jeu::Jeu(){
     std::vector<Joueur> joueurs;
     int tour     = 1;
@@ -20,7 +20,7 @@ Jeu::Jeu(){
   
    
 }
-
+*/
 
 string Joueur::getNom(){
     return (*this).nom;

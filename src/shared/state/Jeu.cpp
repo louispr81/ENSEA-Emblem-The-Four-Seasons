@@ -8,29 +8,15 @@
 using namespace state;
 using namespace std;
 
-
-Jeu::Jeu(){
-    std::vector<Joueur> joueurs;
-    int tour     = 1;
-    bool gameover     = false;
-    Joueur joueur1;
-    Joueur joueur2;
-    Saison saison;
-    saison.nom ="automne"  ;
-    Plateau plateau1;
-  
-   
-}
-
 void Jeu::tourSuivant(){
    if ((*this).gameover== false ){
-    tour++;
+    (*this).tour++;
     }
 };
 
 void Jeu::abandonner (){
     if ((*this).gameover== false){
-     gameover     = true;
+     (*this).gameover     = true;
     }
     
 };

@@ -9,15 +9,15 @@ Joueur::Joueur(std::string nom,JoueurId id, std::vector<Personnage> personnages)
 }
 std::vector<Personnage> Joueur::getPersonnages(){
     
-    return personnages;
+    return this->personnages;
 }
 int Joueur::getId(){
 
-    return id;
+    return this->id;
 }
 std::string getNom(){
 
-    return nom;
+    return this->nom;
 }
 
 Joueur::~Joueur(){

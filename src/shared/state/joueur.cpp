@@ -11,11 +11,11 @@ std::vector<Personnage> Joueur::getPersonnages(){
     
     return (*this).personnages;
 }
-int Joueur::getId(){
+JoueurId Joueur::getId(){
 
     return (*this).id;
 }
-std::string getNom(){
+std::string Joueur::getNom(){
 
     return (*this).nom;
 }

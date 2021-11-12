@@ -110,16 +110,16 @@ void Jeu::updateSaison (){
         
     if ((*this).gameover== false){
         if((*this).saison->getId() ==PRINTEMPS){
-            // (*this).saison=ete;
+            (*this).saison=(*this).listeSaison[ETE];
         }
         if((*this).saison->getId() == ETE){
-            // (*this).saison=automne;                         //les objets printemps ,automne,ete,hiver
-        }                                                      // sont à créer !!
+            (*this).saison=(*this).listeSaison[AUTOMNE];                         
+        }                                                      
         if((*this).saison->getId() == AUTOMNE){   
-            // (*this).saison=hiver;
+            (*this).saison=(*this).listeSaison[HIVER];
         }
         if((*this).saison->getId() == HIVER){
-            // (*this).saison=printemps; 
+            (*this).saison=(*this).listeSaison[PRINTEMPS];
         }
     }
 }

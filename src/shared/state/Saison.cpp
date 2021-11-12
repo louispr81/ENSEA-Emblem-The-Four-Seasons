@@ -1,17 +1,16 @@
 #include "Saison.h"
-#include "limits.h"
 using namespace state;
-
-void Saison::Saison(std::string nom, std::list<int> bonus, SaisonId id, Jeu saison)
+        
+Saison::Saison (SaisonId id, std::vector<int> bonus, std::string nom, SaisonId saisonOppId)
 {    
-    (*this).nom = nom;
-    (*this).bonus = bonus;
     (*this).id = id;
-    (*this).saison = saison;
+    (*this).bonus = bonus;
+    (*this).nom = nom;
+    (*this).saisonOppId = saisonOppId;
 }
 
 
-void Saison::updateStatsSaison(Personnage personnage)
+void Saison::updateStatsSaison(Personnage personnage, Jeu jeu)
 {
     //when the saison and the saison of the character are the same
     if(personnage.getSaison().id == jeu.getSaison().id)  
@@ -22,62 +21,64 @@ void Saison::updateStatsSaison(Personnage personnage)
     else if(personnage.getSaison().saisonOppId == jeu.getSaison().id)
     {       
         
-        tab_bonus = new int[12];      
-        personnage.setBonus(tab);
+        std::vector<int> tab_malus; 
+         for (int i=0; i<12; ++i){
+            tab_malus.push_back(-(this->bonus[i]));
+        }
+        personnage.setBonus(tab_malus);
     }
     else{
-        tab_no_bonus = new int[12] {0}；
+        std::vector<int> tab_no_bonus;
+        for (int i=0; i<12; ++i){
+            tab_no_bonus.push_back(0);
+        }
         personnage.setBonus(tab_no_bonus);
     }
 }
 
 void Saison::updateCell(Cell cell)
 {
-    if(Cell.type == GRASS){
-        Cell.setcostPm = 1;
-        Cell.setWalkable = true;
+    if(cell.getType() == GRASS){
+        cell.setCostPm (1);
+        cell.setWalkable (true);
     }
-    if(Cell.type == FOREST){
-        Cell.setcostPm = 1;
-        Cell.setWalkable = true;
+    if(cell.getType() == FOREST){
+        cell.setCostPm (1);
+        cell.setWalkable (true);
     }
-    if(Cell.type == STONE){
-        Cell.setcostPm = 1;
-        Cell.setWalkable = false;   
+    if(cell.getType() == STONE){
+        cell.setCostPm(1);
+        cell.setWalkable(false);   
     }
-    if(Cell.type == RIVER){
-        Cell.setcostPm = 1;
-        Cell.setWalkable = false;     
+    if(cell.getType() == RIVER){
+        cell.setCostPm(1);
+        cell.setWalkable(false);     
     }
-    if(Cell.type == BRIDGE){
-        Cell.setcostPm = 1;  
-        Cell.setWalkable = true;      
+    if(cell.getType() == BRIDGE){
+        cell.setCostPm(1);  
+        cell.setWalkable(true);      
     }
-    if(Cell.type == PASSAGE){
-        Cell.setcostPm = 3;  
-        Cell.setWalkable = true;      
+    if(cell.getType() == PASSAGE){
+        cell.setCostPm(3);  
+        cell.setWalkable(true);      
     }
-    if(Cell.type == MOUTAINS){
-        Cell.setcostPm = 1;
-        Cell.setWalkable = false;             
+    if(cell.getType() == MOUTAINS){
+        cell.setCostPm(1);
+        cell.setWalkable(false);             
     }
 
 
-    if (this->id == hiver)
-        Cell.setcostPm = 2*Cell.setcostPm;
-        if (Cell.type == RIVER){
-         Cell.walkable = true;
+    if (this->id == HIVER){
+        cell.setCostPm (2*cell.getCostPm());
+        if (cell.getType() == RIVER){
+        cell.setWalkable (true);
         }
     }
-    if (this->id == printemps){
-        Cell.setcostPm = Cell.setcostPm/2;
+    if (this->id == PRINTEMPS){
+        cell.setCostPm(cell.getCostPm()/2);
     }
         
-   }
+   
 
 }
 
-void Saison::~Saison(){
-    delete[] tab_bonus;
-    delete[] tab_no_bonus;
-}

@@ -1,15 +1,11 @@
 #include "Classe.h"
-#include <vector>
+using namespace state;
 
-void Classe::Classe(ClasseId classeId, std::vector<float> probaGainStats )
+Classe::Classe(ClasseId classeId, std::string nom, std::vector<float> probaGainStats)
 {    
     (*this).classeId = classeId;
     (*this).probaGainStats = probaGainStats;
 }
 
-void Classe::~Classe()
-{
-    
-}
 
 

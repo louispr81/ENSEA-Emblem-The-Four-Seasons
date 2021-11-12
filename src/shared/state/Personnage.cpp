@@ -4,8 +4,20 @@
 #include <time.h>
 using namespace state;
 
-void Personnage::Personnage(){
-
+Personnage::Personnage(std::string nom, int id, Statistiques statistiquesBase, std::vector<Objet> inventaire, Arme arme, Classe classe, Saison* saison, Cell* cell, std::vector<int> bonus, Statistiques statistiques, bool played , bool alive ){
+    (*this).nom=nom;
+    (*this).id=id;
+    (*this).statistiquesBase=statistiquesBase;
+    (*this).arme=arme;
+    inventaire.push_back((*this).arme);
+    (*this).inventaire=inventaire;
+    (*this).classe=classe;
+    (*this).saison=saison;
+    (*this).cell=cell;
+    (*this).bonus=bonus;
+    (*this).statistiques=statistiques;
+    (*this).played=played;
+    (*this).alive=alive;
 }
 void Personnage::attendre(){ 
     if ((*this).played != true){
@@ -13,25 +25,9 @@ void Personnage::attendre(){
         (*this).played=true;
     }
 }
-
-void Personnage::deplacer(){
-
-}
-void Personnage::attaquer(){
-
-}
-void Personnage::utiliserPotion(){
-
-}
-void Personnage::pouvoir(){
-
-}
-void Personnage::gainNiveau(){
-
-}
-void Personnage::ouvrirCoffre(){
-if (CellId == CHEST){    
-    if (Personnage.getCell().getType()=CHEST){
+/* 
+void Personnage::ouvrirCoffre(){ 
+    if (Personnage.getCell().getType()==CHEST){
         //choose a random weapon 
         tab_arme = new char[5] {TOME,LANCE,HACHE,EPEE,ARC,POTION};
         srand((unsigned)time(NULL));
@@ -39,17 +35,20 @@ if (CellId == CHEST){
             choix_arme_num=rand()%6+0;
         }
         this->ObjetId=tab_arme[choix_arme_num];
-        Personnage.inventaireAdd(this->ObjetId);
+        Personnage.inventaireAdd(Objet objet(ObjetId)); // Il faut rajouter un constructeur qui crée un objet grâce à l'id
     }
     CellId=GRASS; 
     this->played = true;
-}      
+} 
+*/
+/*     
 void Personnage::echangerObjet(){
     if (Personnage.getCell()=)
 }
-
-void Personnage::~Personnage(){
+*/
+/*
+Personnage::~Personnage(){
     delete[] tab_arme;
 }
-
+*/
 

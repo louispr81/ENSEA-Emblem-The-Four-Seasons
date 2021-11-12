@@ -2,7 +2,7 @@
 #include "limits.h"
 using namespace state;
 
-void Saison::Saison(std::string nom, std::list<int> bonus, SaisonId id, Jeu saison)
+Saison::Saison(std::string nom, std::list<int> bonus, SaisonId id, Jeu saison)
 {    
     (*this).nom = nom;
     (*this).bonus = bonus;
@@ -77,7 +77,7 @@ void Saison::updateCell(Cell cell)
 
 }
 
-void Saison::~Saison(){
+Saison::~Saison(){
     delete[] tab_bonus;
     delete[] tab_no_bonus;
 }

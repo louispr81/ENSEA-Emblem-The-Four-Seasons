@@ -4,7 +4,7 @@
 #include <time.h>
 using namespace state;
 
-void Personnage::Personnage(){
+Personnage::Personnage(){
 
 }
 void Personnage::attendre(){ 
@@ -47,8 +47,7 @@ if (CellId == CHEST){
 void Personnage::echangerObjet(){
     if (Personnage.getCell()=)
 }
-
-void Personnage::~Personnage(){
+Personnage::~Personnage(){
     delete[] tab_arme;
 }
 

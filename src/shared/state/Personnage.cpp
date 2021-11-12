@@ -46,6 +46,8 @@ if (CellId == CHEST){
 }      
 void Personnage::echangerObjet(){
     if (Personnage.getCell()=)
+    
+    this->played = true;
 }
 Personnage::~Personnage(){
     delete[] tab_arme;

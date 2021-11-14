@@ -6,4 +6,5 @@ Classe::Classe(ClasseId classeId, std::string nom, std::vector<float> probaGainS
     (*this).classeId = classeId;
     (*this).probaGainStats = probaGainStats;
     (*this).nom = nom;
+    
 }

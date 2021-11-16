@@ -8,3 +8,7 @@ Classe::Classe(ClasseId classeId, std::string nom, std::vector<float> probaGainS
     (*this).nom = nom;
     
 }
+
+Classe::~Classe(){
+    
+}

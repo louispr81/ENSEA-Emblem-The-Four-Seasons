@@ -1,6 +1,11 @@
 #include "Statistiques.h" 
 using namespace state;
 
+
+Statistiques::Statistiques (){}
+Statistiques::~Statistiques (){}
+
+
 void Statistiques::setVie (int vie){
     (*this).vie=vie;
 }

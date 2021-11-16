@@ -24,3 +24,7 @@ int Arme::getRange (){
 int Arme::getPrecision (){
     return (*this).precision;
 }
+
+Arme::~Arme(){
+    
+}

@@ -28,6 +28,7 @@ Jeu::Jeu(){
     listeSaison.push_back(&ete);
     listeSaison.push_back(&automne);
     listeSaison.push_back(&hiver);
+    
     //Creation du plateau
     Plateau plateau(64); 
 
@@ -46,6 +47,7 @@ Jeu::Jeu(){
     //Creation des tableaux de probabilités d'augmentation d'une statistique
     std::vector<float> probaGainStatsA1;
     std::vector<float> probaGainStatsM1;
+
     //Creation des classes
     Classe assassin(ASSASSIN, "Assassin", probaGainStatsA1);
     Classe mage(MAGE, "Mage", probaGainStatsM1);
@@ -61,7 +63,7 @@ Jeu::Jeu(){
 
     //Choix des cases des personnages
     Cell caseA1=plateau.getCase(0,0);
-    Cell caseM1=plateau.getCase(63,63);
+    Cell caseM1=plateau.getCase(63,63); //Ne pas oublier de marquer les cases comme occupés lorsque cell.cpp sera écrit
 
     //Creation des personnages
     Personnage assassin1((std::string)"assassin1", 0,  statistiquesBaseA1,  inventaireA1, dague, assassin, &automne, &(caseA1), bonusP,  statistiquesA1,false,true);
@@ -110,16 +112,16 @@ void Jeu::updateSaison (){
         
     if ((*this).gameover== false){
         if((*this).saison->getId() ==PRINTEMPS){
-            // (*this).saison=ete;
+            (*this).saison=(*this).listeSaison[ETE];
         }
         if((*this).saison->getId() == ETE){
-            // (*this).saison=automne;                         //les objets printemps ,automne,ete,hiver
-        }                                                      // sont à créer !!
+            (*this).saison=(*this).listeSaison[AUTOMNE];                         
+        }                                                      
         if((*this).saison->getId() == AUTOMNE){   
-            // (*this).saison=hiver;
+            (*this).saison=(*this).listeSaison[HIVER];
         }
         if((*this).saison->getId() == HIVER){
-            // (*this).saison=printemps; 
+            (*this).saison=(*this).listeSaison[PRINTEMPS];
         }
     }
 }

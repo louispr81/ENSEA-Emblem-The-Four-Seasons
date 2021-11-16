@@ -44,6 +44,8 @@ void Personnage::ouvrirCoffre(){
 /*     
 void Personnage::echangerObjet(){
     if (Personnage.getCell()=)
+    
+    this->played = true;
 }
 */
 /*

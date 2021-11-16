@@ -15,8 +15,7 @@ int Potion::getSoin(){
     return (*this).soin;
 }
 
-/*
+
 Potion::~Potion(){
 
 }
-*/

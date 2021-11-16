@@ -77,8 +77,8 @@ void Saison::updateCell(Cell cell)
     if (this->id == PRINTEMPS){
         cell.setCostPm(cell.getCostPm()/2);
     }
-        
-   
-
 }
 
+Saison::~Saison(){
+    
+}

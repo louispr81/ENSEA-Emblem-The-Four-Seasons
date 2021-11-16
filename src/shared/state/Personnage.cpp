@@ -41,16 +41,15 @@ void Personnage::ouvrirCoffre(){
     this->played = true;
 } 
 */
-/*     
-void Personnage::echangerObjet(){
-    if (Personnage.getCell()=)
-    
+/*
+void Personnage::echangerObjet(Personnage personnageB, Objet objet){
+    if (Personnage.getCell()=Personnage.getCell().personnageB)    
     this->played = true;
 }
 */
-/*
+
 Personnage::~Personnage(){
-    delete[] tab_arme;
+   // delete[] tab_arme;
 }
-*/
+
 

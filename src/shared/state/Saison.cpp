@@ -10,7 +10,7 @@ Saison::Saison (SaisonId id, std::vector<int> bonus, std::string nom, SaisonId s
 }
 
 
-void Saison::updateStatsSaison(Personnage personnage, Jeu jeu)
+void Saison::updateStatsSaison(Personnage personnage, State jeu)
 {
     //when the saison and the saison of the character are the same
     if(personnage.getSaison().id == jeu.getSaison().id)  

@@ -1,12 +1,12 @@
 // my_class.cpp
-#include "Jeu.h" // header in local directory
+#include "State.h" // header in local directory
 #include <iostream> // header in standard library
 #include <string>
 using namespace state;
 using namespace std;
 
 
-Jeu::Jeu(){
+State::State(){
     
     std::vector<Joueur> joueurs;
     std::vector<Personnage> personnagesJ1;
@@ -73,6 +73,8 @@ Jeu::Jeu(){
     //Creation des joueurs
     Joueur joueur1("J1", JOUEUR1, personnagesJ1);
     Joueur joueur2("J2", JOUEUR2, personnagesJ2);
+    joueurs.push_back(joueur1);
+    joueurs.push_back(joueur2);
 
     //Atributs
     (*this).joueurs=joueurs;
@@ -86,19 +88,13 @@ Jeu::Jeu(){
 }
 
 
-std::string Joueur::getNom(){
-    return (*this).nom;
-}
-
-
-
-void Jeu::tourSuivant(){
+void State::tourSuivant(){
    if ((*this).gameover== false ){
         (*this).tour++;
     }
 }
 
-void Jeu::abandonner (Joueur joueur){
+void State::abandonner (Joueur joueur){
     if ((*this).gameover== false){
      (*this).gameover     = true;
      
@@ -106,7 +102,7 @@ void Jeu::abandonner (Joueur joueur){
     }
     
 }
-void Jeu::updateSaison (){
+void State::updateSaison (){
         
     if ((*this).gameover== false){
         if((*this).saison->getId() ==PRINTEMPS){
@@ -124,3 +120,17 @@ void Jeu::updateSaison (){
     }
 }
 
+int State::getTour (){
+    return (*this).tour;
+}
+
+bool State::getGameover (){
+    return (*this).gameover;
+}
+
+Joueur State::getJoueurs(int i){
+    return (*this).joueurs[i];
+}
+State::~State(){
+    
+}

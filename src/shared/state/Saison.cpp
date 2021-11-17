@@ -13,12 +13,12 @@ Saison::Saison (SaisonId id, std::vector<int> bonus, std::string nom, SaisonId s
 void Saison::updateStatsSaison(Personnage personnage, State jeu)
 {
     //when the saison and the saison of the character are the same
-    if(personnage.getSaison().id == jeu.getSaison().id)  
+    if(personnage.getSaison().id == (*jeu.getSaison()).id)  
     {
         personnage.setBonus(this->bonus);
     }
     //when the saison and the saison of the character are contrary
-    else if(personnage.getSaison().saisonOppId == jeu.getSaison().id)
+    else if(personnage.getSaison().saisonOppId == (*jeu.getSaison()).id)
     {       
         
         std::vector<int> tab_malus; 
@@ -78,7 +78,9 @@ void Saison::updateCell(Cell cell)
         cell.setCostPm(cell.getCostPm()/2);
     }
 }
-
+SaisonId Saison::getId(){
+    return (*this).id;
+}
 Saison::~Saison(){
     
 }

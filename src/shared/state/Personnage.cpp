@@ -19,6 +19,14 @@ Personnage::Personnage(std::string nom, int id, Statistiques statistiquesBase, s
     (*this).played=played;
     (*this).alive=alive;
 }
+
+Saison Personnage::getSaison(){
+  //  return (*this).saison;
+}
+void Personnage::setBonus(std::vector<int> x){
+
+}
+
 void Personnage::attendre(){ 
     if ((*this).played != true){
         (*this).statistiques.setPoint_mouvement(0);

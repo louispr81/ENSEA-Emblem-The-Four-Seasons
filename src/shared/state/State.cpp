@@ -87,7 +87,9 @@ State::State(){
     
 }
 
-
+std::vector<Saison*> State::getListeSaison(){
+    return (*this).listeSaison;
+}
 void State::tourSuivant(){
    if ((*this).gameover== false ){
         (*this).tour++;
@@ -106,16 +108,16 @@ void State::updateSaison (){
         
     if ((*this).gameover== false){
         if((*this).saison->getId() ==PRINTEMPS){
-            // (*this).saison=ete;
+            (*this).saison=(*this).getListeSaison()[1];
         }
         if((*this).saison->getId() == ETE){
-            // (*this).saison=automne;                         //les objets printemps ,automne,ete,hiver
+            (*this).saison=(*this).getListeSaison()[2];                         //les objets printemps ,automne,ete,hiver
         }                                                      // sont à créer !!
         if((*this).saison->getId() == AUTOMNE){   
-            // (*this).saison=hiver;
+            (*this).saison=(*this).getListeSaison()[3];
         }
         if((*this).saison->getId() == HIVER){
-            // (*this).saison=printemps; 
+            (*this).saison=(*this).getListeSaison()[0]; 
         }
     }
 }
@@ -130,6 +132,10 @@ bool State::getGameover (){
 
 Joueur State::getJoueurs(int i){
     return (*this).joueurs[i];
+}
+
+Saison* State:: getSaison(){
+    return (*this).saison;
 }
 State::~State(){
     

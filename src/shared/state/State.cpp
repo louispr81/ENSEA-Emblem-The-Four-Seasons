@@ -1,12 +1,12 @@
 // my_class.cpp
-#include "Jeu.h" // header in local directory
+#include "State.h" // header in local directory
 #include <iostream> // header in standard library
 #include <string>
 using namespace state;
 using namespace std;
 
 
-Jeu::Jeu(){
+State::State(){
     
     std::vector<Joueur> joueurs;
     std::vector<Personnage> personnagesJ1;
@@ -28,7 +28,6 @@ Jeu::Jeu(){
     listeSaison.push_back(&ete);
     listeSaison.push_back(&automne);
     listeSaison.push_back(&hiver);
-    
     //Creation du plateau
     Plateau plateau(64); 
 
@@ -47,7 +46,6 @@ Jeu::Jeu(){
     //Creation des tableaux de probabilités d'augmentation d'une statistique
     std::vector<float> probaGainStatsA1;
     std::vector<float> probaGainStatsM1;
-
     //Creation des classes
     Classe assassin(ASSASSIN, "Assassin", probaGainStatsA1);
     Classe mage(MAGE, "Mage", probaGainStatsM1);
@@ -63,7 +61,7 @@ Jeu::Jeu(){
 
     //Choix des cases des personnages
     Cell caseA1=plateau.getCase(0,0);
-    Cell caseM1=plateau.getCase(63,63); //Ne pas oublier de marquer les cases comme occupés lorsque cell.cpp sera écrit
+    Cell caseM1=plateau.getCase(63,63);
 
     //Creation des personnages
     Personnage assassin1((std::string)"assassin1", 0,  statistiquesBaseA1,  inventaireA1, dague, assassin, &automne, &(caseA1), bonusP,  statistiquesA1,false,true);
@@ -75,6 +73,8 @@ Jeu::Jeu(){
     //Creation des joueurs
     Joueur joueur1("J1", JOUEUR1, personnagesJ1);
     Joueur joueur2("J2", JOUEUR2, personnagesJ2);
+    joueurs.push_back(joueur1);
+    joueurs.push_back(joueur2);
 
     //Atributs
     (*this).joueurs=joueurs;
@@ -87,20 +87,16 @@ Jeu::Jeu(){
     
 }
 
-
-std::string Joueur::getNom(){
-    return (*this).nom;
+std::vector<Saison*> State::getListeSaison(){
+    return (*this).listeSaison;
 }
-
-
-
-void Jeu::tourSuivant(){
+void State::tourSuivant(){
    if ((*this).gameover== false ){
         (*this).tour++;
     }
 }
 
-void Jeu::abandonner (Joueur joueur){
+void State::abandonner (Joueur joueur){
     if ((*this).gameover== false){
      (*this).gameover     = true;
      
@@ -108,21 +104,39 @@ void Jeu::abandonner (Joueur joueur){
     }
     
 }
-void Jeu::updateSaison (){
+void State::updateSaison (){
         
     if ((*this).gameover== false){
         if((*this).saison->getId() ==PRINTEMPS){
-            (*this).saison=(*this).listeSaison[ETE];
+            (*this).saison=(*this).getListeSaison()[1];
         }
         if((*this).saison->getId() == ETE){
-            (*this).saison=(*this).listeSaison[AUTOMNE];                         
-        }                                                      
+            (*this).saison=(*this).getListeSaison()[2];                         //les objets printemps ,automne,ete,hiver
+        }                                                      // sont à créer !!
         if((*this).saison->getId() == AUTOMNE){   
-            (*this).saison=(*this).listeSaison[HIVER];
+            (*this).saison=(*this).getListeSaison()[3];
         }
         if((*this).saison->getId() == HIVER){
-            (*this).saison=(*this).listeSaison[PRINTEMPS];
+            (*this).saison=(*this).getListeSaison()[0]; 
         }
     }
 }
 
+int State::getTour (){
+    return (*this).tour;
+}
+
+bool State::getGameover (){
+    return (*this).gameover;
+}
+
+Joueur State::getJoueurs(int i){
+    return (*this).joueurs[i];
+}
+
+Saison* State:: getSaison(){
+    return (*this).saison;
+}
+State::~State(){
+    
+}

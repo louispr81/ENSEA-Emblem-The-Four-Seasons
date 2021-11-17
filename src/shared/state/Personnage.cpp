@@ -19,6 +19,14 @@ Personnage::Personnage(std::string nom, int id, Statistiques statistiquesBase, s
     (*this).played=played;
     (*this).alive=alive;
 }
+
+Saison Personnage::getSaison(){
+  //  return (*this).saison;
+}
+void Personnage::setBonus(std::vector<int> x){
+
+}
+
 void Personnage::attendre(){ 
     if ((*this).played != true){
         (*this).statistiques.setPoint_mouvement(0);
@@ -41,16 +49,15 @@ void Personnage::ouvrirCoffre(){
     this->played = true;
 } 
 */
-/*     
-void Personnage::echangerObjet(){
-    if (Personnage.getCell()=)
-    
+/*
+void Personnage::echangerObjet(Personnage personnageB, Objet objet){
+    if (Personnage.getCell()=Personnage.getCell().personnageB)    
     this->played = true;
 }
 */
-/*
+
 Personnage::~Personnage(){
-    delete[] tab_arme;
+   // delete[] tab_arme;
 }
-*/
+
 

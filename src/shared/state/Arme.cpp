@@ -1,6 +1,9 @@
 #include "Arme.h"
 using namespace state;
+/*
+Arme::Arme(){
 
+}*/
 Arme::Arme (std::string nom, int id, int durabilite, bool usable, ObjetId objetId, int degats, int critique, int range, int precision){
     (*this).nom=nom;
     (*this).id=id;
@@ -23,4 +26,8 @@ int Arme::getRange (){
 }
 int Arme::getPrecision (){
     return (*this).precision;
+}
+
+Arme::~Arme(){
+    
 }

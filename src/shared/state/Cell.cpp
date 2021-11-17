@@ -39,3 +39,6 @@ void Cell::setWalkable (bool walkable){
     (*this).walkable=walkable;
 
 }
+Cell::~Cell (){
+    
+}

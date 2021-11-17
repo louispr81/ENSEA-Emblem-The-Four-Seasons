@@ -149,7 +149,7 @@ plt$ bin/client render
 
 * <a href="https://github.com/louispr81/pradineswangbenmira/releases/tag/1.final">1.final</a>
     * Rapport section 2 : Description et Conception des états
-    * Code : implantation et tests unitaires états `./bin/client state`
+    * Code : Implantation et tests unitaires états `./bin/client state`
 
 * <a href="https://github.com/louispr81/pradineswangbenmira/releases/tag/2.1">2.1</a>
     * Rapport section 3 : Description et Conception du Rendu

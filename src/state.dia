@@ -3180,7 +3180,7 @@
         <dia:point val="-319.58,-361.272"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-319.63,-361.322;-301.705,-349.022"/>
+        <dia:rectangle val="-319.63,-361.322;-301.705,-348.222"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-319.58,-361.272"/>
@@ -3189,7 +3189,7 @@
         <dia:real val="17.824999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="12.199999999999999"/>
+        <dia:real val="13"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#Saison#</dia:string>
@@ -3657,6 +3657,36 @@
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#SaisonId#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="inheritance_type">
+            <dia:enum val="2"/>
+          </dia:attribute>
+          <dia:attribute name="query">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="parameters"/>
+        </dia:composite>
+        <dia:composite type="umloperation">
+          <dia:attribute name="name">
+            <dia:string>#getNom#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="stereotype">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7654,7 +7684,7 @@
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O6" connection="30"/>
+        <dia:connection handle="0" to="O6" connection="32"/>
         <dia:connection handle="1" to="O1" connection="42"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
@@ -7926,14 +7956,8 @@
       <dia:attribute name="show_arrow_b">
         <dia:boolean val="false"/>
       </dia:attribute>
-      <dia:attribute name="text_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
       <dia:attribute name="text_height">
         <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="text_colour">
-        <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -7943,7 +7967,7 @@
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O17" connection="16"/>
-        <dia:connection handle="1" to="O6" connection="30"/>
+        <dia:connection handle="1" to="O6" connection="32"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>

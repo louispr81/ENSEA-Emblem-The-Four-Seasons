@@ -81,6 +81,13 @@ void Saison::updateCell(Cell cell)
 SaisonId Saison::getId(){
     return (*this).id;
 }
+
+SaisonId Saison::getSaisonOppId(){
+    return (*this).saisonOppId;
+}
+std::string Saison::getNom(){
+    return (*this).nom;
+}
 Saison::~Saison(){
     
 }

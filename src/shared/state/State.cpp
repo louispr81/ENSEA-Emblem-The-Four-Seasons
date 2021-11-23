@@ -8,9 +8,9 @@ using namespace std;
 
 State::State(){
     
-    std::vector<Joueur> joueurs;
-    std::vector<Personnage> personnagesJ1;
-    std::vector<Personnage> personnagesJ2;
+    std::vector<Joueur*> joueurs;
+    std::vector<Personnage*> personnagesJ1;
+    std::vector<Personnage*> personnagesJ2;
     std::vector<Saison*> listeSaison;
     std::vector<int> bonus; 
     std::vector<int> bonusP;
@@ -63,13 +63,13 @@ State::State(){
     Statistiques statistiquesM1;
 
     //Choix des cases des personnages
-    Cell caseA1=plateau.getCase(0,0);
-    Cell caseM1=plateau.getCase(63,63);
+    Cell caseA1=(*plateau).getCase(0,0);
+    Cell caseM1=(*plateau).getCase(63,63);
 
     //Creation des personnages
-    Personnage *assassin1 = new Personnage((std::string)"assassin1", 0,  statistiquesBaseA1,  inventaireA1, dague, assassin, &automne, &(caseA1), bonusP,  statistiquesA1,false,true);
-    Personnage *mage1 = new Personnage((std::string)"mage1", 1,  statistiquesBaseM1,  inventaireM1, tome, mage, &printemps, &(caseM1), bonusP,  statistiquesM1,false,true);
-    
+    Personnage *assassin1 = new Personnage((std::string)"assassin1", 0,  statistiquesBaseA1,  inventaireA1, dague, assassin, automne, &(caseA1), bonusP,  statistiquesA1,plateau,false,true);
+    Personnage *mage1 = new Personnage((std::string)"mage1", 1,  statistiquesBaseM1,  inventaireM1, tome, mage, printemps, &(caseM1), bonusP,  statistiquesM1,plateau,false,true);
+
     personnagesJ1.push_back(assassin1);
     personnagesJ2.push_back(mage1);
 
@@ -80,14 +80,11 @@ State::State(){
     joueurs.push_back(joueur2);
 
     //Atributs
-
-
     (*this).tour=1;
     (*this).gameover=false;
-    (*this).joueur=&joueur1;
-    (*this).saison=&printemps;
-
-    (*this).plateau=&plateau;
+    (*this).joueur=joueur1;
+    (*this).saison=printemps;
+    (*this).plateau=plateau;
     
 }
 
@@ -111,31 +108,28 @@ void State::abandonner (Joueur joueur){
 void State::updateSaison (){
        
     if ((*this).gameover== false){
-        switch(this->saison){
-            case PRINTEMPS：
-                (*this).saison=(*this).ListeSaison[1];
+        switch(this->saison.getId()){
+            case PRINTEMPS:
+                (*this).saison=(*this).listeSaison[1];
                 break;
-            case ETE：
-                (*this).saison=(*this).ListeSaison[2];
+            case ETE:
+                (*this).saison=(*this).listeSaison[2];
                 break;
-            case AUTOMNE：
-                (*this).saison=(*this).ListeSaison[3];
+            case AUTOMNE:
+                (*this).saison=(*this).listeSaison[3];
                 break;
-            case HIVER：
-                (*this).saison=(*this).ListeSaison[0]; 
+            case HIVER:
+                (*this).saison=(*this).listeSaison[0]; 
                 break;
-            }
-            default：
+            
+            default:
                 cout<<"Invalid selection \n";
             break;
         }
-        else{
-            cout<<"Invalid!!!!! \n" ;
-        }
     }
-
-
-    }
+    else{
+        cout<<"Invalid!!!!! \n" ;
+    }   
 }
 
 int State::getTour (){

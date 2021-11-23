@@ -2,13 +2,13 @@
  using namespace state;
 
  Plateau::Plateau(int size){
-    std::vector<Cell> liste_case;
+    std::vector<Cell*> liste_case;
     for (int i=0; i<size; ++i){
         for (int j=0; j<size; ++j){
             std::vector<int> coordonees;
             coordonees.push_back(j);
             coordonees.push_back(i);
-            Cell cell(NULL, GRASS, coordonees, true, 1, false);
+            Cell *cell= new Cell(NULL, GRASS, coordonees, true, 1, false);
             liste_case.push_back(cell);
         }
     }

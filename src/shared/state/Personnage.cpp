@@ -98,7 +98,8 @@ int Personnage::deplacer(int x1, int y1){
             if(this->plateau->getCase(coordonne_1[0],coordonne_1[1]).getOccupe()==false){
                  if((*this).statistiques.getPoint_mouvement()>=1){
                     (*((*this).cell)).getCoordonees()=coordonne_1;
-                    reply=1;
+                    (*this).statistiques.setPoint_mouvement((*this).statistiques.getPoint_mouvement()-1);
+                  reply=1;
                  }
             }
 
@@ -111,6 +112,7 @@ int Personnage::deplacer(int x1, int y1){
             if(this->plateau->getCase(coordonne_2[0],coordonne_2[1]).getOccupe()==false){
                 if((*this).statistiques.getPoint_mouvement()>=1){  
                     (*((*this).cell)).getCoordonees()=coordonne_2;
+                    (*this).statistiques.setPoint_mouvement((*this).statistiques.getPoint_mouvement()-1);
                     reply=1;
                 }
             }
@@ -125,6 +127,7 @@ if (coordonne_destination==coordonne_3 ){
             if(this->plateau->getCase(coordonne_3[0],coordonne_3[1]).getOccupe()==false){
                 if((*this).statistiques.getPoint_mouvement()>=1){
                     (*((*this).cell)).getCoordonees()=coordonne_3;
+                    (*this).statistiques.setPoint_mouvement((*this).statistiques.getPoint_mouvement()-1);
                     reply=1;
                 }
             }
@@ -138,6 +141,7 @@ if (coordonne_destination==coordonne_4 ){
             if(this->plateau->getCase(coordonne_4[0],coordonne_4[1]).getOccupe()==false){
                 if((*this).statistiques.getPoint_mouvement()>=1){
                     (*((*this).cell)).getCoordonees()=coordonne_4;
+                    (*this).statistiques.setPoint_mouvement((*this).statistiques.getPoint_mouvement()-1);
                     reply=1;
                 }
             }

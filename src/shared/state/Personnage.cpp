@@ -4,6 +4,7 @@
 #include <time.h>
 using namespace state;
 
+
 Personnage::Personnage(std::string nom, int id, Statistiques statistiquesBase, std::vector<Objet> inventaire, Arme* arme, Classe* classe, Saison* saison, Cell* cell, std::vector<int> bonus, Statistiques statistiques, bool played , bool alive ){
     (*this).nom=nom;
     (*this).id=id;
@@ -16,6 +17,7 @@ Personnage::Personnage(std::string nom, int id, Statistiques statistiquesBase, s
     (*this).cell=cell;
     (*this).bonus=bonus;
     (*this).statistiques=statistiques;
+    (*this).plateau=plateau;
     (*this).played=played;
     (*this).alive=alive;
 }

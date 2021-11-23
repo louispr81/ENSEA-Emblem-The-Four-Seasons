@@ -17,7 +17,7 @@
  }
 
 Cell Plateau::getCase (int x, int y){
-    return (*this).liste_case[y*64+x];
+    return *((*this).liste_case[y*64+x]);
 }
 Plateau::~Plateau(){
     

@@ -3,12 +3,12 @@ using namespace state;
 
  Cell::Cell (Personnage* personnage, CellId type, std::vector<int> coordonees, bool walkable, int costPm, bool occupe){
 
-     //(*this).personnage=personnage;
-    // (*this).type=type;
-    // (*this).coordonees=coordonees;
-    // (*this).walkable=walkable;
-    // (*this).costPm=costPm;
-    // (*this).occupe=occupe;
+    (*this).personnage=personnage;
+    (*this).type=type;
+    (*this).coordonees=coordonees;
+    (*this).walkable=walkable;
+    (*this).costPm=costPm;
+    (*this).occupe=occupe;
  }
 
 

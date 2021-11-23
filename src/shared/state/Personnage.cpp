@@ -3,6 +3,8 @@
 #include <cstdlib>
 #include <time.h>
 using namespace state;
+using namespace std;
+
 
 Personnage::Personnage(std::string nom, int id, Statistiques statistiquesBase, std::vector<Objet*> inventaire, Arme* arme, Classe* classe, Saison* saison, Cell* cell, std::vector<int> bonus, Statistiques statistiques, Plateau* plateau, bool played, bool alive){
     (*this).nom=nom;
@@ -57,6 +59,98 @@ void Personnage::echangerObjet(Personnage personnageB, Objet objet){
     this->played = true;
 }
 */
+
+
+void Personnage::deplacer(int x1, int y1){
+
+    
+   
+     std::vector<int> coordonne_a ,coordonne_destination,coordonne_1,coordonne_2,coordonne_3,coordonne_4;
+    
+    coordonne_a=(*((*this).cell)).getCoordonees(); // coordonees du personnage 
+    coordonne_destination=this->plateau->getCase(x1,y1).getCoordonees();
+     
+    coordonne_1[0]=coordonne_a[0]-1;       // coordonees de la case à gauche du personage
+    coordonne_1[1]=coordonne_a[1];        
+
+    coordonne_2[0]=coordonne_a[0];       // coordonees de la case devant le personage
+    coordonne_2[1]=coordonne_a[1]+1;
+
+    coordonne_3[0]=coordonne_a[0]+1;    // coordonees de la case à droite le personage
+    coordonne_3[1]=coordonne_a[1];
+
+    coordonne_4[0]=coordonne_a[0];      // coordoness de la case derriere le personnage 
+    coordonne_4[1]=coordonne_a[1]-1;
+
+
+   
+
+    if (coordonne_a==coordonne_destination){
+        cout<< " le personnage ne bouge pas "<<endl;
+    }
+
+
+
+
+     if (coordonne_destination==coordonne_1 ){
+        if(this->plateau->getCase(coordonne_1[0],coordonne_1[1]).getWalkable()==true){
+            if(this->plateau->getCase(coordonne_1[0],coordonne_1[1]).getOccupe()==false){
+                 if((*this).statistiques.getPoint_mouvement()>=1){
+                    (*((*this).cell)).getCoordonees()=coordonne_1;
+                 }
+            }
+
+        }
+    }
+
+
+    if (coordonne_destination==coordonne_2 ){
+        if(this->plateau->getCase(coordonne_2[0],coordonne_2[1]).getWalkable()==true){
+            if(this->plateau->getCase(coordonne_2[0],coordonne_2[1]).getOccupe()==false){
+                if((*this).statistiques.getPoint_mouvement()>=1){  
+                    (*((*this).cell)).getCoordonees()=coordonne_2;
+                }
+            }
+
+        }
+    }
+
+
+
+if (coordonne_destination==coordonne_3 ){
+        if(this->plateau->getCase(coordonne_3[0],coordonne_3[1]).getWalkable()==true){
+            if(this->plateau->getCase(coordonne_3[0],coordonne_3[1]).getOccupe()==false){
+                if((*this).statistiques.getPoint_mouvement()>=1){
+                    (*((*this).cell)).getCoordonees()=coordonne_3;
+                }
+            }
+
+        }
+    }
+
+
+if (coordonne_destination==coordonne_4 ){
+        if(this->plateau->getCase(coordonne_4[0],coordonne_4[1]).getWalkable()==true){
+            if(this->plateau->getCase(coordonne_4[0],coordonne_4[1]).getOccupe()==false){
+                if((*this).statistiques.getPoint_mouvement()>=1){
+                    (*((*this).cell)).getCoordonees()=coordonne_4;
+                }
+            }
+
+        }
+    }
+
+
+
+
+
+    else {
+        cout<< " la case n'est pas disponible "<<endl;
+    }   
+
+}
+
+
 
 Personnage::~Personnage(){
    // delete[] tab_arme;

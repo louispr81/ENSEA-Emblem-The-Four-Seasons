@@ -52,7 +52,9 @@ std::vector<int> Cell::getCoordonees(){
     return (*this).coordonees=coordonees;
 }
 
-
+bool Cell::getOccupe(){
+    return (*this).occupe;
+}
 Cell::~Cell (){
     
 }

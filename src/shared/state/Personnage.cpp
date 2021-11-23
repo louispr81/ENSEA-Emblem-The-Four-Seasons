@@ -4,7 +4,8 @@
 #include <time.h>
 using namespace state;
 
-Personnage::Personnage(std::string nom, int id, Statistiques statistiquesBase, std::vector<Objet> inventaire, Arme arme, Classe classe, Saison* saison, Cell* cell, std::vector<int> bonus, Statistiques statistiques,Plateau* plateau, bool played , bool alive ){
+
+Personnage::Personnage(std::string nom, int id, Statistiques statistiquesBase, std::vector<Objet> inventaire, Arme* arme, Classe* classe, Saison* saison, Cell* cell, std::vector<int> bonus, Statistiques statistiques, bool played , bool alive ){
     (*this).nom=nom;
     (*this).id=id;
     (*this).statistiquesBase=statistiquesBase;
@@ -22,7 +23,7 @@ Personnage::Personnage(std::string nom, int id, Statistiques statistiquesBase, s
 }
 
 Saison Personnage::getSaison(){
-  //  return (*this).saison;
+    return *((*this).saison);
 }
 void Personnage::setBonus(std::vector<int> x){
 

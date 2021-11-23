@@ -109,7 +109,7 @@ void State::abandonner (Joueur joueur){
 void State::updateSaison (){
        
     if ((*this).gameover== false){
-        switch(this->saison.getId()){
+        switch((*(this->saison)).getId()){
             case PRINTEMPS:
                 (*this).saison=(*this).listeSaison[1];
                 break;
@@ -141,7 +141,7 @@ bool State::getGameover (){
     return (*this).gameover;
 }
 
-Joueur State::getJoueurs(int i){
+Joueur* State::getJoueurs(int i){
     return (*this).joueurs[i];
 }
 

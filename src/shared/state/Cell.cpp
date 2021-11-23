@@ -39,6 +39,20 @@ void Cell::setWalkable (bool walkable){
     (*this).walkable=walkable;
 
 }
+
+bool Cell::getWalkable (){
+    return (*this).walkable;
+}
+
+void Cell::setCoordonnees (std::vector<int> coordonnees){
+    (*this).coordonees=coordonees;
+}
+
+std::vector<int> Cell::getCoordonees(){
+    return (*this).coordonees=coordonees;
+}
+
+
 Cell::~Cell (){
     
 }

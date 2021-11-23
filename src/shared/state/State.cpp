@@ -22,10 +22,10 @@ State::State(){
         bonus.push_back(1);
     }
     // Creation des 4 saisons
-    Saison *printemps = new Saison(PRINTEMPS,  bonus, "Printemps", AUTOMNE);
-    Saison *ete = new Saison(ETE, bonus, "Ete", HIVER);
-    Saison *automne = new Saison(AUTOMNE, bonus, "Automne", PRINTEMPS);
-    Saison *hiver = new Saison(HIVER, bonus, "hiver", ETE);
+    Saison *printemps = new Saison(SaisonId::PRINTEMPS,  bonus, "Printemps", SaisonId::AUTOMNE);
+    Saison *ete = new Saison(SaisonId::ETE, bonus, "Ete", SaisonId::HIVER);
+    Saison *automne = new Saison(SaisonId::AUTOMNE, bonus, "Automne", SaisonId::PRINTEMPS);
+    Saison *hiver = new Saison(SaisonId::HIVER, bonus, "hiver", SaisonId::ETE);
     this->listeSaison.push_back(printemps);
     this->listeSaison.push_back(ete);
     this->listeSaison.push_back(automne);
@@ -39,8 +39,8 @@ State::State(){
     Statistiques statistiquesBaseM1;
 
     //Creation des inventaires
-    std::vector<Objet> inventaireA1;
-    std::vector<Objet> inventaireM1;
+    std::vector<Objet*> inventaireA1;
+    std::vector<Objet*> inventaireM1;
 
     //Creation des armes
     Arme *dague = new Arme("Dague", 0, 30, true, EPEE, 5, 1, 1, 90);
@@ -50,8 +50,8 @@ State::State(){
     std::vector<float> probaGainStatsA1;
     std::vector<float> probaGainStatsM1;
     //Creation des classes
-    Classe *assassin = new Classe(ASSASSIN, "Assassin", probaGainStatsA1);
-    Classe *mage = new Classe(MAGE, "Mage", probaGainStatsM1);
+    Classe *assassin = new Classe(ClasseId::ASSASSIN, "Assassin", probaGainStatsA1);
+    Classe *mage = new Classe(ClasseId::MAGE, "Mage", probaGainStatsM1);
 
     // Creation des bonus les personnages(pour le moment les 4 ont le meme)
     for (int i=0; i<12; ++i){
@@ -67,9 +67,10 @@ State::State(){
     Cell caseM1=(*plateau).getCase(63,63);
 
     //Creation des personnages
-    Personnage *assassin1 = new Personnage((std::string)"assassin1", 0,  statistiquesBaseA1,  inventaireA1, dague, assassin, automne, &(caseA1), bonusP,  statistiquesA1,plateau,false,true);
-    Personnage *mage1 = new Personnage((std::string)"mage1", 1,  statistiquesBaseM1,  inventaireM1, tome, mage, printemps, &(caseM1), bonusP,  statistiquesM1,plateau,false,true);
-
+    Personnage *assassin1 = new Personnage((std::string)"assassin1", 0, statistiquesBaseA1, inventaireA1, dague, assassin, automne, &(caseA1), bonusP, statistiquesA1, plateau, false,true);
+    Personnage *mage1 = new Personnage((std::string)"mage1", 1, statistiquesBaseM1, inventaireM1, tome, mage, printemps, &(caseM1), bonusP, statistiquesM1, plateau, false, true);
+    
+    //(std::string nom, int id, Statistiques statistiquesBase, std::vector<Objet*> inventaire, Arme* arme, Classe* classe, Saison* saison, Cell* cell, std::vector<int> bonus, Statistiques statistiques, Plateau* plateau, bool played, bool alive)
     personnagesJ1.push_back(assassin1);
     personnagesJ2.push_back(mage1);
 
@@ -108,7 +109,7 @@ void State::abandonner (Joueur joueur){
 void State::updateSaison (){
        
     if ((*this).gameover== false){
-        switch(this->saison.getId()){
+        switch((*(this->saison)).getId()){
             case PRINTEMPS:
                 (*this).saison=(*this).listeSaison[1];
                 break;
@@ -140,7 +141,7 @@ bool State::getGameover (){
     return (*this).gameover;
 }
 
-Joueur State::getJoueurs(int i){
+Joueur* State::getJoueurs(int i){
     return (*this).joueurs[i];
 }
 

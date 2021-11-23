@@ -2,8 +2,10 @@
 using namespace render;
 
 
-bool load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height)
+bool Surface::load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height)
 {
+    static sf::Texture m_tileset;
+    static sf::VertexArray m_vertices;
     // on charge la texture du tileset
     if (!m_tileset.loadFromFile(tileset))
         return false;
@@ -38,18 +40,21 @@ bool load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, u
             quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x, (tv + 1) * tileSize.y);
             quad[3].texCoords = sf::Vector2f(tu * tileSize.x, (tv + 1) * tileSize.y);
         }
-
+    this->m_tileset=m_tileset;
+    this->m_vertices=m_vertices;
     return true;
 }
 
 
-void draw(sf::RenderTarget& target, sf::RenderStates states){
+
+void Surface::draw(sf::RenderTarget& target, sf::RenderStates states)
+{
     // on applique la transformation
     states.transform *= getTransform();
 
     // on applique la texture du tileset
-    states.texture = &m_tileset;
+    states.texture = &(this->m_tileset);
 
     // et on dessine enfin le tableau de vertex
-    target.draw(m_vertices, states);
+    target.draw(this->m_vertices, states);
 }

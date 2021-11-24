@@ -21,6 +21,39 @@ std::vector<int> StateLayer::getPlateauIdFromState (){
     }
     return plateauId;
 }
+std::vector<int> StateLayer::getPlateauId (){
+    return (*this).plateauId;
+}
+
+state::State* StateLayer::getState (){
+    return (*this).state;
+}
+
+void StateLayer::setState (state::State* state){
+    (*this).state=state;
+}
+
+void StateLayer::window(){
+    // on crée la fenêtre
+    sf::RenderWindow window(sf::VideoMode(1024, 1024), "Tilemap");
+
+    Surface map;
+    map.load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
+    while (window.isOpen()){
+        // on gère les évènements
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if(event.type == sf::Event::Closed)
+                window.close();
+        }
+        // on dessine le niveau
+        window.clear();
+        window.draw(map);
+        window.display();
+    }
+}
+
 /*
 int main()
 {

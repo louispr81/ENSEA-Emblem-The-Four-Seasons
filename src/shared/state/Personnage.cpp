@@ -37,6 +37,11 @@ void Personnage::attendre(){
         (*this).played=true;
     }
 }
+
+void Personnage::setPlayed (bool played)
+{
+    (*this).played=played;
+}
 /* 
 void Personnage::ouvrirCoffre(){ 
     if (Personnage.getCell().getType()==CHEST){
@@ -159,6 +164,75 @@ if (coordonne_destination==coordonne_4 ){
     }   
  return reply;
 }
+
+
+
+
+
+void Personnage::attaquer (Personnage personnageD){
+std::vector<int> coordonne_a,coordonnees_b,coordonne_1,coordonne_2,coordonne_3,coordonne_4,coordonne_5,coordonne_6,coordonne_7,coordonne_8,coordonne_9,coordonne_10,coordonne_11,coordonne_12;
+coordonne_a=(*this).cell->getCoordonees();
+coordonnees_b=personnageD.cell->getCoordonees();
+
+    coordonne_1[0]=coordonne_a[0]-1;  coordonne_2[0]=coordonne_a[0];    coordonne_3[0]=coordonne_a[0]+1;
+    coordonne_1[1]=coordonne_a[1];    coordonne_2[1]=coordonne_a[1]+1;  coordonne_3[1]=coordonne_a[1];
+
+    coordonne_4[0]=coordonne_a[0];    coordonne_5[0]=coordonne_a[0]-2;  coordonne_6[0]=coordonne_a[0]-1;     
+    coordonne_4[1]=coordonne_a[1]-1;  coordonne_5[1]=coordonne_a[1];    coordonne_6[1]=coordonne_a[1]+1;
+
+   
+
+    coordonne_7[0]=coordonne_a[0];    coordonne_8[0]=coordonne_a[0]+1;  coordonne_9[0]=coordonne_a[0]+2;
+    coordonne_7[1]=coordonne_a[1]+2;  coordonne_8[1]=coordonne_a[1]+1;  coordonne_9[1]=coordonne_a[1];
+
+
+
+    coordonne_10[0]=coordonne_a[0]+1;  coordonne_11[0]=coordonne_a[0];   coordonne_12[0]=coordonne_a[0]-1;
+    coordonne_10[1]=coordonne_a[1]-1;  coordonne_11[1]=coordonne_a[1]-2; coordonne_12[1]=coordonne_a[1]-1;
+
+
+
+
+    if((*this).arme->getRange()==1) 
+        {
+            if(coordonne_a==coordonne_1||coordonne_a==coordonne_2||coordonne_a==coordonne_3||coordonne_a==coordonne_4){
+                personnageD.statistiques.setVie(personnageD.statistiques.getVie()-1);
+               // (*this).set
+            }
+
+        }
+
+    
+    else if ((*this).arme->getRange()==2){
+
+         if(coordonne_a==coordonne_5||coordonne_a==coordonne_6||coordonne_a==coordonne_7||coordonne_a==coordonne_8||coordonne_a==coordonne_9||coordonne_a==coordonne_10||coordonne_a==coordonne_11||coordonne_a==coordonne_12){
+                personnageD.statistiques.setVie(personnageD.statistiques.getVie()-1);
+            }
+
+    }
+
+    else {
+        cout<<"pas d,attaque"<<endl;
+
+    }
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

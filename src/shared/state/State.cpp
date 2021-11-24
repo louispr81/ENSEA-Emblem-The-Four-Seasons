@@ -77,8 +77,8 @@ State::State(){
     //Creation des joueurs
     Joueur *joueur1 = new Joueur("J1", JOUEUR1, personnagesJ1);
     Joueur *joueur2 = new Joueur("J2", JOUEUR2, personnagesJ2);
-    joueurs.push_back(joueur1);
-    joueurs.push_back(joueur2);
+    this->joueurs.push_back(joueur1);
+    this->joueurs.push_back(joueur2);
 
     //Atributs
     (*this).tour=1;

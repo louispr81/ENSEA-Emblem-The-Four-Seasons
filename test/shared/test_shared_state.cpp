@@ -18,29 +18,24 @@ BOOST_AUTO_TEST_CASE(TestStateNamespace)
     BOOST_CHECK_EQUAL(jeuTest.getTour(), 1);
     jeuTest.tourSuivant();
     BOOST_CHECK_EQUAL(jeuTest.getTour(), 2);
-    
-    /*
-    for(Saison* i:jeuTest.getListeSaison()){
-      std::cout<<i<<'\n';
-      std::cout<<"id_test\n";
-      std::cout<<(*i).getId()<<'\n';
-      std::cout<<"opp\n";
-      std::cout<<(*i).getSaisonOppId()<<'\n';
-    }*/
-   // std::cout<<"pointer"<<'\n';
+    // Test change saison
     jeuTest.updateSaison();   
+    std::cout<<jeuTest.getSaison()<<'\n';
     BOOST_CHECK_EQUAL((*(jeuTest.getSaison())).getId(), ETE);
     jeuTest.updateSaison();
+    std::cout<<jeuTest.getSaison()<<'\n';
     BOOST_CHECK_EQUAL((*(jeuTest.getSaison())).getId(), AUTOMNE);
     jeuTest.updateSaison();
+    std::cout<<jeuTest.getSaison()<<'\n';
     BOOST_CHECK_EQUAL((*(jeuTest.getSaison())).getId(), HIVER);
-   // jeuTest.updateSaison();
-   // BOOST_CHECK_EQUAL((*(jeuTest.getSaison())).getId(), PRINTEMPS);                    
-
-
-    //Test gameover
-    jeuTest.abandonner(*jeuTest.getJoueurs(0));
+    jeuTest.updateSaison();
+    std::cout<<jeuTest.getSaison()<<'\n';
+    BOOST_CHECK_EQUAL((*(jeuTest.getSaison())).getId(), PRINTEMPS);                    
+    // Test gameover
+    jeuTest.abandonner(*(jeuTest.getJoueurs(0)));
     BOOST_CHECK_EQUAL(jeuTest.getGameover(), true);
+
+    
     //ex.setX(21);
     //BOOST_CHECK_EQUAL(ex.x, 21);*/
   }

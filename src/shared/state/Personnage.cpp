@@ -212,7 +212,7 @@ void Personnage::attaquer (Personnage personnageD){
     coordonne_10[1]=coordonne_a[1]-1;  coordonne_11[1]=coordonne_a[1]-2; coordonne_12[1]=coordonne_a[1]-1;
 
 
-if((*this).getAlive()==true and personnageD.getAlive()==true and (*this).getPlayed()==false and personnageD.getPlayed()==false){
+if((*this).getAlive()==true and personnageD.getAlive()==true and (*this).getPlayed()==false ){
 
     if((*this).arme->getRange()==1) 
         {

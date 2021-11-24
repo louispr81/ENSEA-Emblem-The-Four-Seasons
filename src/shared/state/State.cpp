@@ -149,6 +149,9 @@ Saison* State:: getSaison(){
     return (*this).saison;
 }
 
+Plateau* State::getPlateau (){
+    return (*this).plateau;
+}
 State::~State(){
     
 }

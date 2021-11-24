@@ -71,12 +71,20 @@ void Personnage::ouvrirCoffre(){
     this->played = true;
 } 
 */
-/*
+
 void Personnage::echangerObjet(Personnage personnageB, Objet objet){
-    if (Personnage.getCell()=Personnage.getCell().personnageB)    
-    this->played = true;
+    for (size_t i = 0; i <(*this).inventaire.size() ; i++)
+    {
+        
+    if ((*this).inventaire.at(i) == &objet)
+    {
+        personnageB.inventaire.push_back(&objet);
+        (*this).inventaire.erase((*this).inventaire.begin()+i);
+    }
+    
+    }
 }
-*/
+
 
 
 int Personnage::deplacer(int x1, int y1){

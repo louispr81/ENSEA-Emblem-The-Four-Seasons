@@ -1,11 +1,12 @@
 #include <iostream>
 #include "../../src/shared/state.h"
+#include "render.h"
 #include "client.h"
 #include <unistd.h>
 #include <string.h> 
 using namespace std;
 using namespace state;
-//using namespace render;
+using namespace render;
 using namespace client;
 
 
@@ -36,11 +37,16 @@ if (strcmp(argv[1],"hello") ==0 ){
 	else if (strcmp(argv[1],"state") == 0){
         state::State state;
 
-		std::cout << "CREATION DE STATE" << std::endl;
+		std::cout << "CREATION DU STATE" << std::endl;
     }
 
     else if (strcmp(argv[1],"render") == 0){
-		std::cout << "RENDER" << std::endl;
+		std::cout << "Lancement du RENDU" << std::endl;
+        state::State *state = new State();
+        sf::Vector2u tileSize = sf::Vector2u(128,128);
+
+        render::StateLayer *rendu = new StateLayer(tileSize, 128, 128, state);
+        (*rendu).window();
 	}
     
     else {

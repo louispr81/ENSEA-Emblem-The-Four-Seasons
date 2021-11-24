@@ -35,8 +35,8 @@ void StateLayer::setState (state::State* state){
 
 void StateLayer::window(){
     // on crée la fenêtre
+    (*this).plateauId=(*this).getPlateauIdFromState();
     sf::RenderWindow window(sf::VideoMode(1024, 1024), "Tilemap");
-
     Surface map;
     map.load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
     while (window.isOpen()){

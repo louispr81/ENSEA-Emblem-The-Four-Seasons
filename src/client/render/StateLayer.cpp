@@ -16,7 +16,7 @@ std::vector<int> StateLayer::getPlateauIdFromState (){
     for(int i=0;i<64;i++){
         for(int j=0;j<64;j++){
             res=((*pPlateau).getCase(j,i)).getType();
-            plateauId.push_back(res);
+            plateauId.push_back(res-10);
         }
     }
     return plateauId;

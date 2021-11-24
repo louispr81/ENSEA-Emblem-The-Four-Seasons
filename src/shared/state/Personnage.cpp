@@ -183,9 +183,9 @@ if (coordonne_destination==coordonne_4 ){
 
 
 void Personnage::attaquer (Personnage personnageD){
-std::vector<int> coordonne_a,coordonnees_b,coordonne_1,coordonne_2,coordonne_3,coordonne_4,coordonne_5,coordonne_6,coordonne_7,coordonne_8,coordonne_9,coordonne_10,coordonne_11,coordonne_12;
-coordonne_a=(*this).cell->getCoordonees();
-coordonnees_b=personnageD.cell->getCoordonees();
+    std::vector<int> coordonne_a,coordonnees_b,coordonne_1,coordonne_2,coordonne_3,coordonne_4,coordonne_5,coordonne_6,coordonne_7,coordonne_8,coordonne_9,coordonne_10,coordonne_11,coordonne_12;
+    coordonne_a=(*this).cell->getCoordonees();
+    coordonnees_b=personnageD.cell->getCoordonees();
 
     coordonne_1[0]=coordonne_a[0]-1;  coordonne_2[0]=coordonne_a[0];    coordonne_3[0]=coordonne_a[0]+1;
     coordonne_1[1]=coordonne_a[1];    coordonne_2[1]=coordonne_a[1]+1;  coordonne_3[1]=coordonne_a[1];
@@ -204,11 +204,11 @@ coordonnees_b=personnageD.cell->getCoordonees();
     coordonne_10[1]=coordonne_a[1]-1;  coordonne_11[1]=coordonne_a[1]-2; coordonne_12[1]=coordonne_a[1]-1;
 
 
-if((*this).getAlive()==true and personnageD.getAlive()==true and (*this).getPlayed()==true and personnageD.getPlayed()==true){
+if((*this).getAlive()==true and personnageD.getAlive()==true and (*this).getPlayed()==false and personnageD.getPlayed()==false){
 
     if((*this).arme->getRange()==1) 
         {
-            if(coordonne_a==coordonne_1||coordonne_a==coordonne_2||coordonne_a==coordonne_3||coordonne_a==coordonne_4){
+            if(coordonnees_b==coordonne_1||coordonnees_b==coordonne_2||coordonnees_b==coordonne_3||coordonnees_b==coordonne_4){
                 personnageD.statistiques.setVie(personnageD.statistiques.getVie()-1);
                 (*this).setPlayed(true);
                 if (personnageD.statistiques.getVie()==0)
@@ -222,15 +222,30 @@ if((*this).getAlive()==true and personnageD.getAlive()==true and (*this).getPlay
 
     
     else if ((*this).arme->getRange()==2){
-
-         if(coordonne_a==coordonne_5||coordonne_a==coordonne_6||coordonne_a==coordonne_7||coordonne_a==coordonne_8||coordonne_a==coordonne_9||coordonne_a==coordonne_10||coordonne_a==coordonne_11||coordonne_a==coordonne_12){
+       
+        if(coordonnees_b==coordonne_1||coordonnees_b==coordonne_2||coordonnees_b==coordonne_3||coordonnees_b==coordonne_4){
                 personnageD.statistiques.setVie(personnageD.statistiques.getVie()-1);
                 (*this).setPlayed(true);
                 if (personnageD.statistiques.getVie()==0)
                 {
                    (*this).setAlive(false); 
                 }
+                
             }
+
+
+
+         else if(coordonnees_b==coordonne_5||coordonnees_b==coordonne_6||coordonnees_b==coordonne_7||coordonnees_b==coordonne_8||coordonnees_b==coordonne_9||coordonnees_b==coordonne_10||coordonnees_b==coordonne_11||coordonnees_b==coordonne_12){
+                personnageD.statistiques.setVie(personnageD.statistiques.getVie()-1);
+                (*this).setPlayed(true);
+                if (personnageD.statistiques.getVie()==0)
+                {
+                   (*this).setAlive(false); 
+                }
+        
+         }
+        
+        
 
     }
 
@@ -240,9 +255,6 @@ if((*this).getAlive()==true and personnageD.getAlive()==true and (*this).getPlay
 
 
 }
-
-
-
 }
 
 

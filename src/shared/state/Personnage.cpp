@@ -42,6 +42,19 @@ void Personnage::setPlayed (bool played)
 {
     (*this).played=played;
 }
+
+bool Personnage::getPlayed (){
+        return (*this).played;
+}
+
+bool Personnage::getAlive (){
+    return (*this).alive;
+}
+
+void Personnage::setAlive(bool alive){
+    (*this).alive=alive;
+}
+
 /* 
 void Personnage::ouvrirCoffre(){ 
     if (Personnage.getCell().getType()==CHEST){
@@ -191,13 +204,18 @@ coordonnees_b=personnageD.cell->getCoordonees();
     coordonne_10[1]=coordonne_a[1]-1;  coordonne_11[1]=coordonne_a[1]-2; coordonne_12[1]=coordonne_a[1]-1;
 
 
-
+if((*this).getAlive()==true and personnageD.getAlive()==true and (*this).getPlayed()==true and personnageD.getPlayed()==true){
 
     if((*this).arme->getRange()==1) 
         {
             if(coordonne_a==coordonne_1||coordonne_a==coordonne_2||coordonne_a==coordonne_3||coordonne_a==coordonne_4){
                 personnageD.statistiques.setVie(personnageD.statistiques.getVie()-1);
-               // (*this).set
+                (*this).setPlayed(true);
+                if (personnageD.statistiques.getVie()==0)
+                {
+                   (*this).setAlive(false); 
+                }
+                
             }
 
         }
@@ -207,17 +225,21 @@ coordonnees_b=personnageD.cell->getCoordonees();
 
          if(coordonne_a==coordonne_5||coordonne_a==coordonne_6||coordonne_a==coordonne_7||coordonne_a==coordonne_8||coordonne_a==coordonne_9||coordonne_a==coordonne_10||coordonne_a==coordonne_11||coordonne_a==coordonne_12){
                 personnageD.statistiques.setVie(personnageD.statistiques.getVie()-1);
+                (*this).setPlayed(true);
+                if (personnageD.statistiques.getVie()==0)
+                {
+                   (*this).setAlive(false); 
+                }
             }
 
     }
 
     else {
-        cout<<"pas d,attaque"<<endl;
-
+        cout<<"pas d'attaque"<<endl;
     }
 
 
-
+}
 
 
 

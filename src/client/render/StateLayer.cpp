@@ -1,8 +1,25 @@
 #include "StateLayer.h"
 using namespace render;
+using namespace state;
+
+StateLayer::StateLayer(sf::Vector2u tileSize, unsigned int width, unsigned int height, state::State* state){
+    (*this).tileSize=tileSize;
+    (*this).width=width;
+    (*this).height=height;
+    (*this).state=state;
+}
 
 std::vector<int> StateLayer::getPlateauIdFromState (){
-    
+    std::vector<int> plateauId;
+    Plateau* pPlateau=(*(*this).state).getPlateau();
+    int res;
+    for(int i=0;i<64;i++){
+        for(int j=0;j<64;j++){
+            res=((*pPlateau).getCase(j,i)).getType();
+            plateauId.push_back(res);
+        }
+    }
+    return plateauId;
 }
 /*
 int main()

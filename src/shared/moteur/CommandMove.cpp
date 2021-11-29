@@ -5,6 +5,7 @@ using namespace std;
 using namespace moteur;
 using namespace state;
 
-CommandMove::CommandMove(){
+/* CommandMove::CommandMove(){
     id = MOVE;
 }
+*/

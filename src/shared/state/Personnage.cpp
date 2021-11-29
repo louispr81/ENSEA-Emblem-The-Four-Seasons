@@ -37,6 +37,24 @@ void Personnage::attendre(){
         (*this).played=true;
     }
 }
+
+void Personnage::setPlayed (bool played)
+{
+    (*this).played=played;
+}
+
+bool Personnage::getPlayed (){
+        return (*this).played;
+}
+
+bool Personnage::getAlive (){
+    return (*this).alive;
+}
+
+void Personnage::setAlive(bool alive){
+    (*this).alive=alive;
+}
+
 /* 
 void Personnage::ouvrirCoffre(){ 
     if (Personnage.getCell().getType()==CHEST){
@@ -53,12 +71,20 @@ void Personnage::ouvrirCoffre(){
     this->played = true;
 } 
 */
-/*
+
 void Personnage::echangerObjet(Personnage personnageB, Objet objet){
-    if (Personnage.getCell()=Personnage.getCell().personnageB)    
-    this->played = true;
+    for (size_t i = 0; i <(*this).inventaire.size() ; i++)
+    {
+        
+    if ((*this).inventaire.at(i) == &objet)
+    {
+        personnageB.inventaire.push_back(&objet);
+        (*this).inventaire.erase((*this).inventaire.begin()+i);
+    }
+    
+    }
 }
-*/
+
 
 
 int Personnage::deplacer(int x1, int y1){
@@ -159,6 +185,96 @@ if (coordonne_destination==coordonne_4 ){
     }   
  return reply;
 }
+
+
+
+
+
+void Personnage::attaquer (Personnage personnageD){
+    std::vector<int> coordonne_a,coordonnees_b,coordonne_1,coordonne_2,coordonne_3,coordonne_4,coordonne_5,coordonne_6,coordonne_7,coordonne_8,coordonne_9,coordonne_10,coordonne_11,coordonne_12;
+    coordonne_a=(*this).cell->getCoordonees();
+    coordonnees_b=personnageD.cell->getCoordonees();
+
+    coordonne_1[0]=coordonne_a[0]-1;  coordonne_2[0]=coordonne_a[0];    coordonne_3[0]=coordonne_a[0]+1;
+    coordonne_1[1]=coordonne_a[1];    coordonne_2[1]=coordonne_a[1]+1;  coordonne_3[1]=coordonne_a[1];
+
+    coordonne_4[0]=coordonne_a[0];    coordonne_5[0]=coordonne_a[0]-2;  coordonne_6[0]=coordonne_a[0]-1;     
+    coordonne_4[1]=coordonne_a[1]-1;  coordonne_5[1]=coordonne_a[1];    coordonne_6[1]=coordonne_a[1]+1;
+
+   
+
+    coordonne_7[0]=coordonne_a[0];    coordonne_8[0]=coordonne_a[0]+1;  coordonne_9[0]=coordonne_a[0]+2;
+    coordonne_7[1]=coordonne_a[1]+2;  coordonne_8[1]=coordonne_a[1]+1;  coordonne_9[1]=coordonne_a[1];
+
+
+
+    coordonne_10[0]=coordonne_a[0]+1;  coordonne_11[0]=coordonne_a[0];   coordonne_12[0]=coordonne_a[0]-1;
+    coordonne_10[1]=coordonne_a[1]-1;  coordonne_11[1]=coordonne_a[1]-2; coordonne_12[1]=coordonne_a[1]-1;
+
+
+if((*this).getAlive()==true and personnageD.getAlive()==true and (*this).getPlayed()==false ){
+
+    if((*this).arme->getRange()==1) 
+        {
+            if(coordonnees_b==coordonne_1||coordonnees_b==coordonne_2||coordonnees_b==coordonne_3||coordonnees_b==coordonne_4){
+                personnageD.statistiques.setVie(personnageD.statistiques.getVie()-1);
+                (*this).setPlayed(true);
+                if (personnageD.statistiques.getVie()==0)
+                {
+                   (*this).setAlive(false); 
+                }
+                
+            }
+
+        }
+
+    
+    else if ((*this).arme->getRange()==2){
+       
+        if(coordonnees_b==coordonne_1||coordonnees_b==coordonne_2||coordonnees_b==coordonne_3||coordonnees_b==coordonne_4){
+                personnageD.statistiques.setVie(personnageD.statistiques.getVie()-1);
+                (*this).setPlayed(true);
+                if (personnageD.statistiques.getVie()==0)
+                {
+                   (*this).setAlive(false); 
+                }
+                
+            }
+
+
+
+         else if(coordonnees_b==coordonne_5||coordonnees_b==coordonne_6||coordonnees_b==coordonne_7||coordonnees_b==coordonne_8||coordonnees_b==coordonne_9||coordonnees_b==coordonne_10||coordonnees_b==coordonne_11||coordonnees_b==coordonne_12){
+                personnageD.statistiques.setVie(personnageD.statistiques.getVie()-1);
+                (*this).setPlayed(true);
+                if (personnageD.statistiques.getVie()==0)
+                {
+                   (*this).setAlive(false); 
+                }
+        
+         }
+        
+        
+
+    }
+
+    else {
+        cout<<"pas d'attaque"<<endl;
+    }
+
+
+}
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

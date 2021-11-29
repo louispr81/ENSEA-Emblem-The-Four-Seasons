@@ -48,8 +48,7 @@ bool Surface::load(const std::string& tileset, sf::Vector2u tileSize, std::vecto
 
 
 
-void Surface::draw(sf::RenderTarget& target, sf::RenderStates states)
-{
+void Surface::draw(sf::RenderTarget& target, sf::RenderStates states) const{
     // on applique la transformation
     states.transform *= getTransform();
 

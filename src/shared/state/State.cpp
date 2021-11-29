@@ -6,7 +6,7 @@ using namespace state;
 using namespace std;
 
 
-State::State(){
+State::State(int size){
     
     std::vector<Joueur*> joueurs;
     std::vector<Personnage*> personnagesJ1;
@@ -32,7 +32,7 @@ State::State(){
     this->listeSaison.push_back(hiver);
 
     //Creation du plateau
-    Plateau *plateau = new Plateau(2); 
+    Plateau *plateau = new Plateau(size); 
 
     //Creation des statistiques
     Statistiques statistiquesBaseA1;

@@ -35,17 +35,16 @@ if (strcmp(argv[1],"hello") ==0 ){
         std::cout << "hello World " << std::endl;
     }
 	else if (strcmp(argv[1],"state") == 0){
-        state::State state;
+        state::State state(32);
 
 		std::cout << "CREATION DU STATE" << std::endl;
     }
 
     else if (strcmp(argv[1],"render") == 0){
 		std::cout << "Lancement du RENDU" << std::endl;
-        state::State *state = new State();
-        sf::Vector2u tileSize = sf::Vector2u(64,64);
-
-        render::StateLayer *rendu = new StateLayer(tileSize, 2, 2, state);
+        state::State *state = new State(17);
+        sf::Vector2u tileSize = sf::Vector2u(32,32);
+        render::StateLayer *rendu = new StateLayer(tileSize, 17, 17, state);
         (*rendu).window();
 	}
     

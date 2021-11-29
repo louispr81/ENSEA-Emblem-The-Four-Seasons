@@ -8,8 +8,19 @@
             std::vector<int> coordonees;
             coordonees.push_back(j);
             coordonees.push_back(i);
-            Cell *cell= new Cell(NULL, GRASS_SPRING, coordonees, true, 1, false);
-            liste_case.push_back(cell);
+            if (i==size/2 and j!=size/2){
+                Cell *cell= new Cell(NULL, RIVER, coordonees, true, 1, false);
+                liste_case.push_back(cell);
+            }
+            else if (i==size/2 and j==size/2){
+                Cell *cell= new Cell(NULL, BRIDGE, coordonees, true, 1, false);
+                liste_case.push_back(cell);
+            }
+            else{
+                Cell *cell= new Cell(NULL, GRASS_SPRING, coordonees, true, 1, false);
+                liste_case.push_back(cell);
+            }
+            
         }
     }
     (*this).size = size;

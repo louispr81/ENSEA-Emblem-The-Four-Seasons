@@ -40,6 +40,8 @@ void StateLayer::window(){
     (*this).plateauId=(*this).getPlateauIdFromState();
     sf::RenderWindow window(sf::VideoMode((*this).width*tileSize.x, (*this).height*tileSize.y), "Tilemap");
     Surface map;
+    float scaleY;
+    float scaleX;
     map.load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
     while (window.isOpen()){
         // on gère les évènements

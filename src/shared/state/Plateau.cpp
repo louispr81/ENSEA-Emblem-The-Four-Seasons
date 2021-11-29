@@ -8,7 +8,7 @@
             std::vector<int> coordonees;
             coordonees.push_back(j);
             coordonees.push_back(i);
-            Cell *cell= new Cell(NULL, GRASS, coordonees, true, 1, false);
+            Cell *cell= new Cell(NULL, GRASS_SPRING, coordonees, true, 1, false);
             liste_case.push_back(cell);
         }
     }

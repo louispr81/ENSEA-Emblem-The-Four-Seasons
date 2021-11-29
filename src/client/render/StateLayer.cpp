@@ -1,4 +1,5 @@
 #include "StateLayer.h"
+#include <iostream>
 using namespace render;
 using namespace state;
 
@@ -13,8 +14,9 @@ std::vector<int> StateLayer::getPlateauIdFromState (){
     std::vector<int> plateauId;
     Plateau* pPlateau=(*(*this).state).getPlateau();
     int res;
-    for(int i=0;i<64;i++){
-        for(int j=0;j<64;j++){
+    int size = pPlateau->getSize();
+    for(int i=0;i<size;i++){
+        for(int j=0;j<size;j++){
             res=((*pPlateau).getCase(j,i)).getType();
             plateauId.push_back(res-10);
         }
@@ -36,7 +38,7 @@ void StateLayer::setState (state::State* state){
 void StateLayer::window(){
     // on crée la fenêtre
     (*this).plateauId=(*this).getPlateauIdFromState();
-    sf::RenderWindow window(sf::VideoMode(1024, 1024), "Tilemap");
+    sf::RenderWindow window(sf::VideoMode((*this).width*tileSize.x, (*this).height*tileSize.y), "Tilemap");
     Surface map;
     map.load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
     while (window.isOpen()){

@@ -43,9 +43,9 @@ if (strcmp(argv[1],"hello") ==0 ){
     else if (strcmp(argv[1],"render") == 0){
 		std::cout << "Lancement du RENDU" << std::endl;
         state::State *state = new State();
-        sf::Vector2u tileSize = sf::Vector2u(8,8);
+        sf::Vector2u tileSize = sf::Vector2u(64,64);
 
-        render::StateLayer *rendu = new StateLayer(tileSize, 128, 128, state);
+        render::StateLayer *rendu = new StateLayer(tileSize, 2, 2, state);
         (*rendu).window();
 	}
     

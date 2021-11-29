@@ -6,7 +6,7 @@ using namespace state;
 using namespace std;
 
 
-State::State(){
+State::State(int size){
     
     std::vector<Joueur*> joueurs;
     std::vector<Personnage*> personnagesJ1;
@@ -32,7 +32,7 @@ State::State(){
     this->listeSaison.push_back(hiver);
 
     //Creation du plateau
-    Plateau *plateau = new Plateau(64); 
+    Plateau *plateau = new Plateau(size); 
 
     //Creation des statistiques
     Statistiques statistiquesBaseA1;
@@ -64,7 +64,7 @@ State::State(){
 
     //Choix des cases des personnages
     Cell caseA1=(*plateau).getCase(0,0);
-    Cell caseM1=(*plateau).getCase(63,63);
+    Cell caseM1=(*plateau).getCase(1,1);
 
     //Creation des personnages
     Personnage *assassin1 = new Personnage((std::string)"assassin1", 0, statistiquesBaseA1, inventaireA1, dague, assassin, automne, &(caseA1), bonusP, statistiquesA1, plateau, false,true);

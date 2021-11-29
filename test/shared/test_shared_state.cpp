@@ -13,7 +13,7 @@ BOOST_AUTO_TEST_CASE(TestStaticAssert)
 BOOST_AUTO_TEST_CASE(TestStateNamespace)
 {
   {
-    State jeuTest;
+    State jeuTest(17);
     //Test tour
     BOOST_CHECK_EQUAL(jeuTest.getTour(), 1);
     jeuTest.tourSuivant();

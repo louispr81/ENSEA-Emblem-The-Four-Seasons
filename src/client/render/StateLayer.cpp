@@ -1,4 +1,5 @@
 #include "StateLayer.h"
+#include <iostream>
 using namespace render;
 using namespace state;
 
@@ -13,8 +14,9 @@ std::vector<int> StateLayer::getPlateauIdFromState (){
     std::vector<int> plateauId;
     Plateau* pPlateau=(*(*this).state).getPlateau();
     int res;
-    for(int i=0;i<64;i++){
-        for(int j=0;j<64;j++){
+    int size = pPlateau->getSize();
+    for(int i=0;i<size;i++){
+        for(int j=0;j<size;j++){
             res=((*pPlateau).getCase(j,i)).getType();
             plateauId.push_back(res-10);
         }
@@ -36,9 +38,14 @@ void StateLayer::setState (state::State* state){
 void StateLayer::window(){
     // on crée la fenêtre
     (*this).plateauId=(*this).getPlateauIdFromState();
-    sf::RenderWindow window(sf::VideoMode(1024, 1024), "Tilemap");
-    Surface map;
-    map.load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
+    (*this).actListePersonnageId();
+    (*this).actXFromState();
+    (*this).actYFromState();
+    sf::RenderWindow window(sf::VideoMode((*this).width*tileSize.x, (*this).height*tileSize.y), "Tilemap");
+    //Surface map;
+    Personnages personnages;
+    //map.load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
+    personnages.load("res/personnages.png", (*this).tileSize, (*this).listePersonnageCoordX, (*this).listePersonnageId, (*this).listePersonnageCoordY);
     while (window.isOpen()){
         // on gère les évènements
         sf::Event event;
@@ -49,11 +56,100 @@ void StateLayer::window(){
         }
         // on dessine le niveau
         window.clear();
-        window.draw(map);
+        //window.draw(map);
+        window.draw(personnages);
         window.display();
     }
 }
+std::vector<int>* StateLayer::getListePersonnageId (){
+    return (*this).listePersonnageId;
+}
 
+std::vector<int>*  StateLayer::getListeX (){
+    return (*this).listePersonnageCoordX;
+}
+std::vector<int>*  StateLayer::getListeY (){
+    return (*this).listePersonnageCoordY;
+}
+
+void StateLayer::actListePersonnageId (){
+    std::vector<int> *listePersonnageId = new std::vector<int>; 
+    Joueur* pJoueur1=(*(*this).state).getJoueurs()[0];
+    Joueur* pJoueur2=(*(*this).state).getJoueurs()[1];
+    int size = pJoueur1->getPersonnages().size();
+    for(int i=0;i<size;i++){
+        (*listePersonnageId).push_back((*((*pJoueur1).getPersonnages()[i])).getClasseId());
+    }
+    size = pJoueur2->getPersonnages().size();
+    for(int i=0;i<size;i++){
+        (*listePersonnageId).push_back((*((*pJoueur2).getPersonnages()[i])).getClasseId());
+    }
+    (*this).listePersonnageId=listePersonnageId;
+    
+}
+
+void  StateLayer::actXFromState (){
+    (*this).listePersonnageCoordX->clear();
+    std::vector<int> *listePersonnageCoordX= new std::vector<int>; 
+
+    Joueur* pJoueur1;
+    Joueur* pJoueur2;
+    pJoueur1=(*(*this).state).getJoueurs()[0];
+    pJoueur2=(*(*this).state).getJoueurs()[1];
+    int size = pJoueur1->getPersonnages().size();
+    int x;
+    int y;
+    Personnage *ptPersonnages;
+    Cell *ptCell;
+    int i;
+    std::vector<int> coords;
+    for(i=0;i<size;i++){
+        ptPersonnages=(*pJoueur1).getPersonnages()[i];
+        ptCell=(*ptPersonnages).getCell();
+        x=(*(*ptCell).getCoordonees())[0];
+        (*listePersonnageCoordX).push_back(x);
+    }
+    size = pJoueur2->getPersonnages().size();
+    int j;
+    for(j=0;j<size;j++){
+        ptPersonnages=(*pJoueur2).getPersonnages()[j];
+        ptCell=(*ptPersonnages).getCell();
+        x=(*(*ptCell).getCoordonees())[0];
+        (*listePersonnageCoordX).push_back(x);
+    }
+    (*this).listePersonnageCoordX=listePersonnageCoordX;
+    
+}
+
+void  StateLayer::actYFromState(){
+    
+    std::vector<int>* listePersonnageCoordY=new std::vector<int>; 
+    std::vector<Joueur*> listeJoueurs;
+    listeJoueurs=(*(*this).state).getJoueurs();
+    Joueur* pJoueur1=listeJoueurs[0];
+    Joueur* pJoueur2=listeJoueurs[1];
+    int size = pJoueur1->getPersonnages().size();
+    int y;
+    Personnage *ptPersonnages;
+    Cell *ptCell;
+    int i;
+    std::vector<int> coords;
+    for(i=0;i<size;i++){
+        ptPersonnages=(*pJoueur1).getPersonnages()[i];
+        ptCell=(*ptPersonnages).getCell();
+        y=(*(*ptCell).getCoordonees())[0];
+        (*listePersonnageCoordY).push_back(y);
+    }
+    size = pJoueur2->getPersonnages().size();
+    for(i=0;i<size;i++){
+        ptPersonnages=(*pJoueur2).getPersonnages()[i];
+        ptCell=(*ptPersonnages).getCell();
+        y=(*(*ptCell).getCoordonees())[1];
+        (*listePersonnageCoordY).push_back(y);
+    }
+    (*this).listePersonnageCoordY=listePersonnageCoordY;
+    
+}
 /*
 int main()
 {

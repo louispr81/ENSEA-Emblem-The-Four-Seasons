@@ -99,7 +99,11 @@ libsfml-dev libxml2-dev libmicrohttpd-dev libboost-all-dev \
 python3 python3-pip \
 lcov gcovr
 ```
-
+install the package to read json
+```sh
+sudo apt-get install libjsoncpp-dev
+sudo ln -s /usr/include/jsoncpp/json/ /usr/include/json
+```
 Install python package with pip (or pip3)
 ```sh
 pip install gcovr

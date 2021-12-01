@@ -11,6 +11,9 @@ Classe::Classe(ClasseId classeId, std::string nom, std::vector<float> probaGainS
     
 }
 
+ClasseId Classe::getId(){
+    return (*this).classeId;
+}
 Classe::~Classe(){
     
 }

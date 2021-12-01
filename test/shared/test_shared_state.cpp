@@ -32,7 +32,7 @@ BOOST_AUTO_TEST_CASE(TestStateNamespace)
     std::cout<<jeuTest.getSaison()<<'\n';
     BOOST_CHECK_EQUAL((*(jeuTest.getSaison())).getId(), PRINTEMPS);                    
     // Test gameover
-    jeuTest.abandonner(*(jeuTest.getJoueurs(0)));
+    jeuTest.abandonner(*(jeuTest.getJoueurs()[0]));
     BOOST_CHECK_EQUAL(jeuTest.getGameover(), true);
 
     

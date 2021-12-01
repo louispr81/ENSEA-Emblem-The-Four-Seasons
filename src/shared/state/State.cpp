@@ -141,8 +141,8 @@ bool State::getGameover (){
     return (*this).gameover;
 }
 
-Joueur* State::getJoueurs(int i){
-    return (*this).joueurs[i];
+std::vector<Joueur*> State::getJoueurs(){
+    return (*this).joueurs;
 }
 
 Saison* State:: getSaison(){

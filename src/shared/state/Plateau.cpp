@@ -5,9 +5,9 @@
     std::vector<Cell*> liste_case;
     for (int i=0; i<size; ++i){
         for (int j=0; j<size; ++j){
-            std::vector<int> coordonees;
-            coordonees.push_back(j);
-            coordonees.push_back(i);
+            std::vector<int> *coordonees=new std::vector<int>;
+            (*coordonees).push_back(j);
+            (*coordonees).push_back(i);
             if (i==size/2 and j!=size/2){
                 Cell *cell= new Cell(NULL, RIVER, coordonees, true, 1, false);
                 liste_case.push_back(cell);

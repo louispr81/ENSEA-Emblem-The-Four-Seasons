@@ -41,7 +41,7 @@ void StateLayer::window(){
     (*this).actListePersonnageId();
     (*this).actXFromState(); 
     (*this).actYFromState();
-    sf::RenderWindow window(sf::VideoMode((*this).width*tileSize.x, (*this).height*tileSize.y), "Tilemap");
+    sf::RenderWindow window(sf::VideoMode((*this).width*tileSize.x, (*this).height*tileSize.y), "ENSEA Emblem: The Four Seasons");
     Surface map;
     Personnages personnages;
     map.load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);

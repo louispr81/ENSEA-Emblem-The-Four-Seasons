@@ -47,7 +47,11 @@ if (strcmp(argv[1],"hello") ==0 ){
         render::StateLayer *rendu = new StateLayer(tileSize, 17, 17, state);
         (*rendu).window();
 	}
-    
+    else if (strcmp(argv[1],"engine") == 0){
+		std::cout << "Work in Progress" << std::endl;
+
+
+	}
     else {
         std::cout << "Wrong command !" << std::endl ;
     }

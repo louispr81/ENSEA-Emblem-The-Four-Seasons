@@ -1,7 +1,7 @@
 #include "Cell.h"
 using namespace state;
 
- Cell::Cell (Personnage* personnage, CellId type, std::vector<int>* coordonees, bool walkable, int costPm, bool occupe){
+ Cell::Cell (Personnage* personnage, CellId type, std::vector<int> coordonees, Cell* ptCell, bool walkable, int costPm, bool occupe){
 
     (*this).personnage=personnage;
     (*this).type=type;
@@ -9,6 +9,7 @@ using namespace state;
     (*this).walkable=walkable;
     (*this).costPm=costPm;
     (*this).occupe=occupe;
+    (*this).ptCell=ptCell;
  }
 
 
@@ -44,12 +45,20 @@ bool Cell::getWalkable (){
     return (*this).walkable;
 }
 
-void Cell::setCoordonnees (std::vector<int>* coordonnees){
+Cell* Cell::getPtCell (){
+    return (*this).ptCell;
+}
+
+void Cell::setCoordonnees (std::vector<int> coordonnees){
     (*this).coordonees=coordonees;
 }
 
-std::vector<int>* Cell::getCoordonees(){
+std::vector<int> Cell::getCoordonees(){
     return (*this).coordonees=coordonees;
+}
+
+void Cell::setPtCell (Cell* ptCell){
+    (*this).ptCell=ptCell;
 }
 
 bool Cell::getOccupe(){

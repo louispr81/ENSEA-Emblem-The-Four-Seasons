@@ -1,4 +1,5 @@
  #include "Plateau.h"
+ #include <iostream>
  using namespace state;
 
  Plateau::Plateau(int size){
@@ -9,15 +10,18 @@
             (*coordonees).push_back(j);
             (*coordonees).push_back(i);
             if (i==size/2 and j!=size/2){
-                Cell *cell= new Cell(NULL, RIVER, coordonees, true, 1, false);
+                Cell *cell= new Cell(NULL, RIVER, *coordonees,NULL, true, 1, false);
+                cell->setPtCell(cell);
                 liste_case.push_back(cell);
             }
             else if (i==size/2 and j==size/2){
-                Cell *cell= new Cell(NULL, BRIDGE, coordonees, true, 1, false);
+                Cell *cell= new Cell(NULL, BRIDGE, *coordonees,NULL, true, 1, false);
+                cell->setPtCell(cell);
                 liste_case.push_back(cell);
             }
             else{
-                Cell *cell= new Cell(NULL, GRASS_SPRING, coordonees, true, 1, false);
+                Cell *cell= new Cell(NULL, GRASS_SPRING, *coordonees,NULL, true, 1, false);
+                cell->setPtCell(cell);
                 liste_case.push_back(cell);
             }
             

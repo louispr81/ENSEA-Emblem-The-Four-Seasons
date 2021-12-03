@@ -1,7 +1,7 @@
 #include "Cell.h"
 using namespace state;
 
- Cell::Cell (Personnage* personnage, CellId type, std::vector<int> coordonees, bool walkable, int costPm, bool occupe){
+ Cell::Cell (Personnage* personnage, CellId type, std::vector<int>* coordonees, bool walkable, int costPm, bool occupe){
 
     (*this).personnage=personnage;
     (*this).type=type;
@@ -44,11 +44,11 @@ bool Cell::getWalkable (){
     return (*this).walkable;
 }
 
-void Cell::setCoordonnees (std::vector<int> coordonnees){
+void Cell::setCoordonnees (std::vector<int>* coordonnees){
     (*this).coordonees=coordonees;
 }
 
-std::vector<int> Cell::getCoordonees(){
+std::vector<int>* Cell::getCoordonees(){
     return (*this).coordonees=coordonees;
 }
 

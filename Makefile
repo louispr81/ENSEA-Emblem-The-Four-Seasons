@@ -133,5 +133,3 @@ list:
 
 .PHONY: configure build clean extern test testdocker list
 
-install:
-  	cp $(EXEC_NAME) $(INSTALL_DIR)

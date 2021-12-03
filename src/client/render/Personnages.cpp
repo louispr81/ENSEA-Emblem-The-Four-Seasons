@@ -20,12 +20,12 @@ bool Personnages::load (const std::string& tileset, sf::Vector2u tileSize, std::
 
     // on remplit le tableau de vertex, avec un quad par tuile
     
-    for (unsigned int i = 0; i < (int)nbrPersonnages-1; ++i){
+    for (unsigned int i = 0; i < (int)nbrPersonnages; ++i){
         // on récupère le numéro de tuile courant
         int tileNumber = (*listePersonnageId)[i];
 
         // on récupère un pointeur vers le quad à définir dans le tableau de vertex
-        sf::Vertex* quad = &m_vertices[i];
+        sf::Vertex* quad = &m_vertices[i*4];
         int x=(*listePersonnageCoordX)[i];
         int y=(*listePersonnageCoordY)[i];
         std::cout << "Id="<< tileNumber<<"\n";

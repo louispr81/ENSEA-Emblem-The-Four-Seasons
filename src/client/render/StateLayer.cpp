@@ -42,9 +42,9 @@ void StateLayer::window(){
     (*this).actXFromState();
     (*this).actYFromState();
     sf::RenderWindow window(sf::VideoMode((*this).width*tileSize.x, (*this).height*tileSize.y), "Tilemap");
-    //Surface map;
+    Surface map;
     Personnages personnages;
-    //map.load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
+    map.load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
     personnages.load("res/personnages.png", (*this).tileSize, (*this).listePersonnageCoordX, (*this).listePersonnageId, (*this).listePersonnageCoordY);
     while (window.isOpen()){
         // on gère les évènements
@@ -56,7 +56,7 @@ void StateLayer::window(){
         }
         // on dessine le niveau
         window.clear();
-        //window.draw(map);
+        window.draw(map);
         window.draw(personnages);
         window.display();
     }

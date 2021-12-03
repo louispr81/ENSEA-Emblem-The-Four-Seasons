@@ -22,6 +22,7 @@ Personnage::Personnage(std::string nom, int id, Statistiques statistiquesBase, s
     (*this).played=played;
     (*this).alive=alive;
     (*this).plateau=plateau;
+    //(*this).getMoved=getMoved;
 }
 
 Saison Personnage::getSaison(){
@@ -91,6 +92,7 @@ int Personnage::deplacer(int x1, int y1){
 
     
     int reply;
+    //this->getMoved=false;
      std::vector<int> coordonne_a ,coordonne_destination,coordonne_1,coordonne_2,coordonne_3,coordonne_4;
     
     coordonne_a=((*((*this).cell)).getCoordonees()); // coordonees du personnage 
@@ -126,6 +128,7 @@ int Personnage::deplacer(int x1, int y1){
                     ((*((*this).cell)).getCoordonees())=coordonne_1;
                     (*this).statistiques.setPoint_mouvement((*this).statistiques.getPoint_mouvement()-1);
                   reply=1;
+                  //this->getMoved=true;
                  }
             }
 
@@ -140,6 +143,7 @@ int Personnage::deplacer(int x1, int y1){
                     ((*((*this).cell)).getCoordonees())=coordonne_2;
                     (*this).statistiques.setPoint_mouvement((*this).statistiques.getPoint_mouvement()-1);
                     reply=1;
+                    //this->getMoved=true;
                 }
             }
 
@@ -155,6 +159,7 @@ if (coordonne_destination==coordonne_3 ){
                     ((*((*this).cell)).getCoordonees())=coordonne_3;
                     (*this).statistiques.setPoint_mouvement((*this).statistiques.getPoint_mouvement()-1);
                     reply=1;
+                    //this->getMoved=true;
                 }
             }
 
@@ -169,6 +174,7 @@ if (coordonne_destination==coordonne_4 ){
                     ((*((*this).cell)).getCoordonees())=coordonne_4;
                     (*this).statistiques.setPoint_mouvement((*this).statistiques.getPoint_mouvement()-1);
                     reply=1;
+                    //this->getMoved=true;
                 }
             }
 
@@ -181,11 +187,14 @@ if (coordonne_destination==coordonne_4 ){
     else {
         cout<< " la case n'est pas disponible "<<endl;
         reply = -1;
+        //this->getMoved=false;
     }   
  return reply;
 }
-
-
+/*
+bool Personnage::getMoved(){
+    return this->getMoved;
+}*/
 
 
 

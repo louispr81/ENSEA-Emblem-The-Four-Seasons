@@ -39,7 +39,7 @@ void StateLayer::window(){
     // on crée la fenêtre
     (*this).plateauId=(*this).getPlateauIdFromState();
     (*this).actListePersonnageId();
-    (*this).actXFromState();
+    (*this).actXFromState(); 
     (*this).actYFromState();
     sf::RenderWindow window(sf::VideoMode((*this).width*tileSize.x, (*this).height*tileSize.y), "Tilemap");
     Surface map;
@@ -91,7 +91,6 @@ void StateLayer::actListePersonnageId (){
 void  StateLayer::actXFromState (){
     (*this).listePersonnageCoordX->clear();
     std::vector<int> *listePersonnageCoordX= new std::vector<int>; 
-
     Joueur* pJoueur1;
     Joueur* pJoueur2;
     pJoueur1=(*(*this).state).getJoueurs()[0];
@@ -106,7 +105,8 @@ void  StateLayer::actXFromState (){
     for(i=0;i<size;i++){
         ptPersonnages=(*pJoueur1).getPersonnages()[i];
         ptCell=(*ptPersonnages).getCell();
-        x=(*(*ptCell).getCoordonees())[0];
+        //std::cout<<"ptCoord="<<((*ptCell).getCoordonees())<<"\n";
+        x=((*ptCell).getCoordonees())[0]; 
         (*listePersonnageCoordX).push_back(x);
     }
     size = pJoueur2->getPersonnages().size();
@@ -114,9 +114,10 @@ void  StateLayer::actXFromState (){
     for(j=0;j<size;j++){
         ptPersonnages=(*pJoueur2).getPersonnages()[j];
         ptCell=(*ptPersonnages).getCell();
-        x=(*(*ptCell).getCoordonees())[0];
+        x=((*ptCell).getCoordonees())[0];
         (*listePersonnageCoordX).push_back(x);
     }
+    std::cout<<"fin\n";
     (*this).listePersonnageCoordX=listePersonnageCoordX;
     
 }
@@ -137,14 +138,14 @@ void  StateLayer::actYFromState(){
     for(i=0;i<size;i++){
         ptPersonnages=(*pJoueur1).getPersonnages()[i];
         ptCell=(*ptPersonnages).getCell();
-        y=(*(*ptCell).getCoordonees())[0];
+        y=((*ptCell).getCoordonees())[1];
         (*listePersonnageCoordY).push_back(y);
     }
     size = pJoueur2->getPersonnages().size();
     for(i=0;i<size;i++){
         ptPersonnages=(*pJoueur2).getPersonnages()[i];
         ptCell=(*ptPersonnages).getCell();
-        y=(*(*ptCell).getCoordonees())[1];
+        y=((*ptCell).getCoordonees())[1];
         (*listePersonnageCoordY).push_back(y);
     }
     (*this).listePersonnageCoordY=listePersonnageCoordY;

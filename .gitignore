@@ -19,3 +19,6 @@ res/pngorigine/pngorigine2.zip
 src/state.dia.autosave
 Diagram1.dia.autosaveZone.Identifier
 Diagram1.dia.autosave:Zone.Identifier
+.vscode/configurationCache.log
+.vscode/dryrun.log
+.vscode/targets.log

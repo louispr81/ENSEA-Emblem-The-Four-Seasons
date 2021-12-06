@@ -6,7 +6,7 @@ using namespace state;
 using namespace std;
 
 
-Personnage::Personnage(std::string nom, int id, Statistiques statistiquesBase, std::vector<Objet*> inventaire, Arme* arme, Classe* classe, Saison* saison, Cell* cell, std::vector<int> bonus, Statistiques statistiques, Plateau* plateau, bool played, bool alive){
+Personnage::Personnage(std::string nom, int id, Statistiques statistiquesBase, std::vector<Objet*> inventaire, Arme* arme, Classe* classe, Saison* saison, Cell* cell, std::vector<int> bonus, Statistiques statistiques, Plateau* plateau, bool played, bool alive, bool moved){
     (*this).nom=nom;
     (*this).id=id;
     (*this).statistiquesBase=statistiquesBase;
@@ -22,7 +22,7 @@ Personnage::Personnage(std::string nom, int id, Statistiques statistiquesBase, s
     (*this).played=played;
     (*this).alive=alive;
     (*this).plateau=plateau;
-    //(*this).getMoved=getMoved;
+    (*this).moved=moved;
 }
 
 Saison Personnage::getSaison(){
@@ -92,11 +92,11 @@ int Personnage::deplacer(int x1, int y1){
 
     
     int reply;
-    //this->getMoved=false;
+    this->moved=false;
      std::vector<int> coordonne_a ,coordonne_destination,coordonne_1,coordonne_2,coordonne_3,coordonne_4;
     
-    coordonne_a=*((*((*this).cell)).getCoordonees()); // coordonees du personnage 
-    coordonne_destination=*(this->plateau->getCase(x1,y1).getCoordonees());
+    coordonne_a=((*((*this).cell)).getCoordonees()); // coordonees du personnage 
+    coordonne_destination=(this->plateau->getCase(x1,y1).getCoordonees());
      
     coordonne_1[0]=coordonne_a[0]-1;       // coordonees de la case à gauche du personage
     coordonne_1[1]=coordonne_a[1];        
@@ -125,10 +125,10 @@ int Personnage::deplacer(int x1, int y1){
         if(this->plateau->getCase(coordonne_1[0],coordonne_1[1]).getWalkable()==true){
             if(this->plateau->getCase(coordonne_1[0],coordonne_1[1]).getOccupe()==false){
                  if((*this).statistiques.getPoint_mouvement()>=1){
-                    *((*((*this).cell)).getCoordonees())=coordonne_1;
+                    ((*((*this).cell)).getCoordonees())=coordonne_1;
                     (*this).statistiques.setPoint_mouvement((*this).statistiques.getPoint_mouvement()-1);
                   reply=1;
-                  //this->getMoved=true;
+                  this->moved=true;
                  }
             }
 
@@ -140,10 +140,10 @@ int Personnage::deplacer(int x1, int y1){
         if(this->plateau->getCase(coordonne_2[0],coordonne_2[1]).getWalkable()==true){
             if(this->plateau->getCase(coordonne_2[0],coordonne_2[1]).getOccupe()==false){
                 if((*this).statistiques.getPoint_mouvement()>=1){  
-                    *((*((*this).cell)).getCoordonees())=coordonne_2;
+                    ((*((*this).cell)).getCoordonees())=coordonne_2;
                     (*this).statistiques.setPoint_mouvement((*this).statistiques.getPoint_mouvement()-1);
                     reply=1;
-                    //this->getMoved=true;
+                    this->moved=true;
                 }
             }
 
@@ -156,10 +156,10 @@ if (coordonne_destination==coordonne_3 ){
         if(this->plateau->getCase(coordonne_3[0],coordonne_3[1]).getWalkable()==true){
             if(this->plateau->getCase(coordonne_3[0],coordonne_3[1]).getOccupe()==false){
                 if((*this).statistiques.getPoint_mouvement()>=1){
-                    *((*((*this).cell)).getCoordonees())=coordonne_3;
+                    ((*((*this).cell)).getCoordonees())=coordonne_3;
                     (*this).statistiques.setPoint_mouvement((*this).statistiques.getPoint_mouvement()-1);
                     reply=1;
-                    //this->getMoved=true;
+                    this->moved=true;
                 }
             }
 
@@ -171,10 +171,10 @@ if (coordonne_destination==coordonne_4 ){
         if(this->plateau->getCase(coordonne_4[0],coordonne_4[1]).getWalkable()==true){
             if(this->plateau->getCase(coordonne_4[0],coordonne_4[1]).getOccupe()==false){
                 if((*this).statistiques.getPoint_mouvement()>=1){
-                    *((*((*this).cell)).getCoordonees())=coordonne_4;
+                    ((*((*this).cell)).getCoordonees())=coordonne_4;
                     (*this).statistiques.setPoint_mouvement((*this).statistiques.getPoint_mouvement()-1);
                     reply=1;
-                    //this->getMoved=true;
+                    this->moved=true;
                 }
             }
 
@@ -187,21 +187,21 @@ if (coordonne_destination==coordonne_4 ){
     else {
         cout<< " la case n'est pas disponible "<<endl;
         reply = -1;
-        //this->getMoved=false;
+        this->moved=false;
     }   
  return reply;
 }
-/*
+
 bool Personnage::getMoved(){
-    return this->getMoved;
-}*/
+    return this->moved;
+}
 
 
 
 void Personnage::attaquer (Personnage personnageD){
     std::vector<int> coordonne_a,coordonnees_b,coordonne_1,coordonne_2,coordonne_3,coordonne_4,coordonne_5,coordonne_6,coordonne_7,coordonne_8,coordonne_9,coordonne_10,coordonne_11,coordonne_12;
-    coordonne_a=*((*this).cell->getCoordonees());
-    coordonnees_b=*(personnageD.cell->getCoordonees());
+    coordonne_a=((*this).cell->getCoordonees());
+    coordonnees_b=(personnageD.cell->getCoordonees());
 
     coordonne_1[0]=coordonne_a[0]-1;  coordonne_2[0]=coordonne_a[0];    coordonne_3[0]=coordonne_a[0]+1;
     coordonne_1[1]=coordonne_a[1];    coordonne_2[1]=coordonne_a[1]+1;  coordonne_3[1]=coordonne_a[1];
@@ -273,6 +273,9 @@ if((*this).getAlive()==true and personnageD.getAlive()==true and (*this).getPlay
 }
 }
 
+std::string Personnage::getPersonnageActif(){
+    return this->nom;
+}
 ClasseId Personnage::getClasseId (){
     return (*((*this).classe)).getId();
 }

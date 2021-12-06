@@ -1,3 +1,4 @@
+/*
 #include "CommandToursuivant.h"
 #include <string>
 #include <iostream>
@@ -17,3 +18,4 @@ Json::Value CommandTourSuivant::serialize(){
 void CommandTourSuivant::execute (state::State &state){
 
 }
+*/

@@ -1,5 +1,4 @@
 #include "Engine.h"
-#include "Engine.h"
 #include <iostream>
 
 
@@ -7,23 +6,31 @@ using namespace state;
 using namespace moteur;
 using namespace std;
 /*
-Engine::Engine():{
-
-}
+Engine::Engine(){
+    cout<<"Engine launched"<<endl;
+}*/
 
 state::State& Engine::getState() {
     return this->currentState;
-}*/
-state::State &Engine::getState(){
-    state::State &refState = currentState;
-    return refState;
 }
-void Engine::addPassiveCommands(){
-    int priority = 0;
-    if(currentCommands.size()>0){
 
-    }
+Command& Engine::getCommands(){
+   
+    return this->currentCommands;
 }
 void Engine::update(){
+   /* switch (this->currentState)
+    {
+        switch (this->currentCommands){
+            case : ATTACT
+                cout<<"Attact"<< endl;
+                break;
+    
+    default:
+        break;
+        }
+    }*/
+}
+Engine::~Engine(){
 
 }

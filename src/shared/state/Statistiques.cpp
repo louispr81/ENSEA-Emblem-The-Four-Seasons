@@ -1,4 +1,5 @@
 #include "Statistiques.h" 
+#include <iostream>
 using namespace state;
 
 
@@ -84,4 +85,18 @@ int Statistiques::getExperience_max (){
 }
 int Statistiques::getNiveau (){
     return (*this).niveau;
+}
+void Statistiques::print(){
+    std::cout<<"---------------STATISTIQUES---------------"<<std::endl;
+    std::cout<<"niveau="<<this->niveau<<std::endl;
+    std::cout<<"XP="<<this->experience<<"/"<<this->experience_max<<std::endl;
+    std::cout<<"HP="<<this->vie<<"/"<<this->vie_max<<std::endl;
+    std::cout<<"PM="<<this->point_mouvement<<"/"<<this->point_mouvement_max<<std::endl;
+    std::cout<<"force="<<this->force<<std::endl;
+    std::cout<<"intelligence="<<this->intelligence<<std::endl;
+    std::cout<<"vitesse="<<this->vitesse<<std::endl;
+    std::cout<<"defense="<<this->defense<<std::endl;
+    std::cout<<"resistance="<<this->resistance<<std::endl;
+    std::cout<<"technique="<<this->technique<<std::endl;
+    std::cout<<"----------------------------------------"<<std::endl;
 }

@@ -171,7 +171,6 @@ void  StateLayer::actXFromState (){
         x=((*ptCell).getCoordonees())[0];
         (*listePersonnageCoordX).push_back(x);
     }
-    std::cout<<"fin\n";
     (*this).listePersonnageCoordX=listePersonnageCoordX;
     
 }

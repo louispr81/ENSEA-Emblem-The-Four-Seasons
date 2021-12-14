@@ -44,8 +44,8 @@ void Personnage::setPlayed (bool played)
     (*this).played=played;
 }
 
-string Personnage::getName (){
-        return (*this).nom;
+std::string Personnage::getNom(){
+ return (*this).nom;
 }
 
 bool Personnage::getPlayed (){
@@ -76,6 +76,14 @@ void Personnage::ouvrirCoffre(){
     this->played = true;
 } 
 */
+
+
+
+
+
+
+
+
 
 void Personnage::echangerObjet(Personnage personnageB, Objet objet){
     for (size_t i = 0; i <(*this).inventaire.size() ; i++)

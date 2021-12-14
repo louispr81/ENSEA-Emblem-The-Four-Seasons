@@ -34,7 +34,7 @@ state::State* StateLayer::getState (){
 void StateLayer::setState (state::State* state){
     (*this).state=state;
 }
-
+/*
 void StateLayer::windowExemple(){
     // on crée la fenêtre
     (*this).plateauId=(*this).getPlateauIdFromState();
@@ -65,19 +65,25 @@ void StateLayer::windowExemple(){
         window->display();
     }
 }
-
+*/
 void StateLayer::windowInit(){
     // on crée la fenêtre
+    std::cout << "Lancement du RENDU" << std::endl;
     (*this).plateauId=(*this).getPlateauIdFromState();
+    std::cout << "Lancement du RENDU" << std::endl;
     (*this).actListePersonnageId();
-    (*this).actXFromState(); 
+    std::cout << "segfault" << std::endl;
+    (*this).actXFromState();
+    std::cout << "Lancement du RENDU" << std::endl; 
     (*this).actYFromState();
+    std::cout << "Lancement du RENDU" << std::endl;
     sf::RenderWindow* window=new sf::RenderWindow(sf::VideoMode((*this).width*tileSize.x, (*this).height*tileSize.y), "ENSEA Emblem: The Four Seasons");
     this->window=window;
     Surface* map= new Surface();
     this->map=map;
     Personnages* personnages = new Personnages();
     this->personnages=personnages;
+    std::cout << "Lancement du RENDU" << std::endl;
     map->load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
     personnages->load("res/personnages.png", (*this).tileSize, (*this).listePersonnageCoordX, (*this).listePersonnageId, (*this).listePersonnageCoordY);
     window->clear();

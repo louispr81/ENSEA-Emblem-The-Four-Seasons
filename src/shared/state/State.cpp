@@ -102,51 +102,53 @@ State::State(int size){
     Statistiques statistiquesAR2;
     
     //Choix des cases des personnages
-    Cell* caseA1=(*plateau).getCase(0,0).getPtCell();
-    (*plateau).getCase(0,0).setOccupe(true);
-    Cell* caseM1=(*plateau).getCase(1,0).getPtCell();
-    (*plateau).getCase(1,0).setOccupe(true);
-    Cell* caseAR1=(*plateau).getCase(2,0).getPtCell();
-    (*plateau).getCase(2,0).setOccupe(true);
-    Cell* caseCH1=(*plateau).getCase(3,0).getPtCell();
-    (*plateau).getCase(3,0).setOccupe(true);
-    Cell* caseC1=(*plateau).getCase(4,0).getPtCell();
-    (*plateau).getCase(4,0).setOccupe(true);
-    Cell* caseA2=(*plateau).getCase(0,size-1).getPtCell();
-    (*plateau).getCase(0,size-1).setOccupe(true);
-    Cell* caseM2=(*plateau).getCase(1,size-1).getPtCell();
-    (*plateau).getCase(1,size-1).setOccupe(true);
-    Cell* caseAR2=(*plateau).getCase(2,size-1).getPtCell();
-    (*plateau).getCase(2,size-1).setOccupe(true);
-    Cell* caseCH2=(*plateau).getCase(3,size-1).getPtCell();
-    (*plateau).getCase(3,size-1).setOccupe(true);
-    Cell* caseC2=(*plateau).getCase(4,size-1).getPtCell();
-    (*plateau).getCase(4,size-1).setOccupe(true);
+    Cell* caseA1=(*plateau).getCase(0,0)->getPtCell();
+    (*plateau).getCase(0,0)->setOccupe(true);
+    Cell* caseM1=(*plateau).getCase(1,0)->getPtCell();
+    (*plateau).getCase(1,0)->setOccupe(true);
+    Cell* caseAR1=(*plateau).getCase(2,0)->getPtCell();
+    (*plateau).getCase(2,0)->setOccupe(true);
+    Cell* caseCH1=(*plateau).getCase(3,0)->getPtCell();
+    (*plateau).getCase(3,0)->setOccupe(true);
+    Cell* caseC1=(*plateau).getCase(4,0)->getPtCell();
+    (*plateau).getCase(4,0)->setOccupe(true);
+    Cell* caseA2=(*plateau).getCase(0,size-1)->getPtCell();
+    (*plateau).getCase(0,size-1)->setOccupe(true);
+    Cell* caseM2=(*plateau).getCase(1,size-1)->getPtCell();
+    (*plateau).getCase(1,size-1)->setOccupe(true);
+    Cell* caseAR2=(*plateau).getCase(2,size-1)->getPtCell();
+    (*plateau).getCase(2,size-1)->setOccupe(true);
+    Cell* caseCH2=(*plateau).getCase(3,size-1)->getPtCell();
+    (*plateau).getCase(3,size-1)->setOccupe(true);
+    Cell* caseC2=(*plateau).getCase(4,size-1)->getPtCell();
+    (*plateau).getCase(4,size-1)->setOccupe(true);
 
     //Creation des personnages
     Personnage *assassin1 = new Personnage((std::string)"assassin 1", 0, statistiquesBaseA1, inventaireA1, dague1, assassin, automne, (caseA1), bonusP, statistiquesA1, plateau, false,true);
     Personnage *mage1 = new Personnage((std::string)"mage 1", 1, statistiquesBaseM1, inventaireM1, tome1, mage, printemps, (caseM1), bonusP, statistiquesM1, plateau, false, true);
-    Personnage *chevalier1 = new Personnage((std::string)"chevalier 1", 1, statistiquesBaseCH1, inventaireCH1, lance1, chevalier, hiver, (caseCH1), bonusP, statistiquesCH1, plateau, false, true);
-    Personnage *archer1 = new Personnage((std::string)"archer 1", 1, statistiquesBaseAR1, inventaireAR1, arc1, archer, ete, (caseAR1), bonusP, statistiquesAR1, plateau, false, true);
-    Personnage *combattant1 = new Personnage((std::string)"combattant 1", 1, statistiquesBaseC1, inventaireC1, hache1, combattant, NULL, (caseC1), bonusP, statistiquesC1, plateau, false, true);
-    Personnage *assassin2 = new Personnage((std::string)"assassin 2", 0, statistiquesBaseA2, inventaireA2, dague2, assassin, automne, (caseA2), bonusP, statistiquesA2, plateau, false,true);
-    Personnage *mage2 = new Personnage((std::string)"mage 2", 1, statistiquesBaseM2, inventaireM2, tome2, mage, printemps, (caseM2), bonusP, statistiquesM2, plateau, false, true);
-    Personnage *chevalier2 = new Personnage((std::string)"chevalier 2", 1, statistiquesBaseCH2, inventaireCH2, lance2, chevalier, hiver, (caseCH2), bonusP, statistiquesCH2, plateau, false, true);
-    Personnage *archer2 = new Personnage((std::string)"archer 2", 1, statistiquesBaseAR2, inventaireAR2, arc2, archer, ete, (caseAR2), bonusP, statistiquesAR2, plateau, false, true);
-    Personnage *combattant2 = new Personnage((std::string)"combattant 2", 1, statistiquesBaseC2, inventaireC2, hache2, combattant, NULL, (caseC2), bonusP, statistiquesC2, plateau, false, true);
+    Personnage *chevalier1 = new Personnage((std::string)"chevalier 1", 2, statistiquesBaseCH1, inventaireCH1, lance1, chevalier, hiver, (caseCH1), bonusP, statistiquesCH1, plateau, false, true);
+    Personnage *archer1 = new Personnage((std::string)"archer 1", 3, statistiquesBaseAR1, inventaireAR1, arc1, archer, ete, (caseAR1), bonusP, statistiquesAR1, plateau, false, true);
+    Personnage *combattant1 = new Personnage((std::string)"combattant 1", 4, statistiquesBaseC1, inventaireC1, hache1, combattant, NULL, (caseC1), bonusP, statistiquesC1, plateau, false, true);
+    Personnage *assassin2 = new Personnage((std::string)"assassin 2", 5, statistiquesBaseA2, inventaireA2, dague2, assassin, automne, (caseA2), bonusP, statistiquesA2, plateau, false,true);
+    Personnage *mage2 = new Personnage((std::string)"mage 2", 6, statistiquesBaseM2, inventaireM2, tome2, mage, printemps, (caseM2), bonusP, statistiquesM2, plateau, false, true);
+    Personnage *chevalier2 = new Personnage((std::string)"chevalier 2", 7, statistiquesBaseCH2, inventaireCH2, lance2, chevalier, hiver, (caseCH2), bonusP, statistiquesCH2, plateau, false, true);
+    Personnage *archer2 = new Personnage((std::string)"archer 2", 8, statistiquesBaseAR2, inventaireAR2, arc2, archer, ete, (caseAR2), bonusP, statistiquesAR2, plateau, false, true);
+    Personnage *combattant2 = new Personnage((std::string)"combattant 2", 9, statistiquesBaseC2, inventaireC2, hache2, combattant, NULL, (caseC2), bonusP, statistiquesC2, plateau, false, true);
 
     //(std::string nom, int id, Statistiques statistiquesBase, std::vector<Objet*> inventaire, Arme* arme, Classe* classe, Saison* saison, Cell* cell, std::vector<int> bonus, Statistiques statistiques, Plateau* plateau, bool played, bool alive)
     personnagesJ1.push_back(assassin1);
     personnagesJ1.push_back(mage1);
-    personnagesJ1.push_back(combattant1);
-    personnagesJ1.push_back(archer1);
     personnagesJ1.push_back(chevalier1);
+    personnagesJ1.push_back(archer1);
+    personnagesJ1.push_back(combattant1);
+    
+    
 
     personnagesJ2.push_back(assassin2);
     personnagesJ2.push_back(mage2);
-    personnagesJ2.push_back(combattant2);
-    personnagesJ2.push_back(archer2);
     personnagesJ2.push_back(chevalier2);
+    personnagesJ2.push_back(archer2);
+    personnagesJ2.push_back(combattant2);
 
     //Creation des joueurs
     Joueur *joueur1 = new Joueur("J1", JOUEUR1, personnagesJ1);
@@ -225,6 +227,25 @@ Saison* State:: getSaison(){
 
 Plateau* State::getPlateau (){
     return (*this).plateau;
+}
+
+void State::print(){
+    std::cout<<"---------------STATE---------------"<<std::endl;
+    std::cout<<"tour="<<this->tour<<std::endl;
+    std::cout<<"saison="<<this->saison->getNom()<<std::endl;
+    std::cout<<"joueur="<<this->joueur->getNom()<<std::endl;
+    std::cout<<"gameover="<<this->gameover<<std::endl;
+    int i(0);
+    int j(0);
+    for(i=0;i<this->joueurs.size();i++){
+        std::cout<<"Personnages Joueur \""<<this->joueurs[i]->getNom()<<"\":"<<std::endl;
+        for(j=0;j<(this->joueurs[i]->getPersonnages()).size();j++){
+            this->joueurs[i]->getPersonnages()[j]->print();
+        }
+    }
+    this->plateau->print();
+    std::cout<<"----------------------------------------"<<std::endl;
+    
 }
 State::~State(){
     

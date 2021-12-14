@@ -8,6 +8,12 @@ StateLayer::StateLayer(sf::Vector2u tileSize, unsigned int width, unsigned int h
     (*this).width=width;
     (*this).height=height;
     (*this).state=state;
+    std::vector<int>* listePersonnageCoordX=new std::vector<int>();
+    std::vector<int>* listePersonnageId=new std::vector<int>();
+    std::vector<int>* listePersonnageCoordY=new std::vector<int>();
+    (*this).listePersonnageCoordX=listePersonnageCoordX;
+    (*this).listePersonnageCoordY=listePersonnageCoordY;
+    (*this).listePersonnageId=listePersonnageId;
 }
 
 std::vector<int> StateLayer::getPlateauIdFromState (){
@@ -35,32 +41,80 @@ void StateLayer::setState (state::State* state){
     (*this).state=state;
 }
 
-void StateLayer::window(){
+void StateLayer::windowExemple(){
     // on crée la fenêtre
     (*this).plateauId=(*this).getPlateauIdFromState();
     (*this).actListePersonnageId();
     (*this).actXFromState(); 
     (*this).actYFromState();
-    sf::RenderWindow window(sf::VideoMode((*this).width*tileSize.x, (*this).height*tileSize.y), "ENSEA Emblem: The Four Seasons");
-    Surface map;
-    Personnages personnages;
-    map.load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
-    personnages.load("res/personnages.png", (*this).tileSize, (*this).listePersonnageCoordX, (*this).listePersonnageId, (*this).listePersonnageCoordY);
-    while (window.isOpen()){
+    sf::RenderWindow* window=new sf::RenderWindow(sf::VideoMode((*this).width*tileSize.x, (*this).height*tileSize.y), "ENSEA Emblem: The Four Seasons");
+    this->window=window;
+    Surface* map= new Surface();
+    this->map=map;
+    Personnages* personnages = new Personnages();
+    this->personnages=personnages;
+    map->load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
+    personnages->load("res/personnages.png", (*this).tileSize, (*this).listePersonnageCoordX, (*this).listePersonnageId, (*this).listePersonnageCoordY);
+    while (window->isOpen()){
         // on gère les évènements
         sf::Event event;
-        while (window.pollEvent(event))
+        while (window->pollEvent(event))
         {
             if(event.type == sf::Event::Closed)
-                window.close();
+                window->close();
         }
         // on dessine le niveau
-        window.clear();
-        window.draw(map);
-        window.draw(personnages);
-        window.display();
+        
+        window->clear();
+        window->draw(*map);
+        window->draw(*personnages);
+        window->display();
     }
 }
+
+void StateLayer::windowInit(){
+    // on crée la fenêtre
+    (*this).plateauId=(*this).getPlateauIdFromState();
+    (*this).actListePersonnageId();
+    (*this).actXFromState();
+    (*this).actYFromState();
+    sf::RenderWindow* window=new sf::RenderWindow(sf::VideoMode((*this).width*tileSize.x, (*this).height*tileSize.y), "ENSEA Emblem: The Four Seasons");
+    this->window=window;
+    Surface* map= new Surface();
+    this->map=map;
+    Personnages* personnages = new Personnages();
+    this->personnages=personnages;
+    map->load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
+    personnages->load("res/personnages.png", (*this).tileSize, (*this).listePersonnageCoordX, (*this).listePersonnageId, (*this).listePersonnageCoordY);
+    window->clear();
+    window->draw(*map);
+    window->draw(*personnages);
+    window->display();
+}
+
+void StateLayer::windowCell(){
+    // on crée la fenêtre
+    (*this).plateauId=(*this).getPlateauIdFromState();
+    map->load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
+    window->clear();
+    window->draw(*map);
+    window->draw(*personnages);
+    window->display();
+}
+
+
+void StateLayer::windowPersonnages(){
+    // on crée la fenêtre
+    (*this).actListePersonnageId();
+    (*this).actXFromState(); 
+    (*this).actYFromState();
+    personnages->load("res/personnages.png", (*this).tileSize, (*this).listePersonnageCoordX, (*this).listePersonnageId, (*this).listePersonnageCoordY);
+    window->clear();
+    window->draw(*map);
+    window->draw(*personnages);
+    window->display();
+}
+
 std::vector<int>* StateLayer::getListePersonnageId (){
     return (*this).listePersonnageId;
 }
@@ -117,7 +171,6 @@ void  StateLayer::actXFromState (){
         x=((*ptCell).getCoordonees())[0];
         (*listePersonnageCoordX).push_back(x);
     }
-    std::cout<<"fin\n";
     (*this).listePersonnageCoordX=listePersonnageCoordX;
     
 }

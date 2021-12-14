@@ -8,6 +8,12 @@ StateLayer::StateLayer(sf::Vector2u tileSize, unsigned int width, unsigned int h
     (*this).width=width;
     (*this).height=height;
     (*this).state=state;
+    std::vector<int>* listePersonnageCoordX=new std::vector<int>();
+    std::vector<int>* listePersonnageId=new std::vector<int>();
+    std::vector<int>* listePersonnageCoordY=new std::vector<int>();
+    (*this).listePersonnageCoordX=listePersonnageCoordX;
+    (*this).listePersonnageCoordY=listePersonnageCoordY;
+    (*this).listePersonnageId=listePersonnageId;
 }
 
 std::vector<int> StateLayer::getPlateauIdFromState (){
@@ -34,7 +40,7 @@ state::State* StateLayer::getState (){
 void StateLayer::setState (state::State* state){
     (*this).state=state;
 }
-/*
+
 void StateLayer::windowExemple(){
     // on crée la fenêtre
     (*this).plateauId=(*this).getPlateauIdFromState();
@@ -65,25 +71,19 @@ void StateLayer::windowExemple(){
         window->display();
     }
 }
-*/
+
 void StateLayer::windowInit(){
     // on crée la fenêtre
-    std::cout << "Lancement du RENDU" << std::endl;
     (*this).plateauId=(*this).getPlateauIdFromState();
-    std::cout << "Lancement du RENDU" << std::endl;
     (*this).actListePersonnageId();
-    std::cout << "segfault" << std::endl;
     (*this).actXFromState();
-    std::cout << "Lancement du RENDU" << std::endl; 
     (*this).actYFromState();
-    std::cout << "Lancement du RENDU" << std::endl;
     sf::RenderWindow* window=new sf::RenderWindow(sf::VideoMode((*this).width*tileSize.x, (*this).height*tileSize.y), "ENSEA Emblem: The Four Seasons");
     this->window=window;
     Surface* map= new Surface();
     this->map=map;
     Personnages* personnages = new Personnages();
     this->personnages=personnages;
-    std::cout << "Lancement du RENDU" << std::endl;
     map->load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
     personnages->load("res/personnages.png", (*this).tileSize, (*this).listePersonnageCoordX, (*this).listePersonnageId, (*this).listePersonnageCoordY);
     window->clear();

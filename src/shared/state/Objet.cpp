@@ -1,4 +1,5 @@
 #include "Objet.h"
+#include <iostream>
 
 using namespace state;
 
@@ -27,7 +28,16 @@ ObjetId Objet::getObjetId() const{
     return (*this).objetId;
 }
 void Objet::setObjetId(ObjetId objetId){
-
+    this->objetId=objetId;
+}
+void Objet::print(){
+    std::cout<<"---------------OBJET---------------"<<std::endl;
+    std::cout<<"nom="<<this->nom<<std::endl;
+    std::cout<<"type="<<this->objetId<<std::endl;
+    std::cout<<"id="<<this->id<<std::endl;
+    std::cout<<"durabilite="<<this->durabilite<<std::endl;
+    std::cout<<"usable="<<this->usable<<std::endl;
+    std::cout<<"----------------------------------------"<<std::endl;
 }
 Objet::~Objet(){    
 

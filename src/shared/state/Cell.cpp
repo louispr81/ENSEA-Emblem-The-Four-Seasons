@@ -1,4 +1,5 @@
 #include "Cell.h"
+#include <iostream>
 using namespace state;
 
  Cell::Cell (Personnage* personnage, CellId type, std::vector<int> coordonees, Cell* ptCell, bool walkable, int costPm, bool occupe){
@@ -64,6 +65,19 @@ void Cell::setPtCell (Cell* ptCell){
 bool Cell::getOccupe(){
     return (*this).occupe;
 }
+
+void Cell::print(){
+    std::cout<<"---------------CELL---------------"<<std::endl;
+    std::cout<<"ptCell="<<this->ptCell<<std::endl;
+    std::cout<<"( x="<<this->getCoordonees()[0]<<";y="<<this->getCoordonees()[1]<<")"<<std::endl;
+    std::cout<<"type="<<this->type<<std::endl;
+    std::cout<<"costPm="<<this->costPm<<std::endl;
+    std::cout<<"walkable="<<this->walkable<<std::endl;
+    std::cout<<"occupe="<<this->occupe<<std::endl;
+    std::cout<<"personnage="<<this->personnage<<std::endl;
+    std::cout<<"----------------------------------------"<<std::endl;
+}
+
 Cell::~Cell (){
     
 }

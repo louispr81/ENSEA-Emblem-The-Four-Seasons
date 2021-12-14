@@ -35,7 +35,7 @@ void StateLayer::setState (state::State* state){
     (*this).state=state;
 }
 
-void StateLayer::window(){
+void StateLayer::windowExemple(){
     // on crée la fenêtre
     (*this).plateauId=(*this).getPlateauIdFromState();
     (*this).actListePersonnageId();
@@ -46,7 +46,7 @@ void StateLayer::window(){
     Personnages personnages;
     map.load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
     personnages.load("res/personnages.png", (*this).tileSize, (*this).listePersonnageCoordX, (*this).listePersonnageId, (*this).listePersonnageCoordY);
-    /*while (window.isOpen()){
+    while (window.isOpen()){
         // on gère les évènements
         sf::Event event;
         while (window.pollEvent(event))
@@ -55,12 +55,12 @@ void StateLayer::window(){
                 window.close();
         }
         // on dessine le niveau
-        */
+        
         window.clear();
         window.draw(map);
         window.draw(personnages);
         window.display();
-    //}
+    }
 }
 std::vector<int>* StateLayer::getListePersonnageId (){
     return (*this).listePersonnageId;

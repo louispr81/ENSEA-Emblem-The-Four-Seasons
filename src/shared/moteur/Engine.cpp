@@ -18,18 +18,19 @@ Command& Engine::getCommands(){
    
     return this->currentCommands;
 }
+
 void Engine::update(){
-   /* switch (this->currentState)
-    {
-        switch (this->currentCommands){
-            case : ATTACT
-                cout<<"Attact"<< endl;
-                break;
-    
-    default:
-        break;
-        }
+/*
+    if(Command.getCommandId()==ATTENDRE){
+        state.getPersonnageActif().Attendre();
+        state::Personnage.setPlayed()= false;
+    }
+
+    if(Command.getCommandId()==ATTACK){
+        state::Personnage.attaquer(state::Personnage personnage);
     }*/
+
+    
 }
 Engine::~Engine(){
 

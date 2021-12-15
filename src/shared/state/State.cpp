@@ -229,6 +229,18 @@ Plateau* State::getPlateau (){
     return (*this).plateau;
 }
 
+Personnage* State::getPersonnageActif(){
+    int i(0);
+    for(i=0;i<this->joueur->getPersonnages().size();i++){
+        if(this->joueur->getPersonnages()[i]->getPlayed()==false){
+            return joueur->getPersonnages()[i];
+        }
+    }
+    perror("Pas de personnage actif");
+    exit(1);
+}
+
+
 void State::print(){
     std::cout<<"---------------STATE---------------"<<std::endl;
     std::cout<<"tour="<<this->tour<<std::endl;

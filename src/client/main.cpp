@@ -47,7 +47,7 @@ if (strcmp(argv[1],"hello") ==0 ){
         state::State *state = new State(17);
         sf::Vector2u tileSize = sf::Vector2u(32,32);
         render::StateLayer *rendu = new StateLayer(tileSize, 17, 17, state);
-        (*rendu).window();
+        (*rendu).windowExemple();
 	}
     else if (strcmp(argv[1],"engine") == 0){
 		std::cout << "Work in Progress" << std::endl;

@@ -44,6 +44,10 @@ void Personnage::setPlayed (bool played)
     (*this).played=played;
 }
 
+string Personnage::getName (){
+        return (*this).nom;
+}
+
 bool Personnage::getPlayed (){
         return (*this).played;
 }

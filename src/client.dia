@@ -134,13 +134,13 @@
         <dia:point val="11.75,6.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="11.7,6.25;15.765,9.95"/>
+        <dia:rectangle val="11.7,6.25;16.92,9.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="11.75,6.3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="3.9649999999999999"/>
+        <dia:real val="5.1200000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.5999999999999996"/>
@@ -275,7 +275,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>##</dia:string>
+            <dia:string>#void#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

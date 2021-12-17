@@ -1,17 +1,17 @@
-#include "CommandAttact.h"
+#include "CommandAttack.h"
 #include <iostream>
 #include "../state/Personnage.h"
 
 using namespace std;
 using namespace moteur;
 using namespace state;
-
+/*
 CommandAttact::CommandAttact(state::Personnage attacker, state::Personnage target) : attacker(attacker), target(target)
 {
     id = ATTACK;
 }
-
-
+*/
+/*
 void CommandAttact::execute(state::State& state){
 
     target.attaquer(attacker);
@@ -25,3 +25,4 @@ cout <<  target.getName() << " a  " << target.statistiques.getVie()<< "  de vie 
     }
 
 }
+*/

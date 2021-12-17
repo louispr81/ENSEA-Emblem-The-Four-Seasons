@@ -1,5 +1,5 @@
 #include "Engine.h"
-//#include <iostream>
+#include <iostream>
 
 
 using namespace state;
@@ -9,16 +9,17 @@ namespace moteur{
 Engine::Engine () {
     cout<<"Engine launched"<<endl;
 }
-/*
-Engine::Engine (state::State& currentState) {
+
+Engine::Engine (state::State& currentState, Command currentCommands) {
     this->currentState=currentState;
+    this->currentCommands=currentCommands;
 }
-*/
+
 state::State& Engine::getState() {
     return this->currentState;
 }
 
-Command& Engine::getCommands(){
+Command Engine::getCommands(){
    
     return this->currentCommands;
 }

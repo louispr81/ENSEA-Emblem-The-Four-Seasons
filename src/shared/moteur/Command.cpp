@@ -14,3 +14,7 @@ void Command::setCommand(CommandId id){
 CommandId Command::getCommandId(){
     return this->id;
 }
+
+void Command::execute(state::State* state){
+
+}

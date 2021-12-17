@@ -1,15 +1,19 @@
 #include "Engine.h"
-#include <iostream>
+//#include <iostream>
 
 
 using namespace state;
-using namespace moteur;
 using namespace std;
-/*
-Engine::Engine(){
-    cout<<"Engine launched"<<endl;
-}*/
+namespace moteur{
 
+Engine::Engine () {
+    cout<<"Engine launched"<<endl;
+}
+/*
+Engine::Engine (state::State& currentState) {
+    this->currentState=currentState;
+}
+*/
 state::State& Engine::getState() {
     return this->currentState;
 }
@@ -19,19 +23,21 @@ Command& Engine::getCommands(){
     return this->currentCommands;
 }
 
-void Engine::update(){
-/*
-    if(Command.getCommandId()==ATTENDRE){
-        state.getPersonnageActif().Attendre();
-        state::Personnage.setPlayed()= false;
+void Engine::update(Command& cmd){
+    
+    if(cmd.getCommandId()==ATTENDRE){
+        cmd.execute(&this->getState());
     }
-
-    if(Command.getCommandId()==ATTACK){
-        state::Personnage.attaquer(state::Personnage personnage);
-    }*/
+    if(cmd.getCommandId()==ATTACK){
+        cmd.execute(&this->getState());
+    }
+    if(cmd.getCommandId()==MOVE){
+        cmd.execute(&this->getState());
+    }
 
     
 }
 Engine::~Engine(){
 
+}
 }

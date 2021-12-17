@@ -18,52 +18,43 @@ Json::Value CommandMove::serialize(){
     newCommand["id"]=id;
     return newCommand;
 }
-/*
+
 void CommandMove::execute(state::State &state){
   cout<< "Move character" <<endl;
-      if(personnage.getMoved()==true){    
-        cout<<personnage.getPersonnageActif() <<" has been moved" << endl;
+      if(state.getPersonnageActif()->getMoved()==true){    
+        cout<<state.getPersonnageActif() <<" has been moved" << endl;
       }
       else{
-        cout<<personnage.getPersonnageActif()<<"has not been moved" << endl;
+        cout<<state.getPersonnageActif()<<"has not been moved" << endl;
       }
-      if(Command.getCommandId()==MOVE){
+
+      state::Personnage *personnage;
+      if(Command::getCommandId()==MOVE){
         
-        if (CommandMove->getMoveId()==LEFT){
-            state.getPersonnageActif()->setCoordonnees(*(getCoordonnees().at(1)-1));
+        if (CommandMove::getMoveId()==LEFT){  
+            this->x = x-1;         
+            personnage->deplacer(this->x,this->y);
         }
-        else if(CommandMove->getMoveId()==RIGHT){
-            state.getPersonnageActif()->setCoordonnees(*(getCoordonnees().at(2)-1));
+        else if(CommandMove::getMoveId()==RIGHT){  
+            this->y = y-1;  
+            personnage->deplacer(this->x,this->y);
         }
-        else if(CommandMove->getMoveId()==UP){
-            state.getPersonnageActif()->setCoordonnees(*(getCoordonnees().at(2)+1));
+        else if(CommandMove::getMoveId()==UP){
+            this->x = x+1;
+            personnage->deplacer(this->x,this->y);
         }
-        else if(CommandMove->getMoveId()==DOWN){
-            state.getPersonnageActif()->setCoordonnees(*(getCoordonnees().at(1)+1));
+        else if(CommandMove::getMoveId()==DOWN){
+            this->y = y+1;
+            personnage->deplacer(this->x,this->y);
         }
       }
 
 
-}*/
-/*
-MoveId CommandMove::getCommandId(){
+}
+
+MoveId CommandMove::getMoveId(){
   return this->moveId;
 }
-*/
 
-/*
-MoveId CommandMove::convert(sf::Event event){
-    if(sf::Keyboard::isKeyPressed(sf::Keyyboard::Left)){
-      return LEFT;
-    }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyyboard::Right)){
-      return RIGHT;
-    }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyyboard::Up)){
-      return UP;
-    }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyyboard::Down)){
-      return DOWN;
-    }
-}*/
+
 }

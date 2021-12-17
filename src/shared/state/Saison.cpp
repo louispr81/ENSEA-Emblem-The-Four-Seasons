@@ -38,11 +38,7 @@ void Saison::updateStatsSaison(Personnage personnage, State jeu)
 
 void Saison::updateCell(Cell cell)
 {
-    if(cell.getType() == GRASS){
-        cell.setCostPm (1);
-        cell.setWalkable (true);
-    }
-    if(cell.getType() == FOREST){
+    if(cell.getType() == (GRASS_AUTOMN || GRASS_SPRING|| GRASS_SUMMER || GRASS_WINTER )){
         cell.setCostPm (1);
         cell.setWalkable (true);
     }
@@ -50,7 +46,7 @@ void Saison::updateCell(Cell cell)
         cell.setCostPm(1);
         cell.setWalkable(false);   
     }
-    if(cell.getType() == RIVER){
+    if(cell.getType() == (RIVER||RIVER_WINTER) ){
         cell.setCostPm(1);
         cell.setWalkable(false);     
     }
@@ -61,10 +57,6 @@ void Saison::updateCell(Cell cell)
     if(cell.getType() == PASSAGE){
         cell.setCostPm(3);  
         cell.setWalkable(true);      
-    }
-    if(cell.getType() == MOUTAINS){
-        cell.setCostPm(1);
-        cell.setWalkable(false);             
     }
 
 
@@ -80,6 +72,13 @@ void Saison::updateCell(Cell cell)
 }
 SaisonId Saison::getId(){
     return (*this).id;
+}
+
+SaisonId Saison::getSaisonOppId(){
+    return (*this).saisonOppId;
+}
+std::string Saison::getNom(){
+    return (*this).nom;
 }
 Saison::~Saison(){
     

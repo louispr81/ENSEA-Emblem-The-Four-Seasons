@@ -99,7 +99,11 @@ libsfml-dev libxml2-dev libmicrohttpd-dev libboost-all-dev \
 python3 python3-pip \
 lcov gcovr
 ```
-
+install the package to read json
+```sh
+sudo apt-get install libjsoncpp-dev
+sudo ln -s /usr/include/jsoncpp/json/ /usr/include/json
+```
 Install python package with pip (or pip3)
 ```sh
 pip install gcovr
@@ -149,7 +153,7 @@ plt$ bin/client render
 
 * <a href="https://github.com/louispr81/pradineswangbenmira/releases/tag/1.final">1.final</a>
     * Rapport section 2 : Description et Conception des états
-    * Code : implantation et tests unitaires états `./bin/client state`
+    * Code : Implantation et tests unitaires états `./bin/client state`
 
 * <a href="https://github.com/louispr81/pradineswangbenmira/releases/tag/2.1">2.1</a>
     * Rapport section 3 : Description et Conception du Rendu

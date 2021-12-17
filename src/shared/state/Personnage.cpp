@@ -3,8 +3,10 @@
 #include <cstdlib>
 #include <time.h>
 using namespace state;
+using namespace std;
 
-Personnage::Personnage(std::string nom, int id, Statistiques statistiquesBase, std::vector<Objet> inventaire, Arme arme, Classe classe, Saison* saison, Cell* cell, std::vector<int> bonus, Statistiques statistiques, bool played , bool alive ){
+
+Personnage::Personnage(std::string nom, int id, Statistiques statistiquesBase, std::vector<Objet*> inventaire, Arme* arme, Classe* classe, Saison* saison, Cell* cell, std::vector<int> bonus, Statistiques statistiques, Plateau* plateau, bool played, bool alive, bool moved){
     (*this).nom=nom;
     (*this).id=id;
     (*this).statistiquesBase=statistiquesBase;
@@ -16,12 +18,15 @@ Personnage::Personnage(std::string nom, int id, Statistiques statistiquesBase, s
     (*this).cell=cell;
     (*this).bonus=bonus;
     (*this).statistiques=statistiques;
+    (*this).plateau=plateau;
     (*this).played=played;
     (*this).alive=alive;
+    (*this).plateau=plateau;
+    (*this).moved=moved;
 }
 
 Saison Personnage::getSaison(){
-  //  return (*this).saison;
+    return *((*this).saison);
 }
 void Personnage::setBonus(std::vector<int> x){
 
@@ -33,6 +38,28 @@ void Personnage::attendre(){
         (*this).played=true;
     }
 }
+
+void Personnage::setPlayed (bool played)
+{
+    (*this).played=played;
+}
+
+std::string Personnage::getNom(){
+ return (*this).nom;
+}
+
+bool Personnage::getPlayed (){
+        return (*this).played;
+}
+
+bool Personnage::getAlive (){
+    return (*this).alive;
+}
+
+void Personnage::setAlive(bool alive){
+    (*this).alive=alive;
+}
+
 /* 
 void Personnage::ouvrirCoffre(){ 
     if (Personnage.getCell().getType()==CHEST){
@@ -49,13 +76,251 @@ void Personnage::ouvrirCoffre(){
     this->played = true;
 } 
 */
-/*
-void Personnage::echangerObjet(Personnage personnageB, Objet objet){
-    if (Personnage.getCell()=Personnage.getCell().personnageB)    
-    this->played = true;
-}
-*/
 
+
+
+
+
+
+
+
+
+void Personnage::echangerObjet(Personnage personnageB, Objet objet){
+    for (size_t i = 0; i <(*this).inventaire.size() ; i++)
+    {
+        
+    if ((*this).inventaire.at(i) == &objet)
+    {
+        personnageB.inventaire.push_back(&objet);
+        (*this).inventaire.erase((*this).inventaire.begin()+i);
+    }
+    
+    }
+}
+
+
+
+int Personnage::deplacer(int x1, int y1){
+
+    
+    int reply;
+    this->moved=false;
+     std::vector<int> coordonne_a ,coordonne_destination,coordonne_1,coordonne_2,coordonne_3,coordonne_4;
+    
+    coordonne_a=((*((*this).cell)).getCoordonees()); // coordonees du personnage 
+    coordonne_destination=(this->plateau->getCase(x1,y1)->getCoordonees());
+     
+    coordonne_1[0]=coordonne_a[0]-1;       // coordonees de la case à gauche du personage
+    coordonne_1[1]=coordonne_a[1];        
+
+    coordonne_2[0]=coordonne_a[0];       // coordonees de la case devant le personage
+    coordonne_2[1]=coordonne_a[1]+1;
+
+    coordonne_3[0]=coordonne_a[0]+1;    // coordonees de la case à droite le personage
+    coordonne_3[1]=coordonne_a[1];
+
+    coordonne_4[0]=coordonne_a[0];      // coordoness de la case derriere le personnage 
+    coordonne_4[1]=coordonne_a[1]-1;
+
+
+   
+
+    if (coordonne_a==coordonne_destination){
+        cout<< " le personnage ne bouge pas "<<endl;
+        reply=1;
+    }
+
+
+
+
+     if (coordonne_destination==coordonne_1 ){
+        if(this->plateau->getCase(coordonne_1[0],coordonne_1[1])->getWalkable()==true){
+            if(this->plateau->getCase(coordonne_1[0],coordonne_1[1])->getOccupe()==false){
+                 if((*this).statistiques.getPoint_mouvement()>=1){
+                    ((*((*this).cell)).getCoordonees())=coordonne_1;
+                    (*this).statistiques.setPoint_mouvement((*this).statistiques.getPoint_mouvement()-1);
+                  reply=1;
+                  this->moved=true;
+                 }
+            }
+
+        }
+    }
+
+
+    if (coordonne_destination==coordonne_2 ){
+        if(this->plateau->getCase(coordonne_2[0],coordonne_2[1])->getWalkable()==true){
+            if(this->plateau->getCase(coordonne_2[0],coordonne_2[1])->getOccupe()==false){
+                if((*this).statistiques.getPoint_mouvement()>=1){  
+                    ((*((*this).cell)).getCoordonees())=coordonne_2;
+                    (*this).statistiques.setPoint_mouvement((*this).statistiques.getPoint_mouvement()-1);
+                    reply=1;
+                    this->moved=true;
+                }
+            }
+
+        }
+    }
+
+
+
+if (coordonne_destination==coordonne_3 ){
+        if(this->plateau->getCase(coordonne_3[0],coordonne_3[1])->getWalkable()==true){
+            if(this->plateau->getCase(coordonne_3[0],coordonne_3[1])->getOccupe()==false){
+                if((*this).statistiques.getPoint_mouvement()>=1){
+                    ((*((*this).cell)).getCoordonees())=coordonne_3;
+                    (*this).statistiques.setPoint_mouvement((*this).statistiques.getPoint_mouvement()-1);
+                    reply=1;
+                    this->moved=true;
+                }
+            }
+
+        }
+    }
+
+
+if (coordonne_destination==coordonne_4 ){
+        if(this->plateau->getCase(coordonne_4[0],coordonne_4[1])->getWalkable()==true){
+            if(this->plateau->getCase(coordonne_4[0],coordonne_4[1])->getOccupe()==false){
+                if((*this).statistiques.getPoint_mouvement()>=1){
+                    ((*((*this).cell)).getCoordonees())=coordonne_4;
+                    (*this).statistiques.setPoint_mouvement((*this).statistiques.getPoint_mouvement()-1);
+                    reply=1;
+                    this->moved=true;
+                }
+            }
+
+        }
+    }
+
+
+
+
+    else {
+        cout<< " la case n'est pas disponible "<<endl;
+        reply = -1;
+        this->moved=false;
+    }   
+ return reply;
+}
+
+bool Personnage::getMoved(){
+    return this->moved;
+}
+
+
+
+void Personnage::attaquer (Personnage personnageD){
+    std::vector<int> coordonne_a,coordonnees_b,coordonne_1,coordonne_2,coordonne_3,coordonne_4,coordonne_5,coordonne_6,coordonne_7,coordonne_8,coordonne_9,coordonne_10,coordonne_11,coordonne_12;
+    coordonne_a=((*this).cell->getCoordonees());
+    coordonnees_b=(personnageD.cell->getCoordonees());
+
+    coordonne_1[0]=coordonne_a[0]-1;  coordonne_2[0]=coordonne_a[0];    coordonne_3[0]=coordonne_a[0]+1;
+    coordonne_1[1]=coordonne_a[1];    coordonne_2[1]=coordonne_a[1]+1;  coordonne_3[1]=coordonne_a[1];
+
+    coordonne_4[0]=coordonne_a[0];    coordonne_5[0]=coordonne_a[0]-2;  coordonne_6[0]=coordonne_a[0]-1;     
+    coordonne_4[1]=coordonne_a[1]-1;  coordonne_5[1]=coordonne_a[1];    coordonne_6[1]=coordonne_a[1]+1;
+
+   
+
+    coordonne_7[0]=coordonne_a[0];    coordonne_8[0]=coordonne_a[0]+1;  coordonne_9[0]=coordonne_a[0]+2;
+    coordonne_7[1]=coordonne_a[1]+2;  coordonne_8[1]=coordonne_a[1]+1;  coordonne_9[1]=coordonne_a[1];
+
+
+
+    coordonne_10[0]=coordonne_a[0]+1;  coordonne_11[0]=coordonne_a[0];   coordonne_12[0]=coordonne_a[0]-1;
+    coordonne_10[1]=coordonne_a[1]-1;  coordonne_11[1]=coordonne_a[1]-2; coordonne_12[1]=coordonne_a[1]-1;
+
+
+if((*this).getAlive()==true and personnageD.getAlive()==true and (*this).getPlayed()==false ){
+
+    if((*this).arme->getRange()==1) 
+        {
+            if(coordonnees_b==coordonne_1||coordonnees_b==coordonne_2||coordonnees_b==coordonne_3||coordonnees_b==coordonne_4){
+                personnageD.statistiques.setVie(personnageD.statistiques.getVie()-1);
+                (*this).setPlayed(true);
+                if (personnageD.statistiques.getVie()==0)
+                {
+                   (*this).setAlive(false); 
+                }
+                
+            }
+
+        }
+
+    
+    else if ((*this).arme->getRange()==2){
+       
+        if(coordonnees_b==coordonne_1||coordonnees_b==coordonne_2||coordonnees_b==coordonne_3||coordonnees_b==coordonne_4){
+                personnageD.statistiques.setVie(personnageD.statistiques.getVie()-1);
+                (*this).setPlayed(true);
+                if (personnageD.statistiques.getVie()==0)
+                {
+                   (*this).setAlive(false); 
+                }
+                
+            }
+
+
+
+         else if(coordonnees_b==coordonne_5||coordonnees_b==coordonne_6||coordonnees_b==coordonne_7||coordonnees_b==coordonne_8||coordonnees_b==coordonne_9||coordonnees_b==coordonne_10||coordonnees_b==coordonne_11||coordonnees_b==coordonne_12){
+                personnageD.statistiques.setVie(personnageD.statistiques.getVie()-1);
+                (*this).setPlayed(true);
+                if (personnageD.statistiques.getVie()==0)
+                {
+                   (*this).setAlive(false); 
+                }
+        
+         }
+        
+        
+
+    }
+
+    else {
+        cout<<"pas d'attaque"<<endl;
+    }
+
+
+}
+}
+
+std::string Personnage::getPersonnageActif(){
+    return this->nom;
+}
+ClasseId Personnage::getClasseId (){
+    return (*((*this).classe)).getId();
+}
+
+Cell* Personnage::getCell (){
+    return (*this).cell;
+}
+
+void Personnage::print(){
+    std::cout<<"---------------PERSONNAGE---------------"<<std::endl;
+    std::cout<<"nom="<<this->nom<<std::endl;
+    std::cout<<"classe="<<this->classe->getNom()<<std::endl;
+    std::cout<<"coords= ("<<this->cell->getPtCell()->getCoordonees()[0]<<";"<<this->cell->getPtCell()->getCoordonees()[1]<<")"<<std::endl;
+    std::cout<<"moved="<<this->moved<<std::endl;
+    std::cout<<"alive="<<this->alive<<std::endl;
+    std::cout<<"id="<<this->id<<std::endl;
+    this->statistiques.print();
+    std::cout<<"----------------------------------------"<<std::endl;
+}
+    std::string nom;
+    int id;
+    Statistiques statistiquesBase;
+    std::vector<Objet*> inventaire;
+    Arme* arme;
+    Classe* classe;
+    Saison* saison;
+    bool alive     = true;
+    bool played     = false;
+    std::vector<int> bonus;
+    Statistiques statistiques;
+    Cell* cell;
+    Plateau* plateau;
+    bool moved     = false;
 Personnage::~Personnage(){
    // delete[] tab_arme;
 }

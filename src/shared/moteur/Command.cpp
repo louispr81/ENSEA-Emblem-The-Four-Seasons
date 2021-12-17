@@ -5,12 +5,16 @@ using namespace moteur;
 using namespace state;
 
 
-void Command::execute(state::State& state){
-   /* if(CommandId==1){
-        
-    }*/
+
+
+void Command::setCommand(CommandId id){
+    this->id = id;
 }
 
 CommandId Command::getCommandId(){
-    return id;
+    return this->id;
+}
+
+void Command::execute(state::State* state){
+
 }

@@ -6,6 +6,9 @@ using namespace state;
 using namespace std;
 
 
+State::State(){
+    
+}
 State::State(int size){
     
     std::vector<Joueur*> joueurs;

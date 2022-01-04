@@ -20,7 +20,8 @@ void usage(char * argv0){
         cout << "hello" << " | ";
         cout << "state"<< " | ";;
         cout << "render"<< " | ";;
-        cout << "engine";
+        cout << "engine"<< " | ";;
+        cout << "game";
     cout << " }" << endl;
 }
 
@@ -53,6 +54,11 @@ if (strcmp(argv[1],"hello") ==0 ){
 		std::cout << "Work in Progress" << std::endl;
 
 
+	}
+    else if (strcmp(argv[1],"game") == 0){
+        std::cout << "Lancement du CLIENT" << std::endl;
+		client::Client *client= new Client;
+        client->run();
 	}
     else {
         std::cout << "Wrong command !" << std::endl ;

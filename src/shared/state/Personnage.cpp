@@ -35,6 +35,7 @@ void Personnage::setBonus(std::vector<int> x){
 void Personnage::attendre(){ 
     if ((*this).played != true){
         (*this).statistiques.setPoint_mouvement(0);
+        (*this).moved=true;
         (*this).played=true;
     }
 }
@@ -102,10 +103,10 @@ void Personnage::echangerObjet(Personnage personnageB, Objet objet){
 
 int Personnage::deplacer(int x1, int y1){
 
-    
+    /*
     int reply;
     this->moved=false;
-     std::vector<int> coordonne_a ,coordonne_destination,coordonne_1,coordonne_2,coordonne_3,coordonne_4;
+    std::vector<int> coordonne_a ,coordonne_destination,coordonne_1,coordonne_2,coordonne_3,coordonne_4;
     
     coordonne_a=((*((*this).cell)).getCoordonees()); // coordonees du personnage 
     coordonne_destination=(this->plateau->getCase(x1,y1)->getCoordonees());
@@ -206,8 +207,118 @@ if (coordonne_destination==coordonne_4 ){
 
 bool Personnage::getMoved(){
     return this->moved;
+*/
+    if(this->moved==false){
+        int pm;
+        pm=this->statistiques.getPoint_mouvement();
+        if(pm>0){
+            Cell* Destination=this->plateau->getCase(x1,y1);
+            Cell* tmpDestination;
+            int distanceX;
+            int distanceY;
+            int signe;
+            int test;
+            while (pm>0){
+                int x0=this->cell->getCoordonees()[0];
+                int y0=this->cell->getCoordonees()[1];
+                distanceX=x1-x0;
+                distanceY=y1-y0;
+                if(abs(distanceX)>=abs(distanceY)){
+                    if(distanceX>0){
+                        signe=1;
+                    }
+                    else{
+                        signe=-1;
+                    }
+                    tmpDestination=this->plateau->getCase(x0+signe,y0);
+                    test=this->deplacer1Dist(tmpDestination,pm);
+                    if(test==0){
+                        this->moved=true;
+                        return 1;
+                    }
+                    else if(test==-1){
+                        if(distanceY>0){
+                            signe=1;
+                        }
+                        else{
+                            signe=-1;
+                        }
+                        tmpDestination=this->plateau->getCase(x0,y0+signe);
+                        test=this->deplacer1Dist(tmpDestination,pm);
+                        if(test==0){
+                            this->moved=true;
+                            return 1;
+                        }
+                        else if(test==-1){
+                            std::cout<<"Personnage bloqué mouvement stopé"<<std::endl;
+                            return 1;
+                        }
+                    }
+                }
+                else{                   
+                    if(distanceY>0){
+                        signe=1;
+                    }
+                    else{
+                        signe=-1;
+                    }
+                    tmpDestination=this->plateau->getCase(x0,y0+signe);
+                    test=this->deplacer1Dist(tmpDestination,pm);
+                    if(test==0){
+                        return 1;
+                    }
+                    else if(test==-1){
+                        if(distanceX>0){
+                            signe=1;
+                        }
+                        else{
+                            signe=-1;
+                        }
+                        tmpDestination=this->plateau->getCase(x0+signe,y0);
+                        test=this->deplacer1Dist(tmpDestination,pm);
+                        if(test==0){
+                            return 1;
+                        }
+                        else if(test==-1){
+                            std::cout<<"Personnage bloqué mouvement stopé"<<std::endl;
+                            return 1;
+                        }
+                    }
+
+                }
+                pm=this->statistiques.getPoint_mouvement();
+            }
+            this->moved=true;
+            return 1;
+        }
+        else{
+            std::cout<<"Le personnage n'a pas assez de points de mouvements"<<std::endl;
+            return -1;
+        }
+    }
+    else{
+        std::cout<<"Le personnage a déjà bougé"<<std::endl;
+        return -1;
+    }    
 }
 
+int Personnage::deplacer1Dist(Cell* dest,int pm){
+    if(dest->getWalkable()==true){
+        if(pm-dest->getCostPm()>=0){
+            pm=pm-dest->getCostPm();
+            this->cell=dest;
+            this->statistiques.setPoint_mouvement(pm);
+            return 1;
+        }
+        else{
+            this->statistiques.setPoint_mouvement(pm);
+            return 0;
+        }
+    }
+    else{
+        return -1;
+    }
+}
 
 
 void Personnage::attaquer (Personnage personnageD){

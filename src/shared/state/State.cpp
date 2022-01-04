@@ -262,6 +262,10 @@ void State::print(){
     std::cout<<"----------------------------------------"<<std::endl;
     
 }
+Joueur* State::getJoueur(){
+    return this->joueur;
+}
+
 State::~State(){
     
 }

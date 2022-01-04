@@ -5,14 +5,13 @@
 using namespace std;
 using namespace moteur;
 using namespace state;
-/*
-CommandAttact::CommandAttact(state::Personnage attacker, state::Personnage target) : attacker(attacker), target(target)
+
+CommandAttack::CommandAttack(state::Personnage attacker, state::Personnage target) : attacker(attacker), target(target)
 {
     id = ATTACK;
 }
-*/
-/*
-void CommandAttact::execute(state::State& state){
+
+void CommandAttack::execute(state::State& state){
 
     target.attaquer(attacker);
 cout <<  attacker.getNom() << " attaque " << target.getNom() << endl;
@@ -25,4 +24,4 @@ cout <<  target.getNom() << " a  " << target.statistiques.getVie()<< "  de vie "
     }
 
 }
-*/
+

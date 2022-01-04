@@ -10,7 +10,7 @@ CommandMove::CommandMove(){
 
 }
 
-CommandMove::CommandMove(state::State& currentState){
+CommandMove::CommandMove(state::State* currentState){
   id = MOVE;
   this->currentState=currentState;
 }
@@ -23,13 +23,13 @@ Json::Value CommandMove::serialize(){
 
 void CommandMove::execute(int x,int y){
   cout<< "Move character" <<endl;
-      if(state.getPersonnageActif()->getMoved()==true){    
-        cout<<currentState.getPersonnageActif()->getNom()<<" has been moved" << endl;
+      if(currentState->getPersonnageActif()->getMoved()==true){    
+        cout<<currentState->getPersonnageActif()->getNom()<<" has been moved" << endl;
       }
       else{
-        cout<<currentState.getPersonnageActif()->getNom()<<"has not been moved" << endl;
+        cout<<currentState->getPersonnageActif()->getNom()<<"has not been moved" << endl;
       }
-  currentState.getPersonnageActif()->deplacer(x,y);
+  currentState->getPersonnageActif()->deplacer(x,y);
 
 /*
       state::Personnage *personnage;

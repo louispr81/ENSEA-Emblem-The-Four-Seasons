@@ -7,7 +7,7 @@ namespace moteur{
 CommandAttendre::CommandAttendre(){
 
 } 
-CommandAttendre::CommandAttendre(state::State& currentState){
+CommandAttendre::CommandAttendre(state::State* currentState){
   this->id = ATTENDRE;
   this->currentState = currentState;
 }
@@ -19,7 +19,7 @@ Json::Value CommandAttendre::serialize(){
 }
 */
 void CommandAttendre::execute(){
-    currentState.getPersonnageActif()->attendre();
+    currentState->getPersonnageActif()->attendre();
 }
 
 }

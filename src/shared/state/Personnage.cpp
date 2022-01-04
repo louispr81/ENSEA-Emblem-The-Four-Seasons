@@ -35,6 +35,7 @@ void Personnage::setBonus(std::vector<int> x){
 void Personnage::attendre(){ 
     if ((*this).played != true){
         (*this).statistiques.setPoint_mouvement(0);
+        (*this).moved=true;
         (*this).played=true;
     }
 }
@@ -232,6 +233,7 @@ bool Personnage::getMoved(){
                     tmpDestination=this->plateau->getCase(x0+signe,y0);
                     test=this->deplacer1Dist(tmpDestination,pm);
                     if(test==0){
+                        this->moved=true;
                         return 1;
                     }
                     else if(test==-1){
@@ -244,6 +246,7 @@ bool Personnage::getMoved(){
                         tmpDestination=this->plateau->getCase(x0,y0+signe);
                         test=this->deplacer1Dist(tmpDestination,pm);
                         if(test==0){
+                            this->moved=true;
                             return 1;
                         }
                         else if(test==-1){
@@ -285,6 +288,8 @@ bool Personnage::getMoved(){
                 }
                 pm=this->statistiques.getPoint_mouvement();
             }
+            this->moved=true;
+            return 1;
         }
         else{
             std::cout<<"Le personnage n'a pas assez de points de mouvements"<<std::endl;

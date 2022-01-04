@@ -10,32 +10,44 @@ Engine::Engine () {
     cout<<"Engine launched"<<endl;
 }
 
-Engine::Engine (state::State& currentState, Command currentCommands) {
+//doit avoir liste *commandes 
+Engine::Engine (state::State& currentState) {
     this->currentState=currentState;
-    this->currentCommands=currentCommands;
+    std::vector<Command*> listeCommandes;
+    CommandAttack* attack = new CommandAttack();
+    CommandAttack* move = new CommandMove();
+    CommandAttack* attendre = new CommandAttendre(currentState);
+    this->listeCommandes.push_back(attack);
+    this->listeCommandes.push_back(move);
+    this->listeCommandes.push_back(attendre);
+
 }
 
 state::State& Engine::getState() {
     return this->currentState;
 }
 
-Command Engine::getCommands(){
+Command* Engine::getCommands(){
    
-    return this->currentCommands;
+    return currentCommands;
 }
 
 int Engine::update(CommandId cmd){
     
     if(cmd == ATTENDRE){
-        currentCommands.execute(&this->getState());
+        this->currentCommands=this->listeCommandes[2];
+        this->currentCommands->execute();
         return 2;
     }
     if(cmd == ATTACK){
-        currentCommands.execute(&this->getState());
+        this->currentCommands=this->listeCommandes[0];
+        this->currentCommands->execute(&this->getState());
         return 0;
     }
     if(cmd == MOVE){
-        currentCommands.execute(&this->getState());
+        //demander x et y cin
+        this->currentCommands=this->listeCommandes[1];
+        this->currentCommands->execute(&this->getState());
         return 1;
     }
     else{

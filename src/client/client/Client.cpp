@@ -6,7 +6,7 @@ using namespace moteur;
 
 Client::Client (){
     State* state=new State(17);
-    Engine* engine=new Engine(/*state,currentCommands*/);
+    Engine* engine=new Engine(state);
     this->engine=engine;
     this->state=state;
 }
@@ -20,6 +20,6 @@ void Client::run(){
         std::cin>>cmd;
         std::cout<<"\n";
         std::cout<<cmd<<" va être éxécutée"<<std::endl;
-        //this->engine->update(cmd);
+        this->engine->update((moteur::CommandId)cmd);
     }
 }

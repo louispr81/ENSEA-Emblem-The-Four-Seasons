@@ -71,6 +71,9 @@ void StateLayer::windowExemple(){
         window->display();
     }
 }
+sf::RenderWindow* StateLayer::getWindow(){
+    return this->window;
+}
 
 void StateLayer::windowInit(){
     // on crée la fenêtre

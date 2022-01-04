@@ -20,7 +20,7 @@ void Client::run(){
     std::cout<<"Liste des commandes:\n"<<"ATTACK=0"<<std::endl<<"MOVE=1"<<std::endl<<"WAIT=2"<<std::endl;
     std::cout<<"\n";
     render->windowInit();
-    while(1){
+    while(render->getWindow()->isOpen()){
         render->windowPersonnages(); 
         std::cout<<state->getJoueur()->getNom()<< " quelle commande voulez vous faire avec "<<state->getPersonnageActif()->getNom()<<" ?"<<std::endl;
         std::cin>>cmd;

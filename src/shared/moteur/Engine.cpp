@@ -24,19 +24,23 @@ Command Engine::getCommands(){
     return this->currentCommands;
 }
 
-void Engine::update(Command& cmd){
+int Engine::update(CommandId cmd){
     
-    if(cmd.getCommandId()==ATTENDRE){
-        cmd.execute(&this->getState());
+    if(cmd == ATTENDRE){
+        currentCommands.execute(&this->getState());
+        return 2;
     }
-    if(cmd.getCommandId()==ATTACK){
-        cmd.execute(&this->getState());
+    if(cmd == ATTACK){
+        currentCommands.execute(&this->getState());
+        return 0;
     }
-    if(cmd.getCommandId()==MOVE){
-        cmd.execute(&this->getState());
+    if(cmd == MOVE){
+        currentCommands.execute(&this->getState());
+        return 1;
     }
-
-    
+    else{
+        return -1;
+    }  
 }
 Engine::~Engine(){
 

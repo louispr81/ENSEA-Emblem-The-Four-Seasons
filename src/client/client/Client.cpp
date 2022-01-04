@@ -14,11 +14,12 @@ Client::Client (){
 void Client::run(){
     int cmd;
     std::cout<<"Liste des commandes:\n"<<"ATTACK=0"<<std::endl<<"MOVE=1"<<std::endl<<"WAIT=2"<<std::endl;
+    std::cout<<"\n";
     while(1){
         std::cout<<state->getJoueur()->getNom()<< " quelle commande voulez faire avec "<<state->getPersonnageActif()->getNom()<<" ?"<<std::endl;
         std::cin>>cmd;
         std::cout<<"\n";
         std::cout<<cmd<<" va être éxécutée"<<std::endl;
-        //this->engine->update();
+        //this->engine->update(cmd);
     }
 }

@@ -20,6 +20,6 @@ void Client::run(){
         std::cin>>cmd;
         std::cout<<"\n";
         std::cout<<cmd<<" va être éxécutée"<<std::endl;
-        this->engine->update((moteur::CommandId)cmd);
+       // this->engine->update((moteur::CommandId)cmd);
     }
 }

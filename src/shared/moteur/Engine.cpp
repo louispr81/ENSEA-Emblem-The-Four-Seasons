@@ -10,33 +10,49 @@ Engine::Engine () {
     cout<<"Engine launched"<<endl;
 }
 
-Engine::Engine (state::State& currentState, Command currentCommands) {
+//doit avoir liste *commandes 
+Engine::Engine (state::State* currentState) {
     this->currentState=currentState;
-    this->currentCommands=currentCommands;
+    std::vector<Command*> listeCommandes;
+    CommandAttack *attack = new CommandAttack(currentState);
+    CommandMove *move = new CommandMove(currentState);
+    CommandAttendre *attendre = new CommandAttendre(currentState);
+    this->listeCommandes.push_back(attack);
+    this->listeCommandes.push_back(move);
+    this->listeCommandes.push_back(attendre);
+
 }
 
-state::State& Engine::getState() {
+state::State* Engine::getState() {
     return this->currentState;
 }
 
-Command Engine::getCommands(){
+Command* Engine::getCommands(){
    
-    return this->currentCommands;
+    return currentCommands;
 }
 
-void Engine::update(Command& cmd){
+int Engine::update(CommandId cmd){
     
-    if(cmd.getCommandId()==ATTENDRE){
-        cmd.execute(&this->getState());
+    if(cmd == ATTENDRE){
+        this->currentCommands=this->listeCommandes[2];
+        currentCommands->execute();
+        return 2;
     }
-    if(cmd.getCommandId()==ATTACK){
-        cmd.execute(&this->getState());
+    if(cmd == ATTACK){
+        this->currentCommands=this->listeCommandes[0];
+        this->currentCommands->execute(state::Personnage target);
+        return 0;
     }
-    if(cmd.getCommandId()==MOVE){
-        cmd.execute(&this->getState());
+    if(cmd == MOVE){
+        //demander x et y cin
+        this->currentCommands=this->listeCommandes[1];
+        this->currentCommands->execute(int x,int y);
+        return 1;
     }
-
-    
+    else{
+        return -1;
+    }  
 }
 Engine::~Engine(){
 

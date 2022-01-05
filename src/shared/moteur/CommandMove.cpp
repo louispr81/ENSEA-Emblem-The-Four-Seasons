@@ -6,11 +6,13 @@ using namespace std;
 using namespace state;
 
 namespace moteur{   
+CommandMove::CommandMove(){
 
-CommandMove::CommandMove(int x,int y){
+}
+
+CommandMove::CommandMove(state::State* currentState){
   id = MOVE;
-  this->x = x;
-  this->y = y;
+  this->currentState=currentState;
 }
 
 Json::Value CommandMove::serialize(){
@@ -19,15 +21,17 @@ Json::Value CommandMove::serialize(){
     return newCommand;
 }
 
-void CommandMove::execute(state::State &state){
+void CommandMove::execute(int x,int y){
   cout<< "Move character" <<endl;
-      if(state.getPersonnageActif()->getMoved()==true){    
-        cout<<state.getPersonnageActif() <<" has been moved" << endl;
+      if(currentState->getPersonnageActif()->getMoved()==true){    
+        cout<<currentState->getPersonnageActif()->getNom()<<" has been moved" << endl;
       }
       else{
-        cout<<state.getPersonnageActif()<<"has not been moved" << endl;
+        cout<<currentState->getPersonnageActif()->getNom()<<"has not been moved" << endl;
       }
+  currentState->getPersonnageActif()->deplacer(x,y);
 
+/*
       state::Personnage *personnage;
       if(Command::getCommandId()==MOVE){
         
@@ -48,7 +52,7 @@ void CommandMove::execute(state::State &state){
             personnage->deplacer(this->x,this->y);
         }
       }
-
+*/
 
 }
 

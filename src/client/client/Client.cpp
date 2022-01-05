@@ -52,19 +52,22 @@ void Client::run(){
                             break;
                         case sf::Keyboard::Z:
                             std::cout << "the Z key was pressed" << std::endl;
-                            render->windowPersonnages();
-                            engine->update();
+                            engine->update(MOVE,UP);
+                            render->windowPersonnages();                            
                             break;
                         case sf::Keyboard::Q:
                             std::cout << "the Q key was pressed" << std::endl;
+                            engine->update(MOVE,LEFT);
                             render->windowPersonnages();
                             break; 
                         case sf::Keyboard::D:
                             std::cout << "the D key was pressed" << std::endl;
+                            engine->update(MOVE,RIGHT);
                             render->windowPersonnages();
                             break;
                         case sf::Keyboard::S:
                             std::cout << "the S key was pressed" << std::endl;
+                            engine->update(MOVE,DOWN);
                             render->windowPersonnages();
                             break; 
                         default:

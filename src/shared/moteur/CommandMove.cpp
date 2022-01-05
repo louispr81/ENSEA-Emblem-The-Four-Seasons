@@ -14,13 +14,13 @@ CommandMove::CommandMove(state::State* currentState){
   id = MOVE;
   this->currentState=currentState;
 }
-
+/*
 Json::Value CommandMove::serialize(){
     Json::Value newCommand;
     newCommand["id"]=id;
     return newCommand;
 }
-
+*/
 void CommandMove::execute(MoveId move){
   cout<< "Move character" <<endl;
       if(currentState->getPersonnageActif()->getMoved()==true){    

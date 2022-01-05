@@ -16,10 +16,67 @@ Client::Client (){
 }
 
 void Client::run(){
+    sf::Event event;
     int cmd;
-    std::cout<<"Liste des commandes:\n"<<"ATTACK=0"<<std::endl<<"MOVE=1"<<std::endl<<"WAIT=2"<<std::endl;
-    std::cout<<"\n";
     render->windowInit();
+    while (render->getWindow()->isOpen()){
+        while (render->getWindow()->pollEvent(event)){
+            switch (event.type){
+                case sf::Event::Closed:
+                    render->getWindow()->close();
+                    break;
+                case sf::Event::KeyPressed:
+                    switch (event.key.code){
+                        case sf::Keyboard::Escape:
+                            std::cout << "the Escape key was pressed" << std::endl;
+                            break;
+                        case sf::Keyboard::A:
+                            std::cout << "the A key was pressed" << std::endl;
+                            render->windowPersonnages();
+                            break;
+                        case sf::Keyboard::Up:
+                            std::cout << "the Up key was pressed" << std::endl;
+                            render->windowPersonnages();
+                            break;
+                        case sf::Keyboard::Left:
+                            std::cout << "the Left key was pressed" << std::endl;
+                            render->windowPersonnages();
+                            break; 
+                        case sf::Keyboard::Right:
+                            std::cout << "the Right key was pressed" << std::endl;
+                            render->windowPersonnages();
+                            break;
+                        case sf::Keyboard::Down:
+                            std::cout << "the Down key was pressed" << std::endl;
+                            render->windowPersonnages();
+                            break;
+                        case sf::Keyboard::Z:
+                            std::cout << "the Z key was pressed" << std::endl;
+                            render->windowPersonnages();
+                            engine->update();
+                            break;
+                        case sf::Keyboard::Q:
+                            std::cout << "the Q key was pressed" << std::endl;
+                            render->windowPersonnages();
+                            break; 
+                        case sf::Keyboard::D:
+                            std::cout << "the D key was pressed" << std::endl;
+                            render->windowPersonnages();
+                            break;
+                        case sf::Keyboard::S:
+                            std::cout << "the S key was pressed" << std::endl;
+                            render->windowPersonnages();
+                            break; 
+                        default:
+                            break;       
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    /*
     while(render->getWindow()->isOpen()){
         render->windowPersonnages(); 
         std::cout<<state->getJoueur()->getNom()<< " quelle commande voulez vous faire avec "<<state->getPersonnageActif()->getNom()<<" ?"<<std::endl;
@@ -27,5 +84,5 @@ void Client::run(){
         std::cout<<"\n";
         std::cout<<cmd<<" va être éxécutée"<<std::endl;
         //this->engine->update(cmd);
-    }
+    }*/
 }

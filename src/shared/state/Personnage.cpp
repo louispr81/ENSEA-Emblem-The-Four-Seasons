@@ -102,7 +102,6 @@ void Personnage::echangerObjet(Personnage personnageB, Objet objet){
 
 
 int Personnage::deplacer(int x1, int y1){
-
     /*
     int reply;
     this->moved=false;
@@ -130,11 +129,7 @@ int Personnage::deplacer(int x1, int y1){
         cout<< " le personnage ne bouge pas "<<endl;
         reply=1;
     }
-
-
-
-
-     if (coordonne_destination==coordonne_1 ){
+    if (coordonne_destination==coordonne_1 ){
         if(this->plateau->getCase(coordonne_1[0],coordonne_1[1])->getWalkable()==true){
             if(this->plateau->getCase(coordonne_1[0],coordonne_1[1])->getOccupe()==false){
                  if((*this).statistiques.getPoint_mouvement()>=1){
@@ -156,7 +151,7 @@ int Personnage::deplacer(int x1, int y1){
                     ((*((*this).cell)).getCoordonees())=coordonne_2;
                     (*this).statistiques.setPoint_mouvement((*this).statistiques.getPoint_mouvement()-1);
                     reply=1;
-                    this->moved=true;
+                    //this->moved=true;
                 }
             }
 
@@ -165,49 +160,38 @@ int Personnage::deplacer(int x1, int y1){
 
 
 
-if (coordonne_destination==coordonne_3 ){
+    if (coordonne_destination==coordonne_3 ){
         if(this->plateau->getCase(coordonne_3[0],coordonne_3[1])->getWalkable()==true){
             if(this->plateau->getCase(coordonne_3[0],coordonne_3[1])->getOccupe()==false){
                 if((*this).statistiques.getPoint_mouvement()>=1){
                     ((*((*this).cell)).getCoordonees())=coordonne_3;
                     (*this).statistiques.setPoint_mouvement((*this).statistiques.getPoint_mouvement()-1);
                     reply=1;
-                    this->moved=true;
+                    //this->moved=true;
                 }
             }
 
         }
     }
-
-
-if (coordonne_destination==coordonne_4 ){
+    if (coordonne_destination==coordonne_4 ){
         if(this->plateau->getCase(coordonne_4[0],coordonne_4[1])->getWalkable()==true){
             if(this->plateau->getCase(coordonne_4[0],coordonne_4[1])->getOccupe()==false){
                 if((*this).statistiques.getPoint_mouvement()>=1){
                     ((*((*this).cell)).getCoordonees())=coordonne_4;
                     (*this).statistiques.setPoint_mouvement((*this).statistiques.getPoint_mouvement()-1);
                     reply=1;
-                    this->moved=true;
+                    //this->moved=true;
                 }
             }
-
         }
     }
-
-
-
-
     else {
         cout<< " la case n'est pas disponible "<<endl;
         reply = -1;
-        this->moved=false;
+        //this->moved=false;
     }   
  return reply;
-}
-
-bool Personnage::getMoved(){
-    return this->moved;
-*/
+ */
     if(this->moved==false){
         int pm;
         pm=this->statistiques.getPoint_mouvement();
@@ -299,7 +283,11 @@ bool Personnage::getMoved(){
     else{
         std::cout<<"Le personnage a déjà bougé"<<std::endl;
         return -1;
-    }    
+    }  
+}
+
+bool Personnage::getMoved(){
+    return this->moved;  
 }
 
 int Personnage::deplacer1Dist(Cell* dest,int pm){

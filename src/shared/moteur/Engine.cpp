@@ -37,12 +37,63 @@ int Engine::update(CommandId cmd, MoveId move){
         ((CommandAttendre*)this->currentCommands)->execute();
         return 2;
     }
-/*    if(cmd == ATTACK){
+    if(cmd == ATTACK){
         this->currentCommands=this->listeCommandes[0];
-        this->currentCommands->execute(target);
+        cout<<"Select target"<<endl;
+        std::vector<int> position;
+        std::vector<int> positionEnemy;
+        state::Joueur* joueurEnemy;
+        position = currentState->getPersonnageActif()->getCell()->getCoordonees();
+        joueurEnemy = currentState->getJoueurs()[((currentState->getJoueur()->getId()-40)+1)%2];
+        
+        switch(move){
+            case LEFT:
+                position[0]=position[0]-1;
+                if(0<position[0]-1<= currentState->getPlateau()->getSize()){
+                    for(int i=0;i<joueurEnemy->getPersonnages().size();i++){
+                        positionEnemy = joueurEnemy->getPersonnages()[i]->getCell()->getCoordonees();
+                        if(position == positionEnemy){
+                            ((CommandAttack*)this->currentCommands)->execute(joueurEnemy->getPersonnages()[i]);
+                        }
+                        else{
+                            cout<<"There isn't any enemy around you."<<endl;
+                        }
+                    }
+                }
+                else{
+                    cout<<"You can't attack here."<<endl;
+                }
+                break;
+            case RIGHT:
+                position[0]=position[0]+1;
+                if(0<position[0]+1<= currentState->getPlateau()->getSize()){
+                    for(int i=0;i<joueurEnemy->getPersonnages().size();i++){
+                        positionEnemy = joueurEnemy->getPersonnages()[i]->getCell()->getCoordonees();
+                        if(position == positionEnemy){
+                            ((CommandAttack*)this->currentCommands)->execute(joueurEnemy->getPersonnages()[i]);
+                        }
+                        else{
+                            cout<<"There isn't any enemy around you."<<endl;
+                        }
+                    }
+                }
+                else{
+                    cout<<"You can't attack here."<<endl;
+                }
+            break;
+
+            case UP:
+
+            break;
+
+            case DOWN:
+
+            break;
+        }
+
         return 0;
-    }*/
-    if(cmd == MOVE){    
+    }
+    if(cmd == MOVE){        
         this->currentCommands=this->listeCommandes[1];
         ((CommandMove*)(this->currentCommands))->execute(move);
         return 1;

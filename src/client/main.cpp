@@ -51,6 +51,7 @@ if (strcmp(argv[1],"hello") ==0 ){
         (*rendu).windowExemple();
 	}
     else if (strcmp(argv[1],"engine") == 0){
+        std::cout << "Lancement de l'ENGINE" << std::endl;
         std::cout << "Les touches :" << std::endl;
         std::cout << "A : attendre (et valider la fin du tour du personnage)" << std::endl;
         std::cout << "Z,Q,S,D : se déplacer" << std::endl;
@@ -58,10 +59,13 @@ if (strcmp(argv[1],"hello") ==0 ){
 		client::Client *client= new Client;
         client->run();
 
-
 	}
     else if (strcmp(argv[1],"game") == 0){
         std::cout << "Lancement du CLIENT" << std::endl;
+        std::cout << "Les touches :" << std::endl;
+        std::cout << "A : attendre (et valider la fin du tour du personnage)" << std::endl;
+        std::cout << "Z,Q,S,D : se déplacer" << std::endl;
+        std::cout << "UP,DOWN,LEFT,RIGHT : attaquer (Work in Progress)" << std::endl;
 		client::Client *client= new Client;
         client->run();
 	}

@@ -38,16 +38,17 @@ State::State(int size){
     Plateau *plateau = new Plateau(size); 
 
     //Creation des statistiques
-    Statistiques statistiquesBaseA1;
-    Statistiques statistiquesBaseM1;
-    Statistiques statistiquesBaseC1;
-    Statistiques statistiquesBaseCH1;
-    Statistiques statistiquesBaseAR1;
-    Statistiques statistiquesBaseA2;
-    Statistiques statistiquesBaseM2;
-    Statistiques statistiquesBaseC2;
-    Statistiques statistiquesBaseCH2;
-    Statistiques statistiquesBaseAR2;
+    //Statistiques (int vie, int vie_max, int point_mouvement, int point_mouvement_max, int force, int intelligence, int vitesse, int defense, int resistance, int technique, int experience, int experience_max, int niveau);
+    Statistiques* statistiquesBaseA1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesBaseM1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesBaseC1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesBaseCH1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesBaseAR1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesBaseA2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesBaseM2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesBaseC2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesBaseCH2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesBaseAR2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
 
     //Creation des inventaires
     std::vector<Objet*> inventaireA1;

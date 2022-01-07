@@ -94,16 +94,16 @@ State::State(int size){
     }
     
     //Creation des statistiques des personnages
-    Statistiques* statistiquesA1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques*statistiquesM1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesC1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesCH1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesAR1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesA2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesM2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesC2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesCH2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesAR2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesA1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques*statistiquesM1=new Statistiques(20,20,16,16,10,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesC1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesCH1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesAR1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesA2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesM2=new Statistiques(20,20,16,16,10,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesC2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesCH2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesAR2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
     
     //Choix des cases des personnages
     Cell* caseA1=(*plateau).getCase(0,0)->getPtCell();
@@ -175,6 +175,7 @@ std::vector<Saison*> State::getListeSaison(){
 void State::tourSuivant(){
    if ((*this).gameover== false ){
         this->tour=tour+1;
+        std::cout<<"Début du tour "<<this->tour<<std::endl;
         int i(0);
         for(i=0;i<this->joueurs[0]->getPersonnages().size();i++){
             if(this->joueurs[0]->getPersonnages()[i]->getAlive()==true){
@@ -195,7 +196,19 @@ void State::tourSuivant(){
 }
 void State::joueurSuivant(){
     if ((*this).gameover== false ){
-        this->joueur=this->joueurs[(this->joueur->getId()-40+1)%2];
+        if(this->joueur->getId()==JOUEUR2){
+            std::cout<<"Fin du tour !"<<std::endl;
+            this->tourSuivant();
+            this->joueur=joueurs[0];
+        }
+        else if(this->joueur->getId()==JOUEUR1){
+            this->joueur=joueurs[1];
+        }
+        else{
+            perror("joueur suivant");
+            exit(1);
+        }
+        std::cout<<"Au tour de "<<this->joueur->getNom()<<std::endl;
     }
 }
 
@@ -257,25 +270,14 @@ Personnage* State::getPersonnageActif(){
     if (this->gameover== false ){
         int i(0);
         for(i=0;i<this->joueur->getPersonnages().size();i++){
-            if(this->joueur->getPersonnages()[i]->getPlayed()==false){
+            if(this->joueur->getPersonnages()[i]->getPlayed()==false and this->joueur->getPersonnages()[i]->getAlive()==true){
                 return joueur->getPersonnages()[i];
             }
         }
-        std::cout<<"Au tour du joueur 2 !"<<std::endl;
         this->joueurSuivant();
         i=0;
         for(i=0;i<this->joueur->getPersonnages().size();i++){
-            if(this->joueur->getPersonnages()[i]->getPlayed()==false){
-                return joueur->getPersonnages()[i];
-            }
-        }
-        std::cout<<"Fin du tour !"<<std::endl;
-        this->tourSuivant();
-        std::cout<<"Au tour du joueur 1 !"<<std::endl;
-        this->joueurSuivant();
-        i=0;
-        for(i=0;i<this->joueur->getPersonnages().size();i++){
-            if(this->joueur->getPersonnages()[i]->getPlayed()==false){
+            if(this->joueur->getPersonnages()[i]->getPlayed()==false and this->joueur->getPersonnages()[i]->getAlive()==true){
                 return joueur->getPersonnages()[i];
             }
         }

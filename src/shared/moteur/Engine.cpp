@@ -20,7 +20,6 @@ Engine::Engine (state::State* currentState) {
     this->listeCommandes.push_back(attack);
     this->listeCommandes.push_back(move);
     this->listeCommandes.push_back(attendre);
-
 }
 
 state::State* Engine::getState() {
@@ -33,7 +32,6 @@ Command* Engine::getCommands(){
 }
 
 int Engine::update(CommandId cmd, MoveId move){
-    
     if(cmd == ATTENDRE){
         this->currentCommands=this->listeCommandes[2];
         ((CommandAttendre*)this->currentCommands)->execute();
@@ -44,9 +42,9 @@ int Engine::update(CommandId cmd, MoveId move){
         this->currentCommands->execute(target);
         return 0;
     }*/
-    if(cmd == MOVE){        
+    if(cmd == MOVE){    
         this->currentCommands=this->listeCommandes[1];
-        ((CommandMove*)this->currentCommands)->execute(move);
+        ((CommandMove*)(this->currentCommands))->execute(move);
         return 1;
     }
     else{

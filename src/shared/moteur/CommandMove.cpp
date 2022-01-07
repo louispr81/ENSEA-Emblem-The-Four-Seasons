@@ -22,31 +22,74 @@ Json::Value CommandMove::serialize(){
 }
 */
 void CommandMove::execute(MoveId move){
-  cout<< "Move character" <<endl;
       if(currentState->getPersonnageActif()->getMoved()==true){    
-        cout<<currentState->getPersonnageActif()->getNom()<<" Can be moved" << endl;
+        cout<<currentState->getPersonnageActif()->getNom()<<" Can not be moved" << endl;
       }
       else{
-        cout<<currentState->getPersonnageActif()->getNom()<<"Can not be moved" << endl;
+        cout<<currentState->getPersonnageActif()->getNom()<<" Can be moved" << endl;
       
       //currentState->getPersonnageActif()->deplacer(x,y);
         std::vector<int> coordonnees;
         coordonnees = currentState->getPersonnageActif()->getCell()->getCoordonees();
         if (move==LEFT){  
-            coordonnees[0] = coordonnees[0]-1;         
-            currentState->getPersonnageActif()->deplacer(coordonnees[0],coordonnees[1]);
+            coordonnees[0] = coordonnees[0]-1;
+            if(coordonnees[0]>=0 and coordonnees[0]<currentState->getPlateau()->getSize()){
+              if (coordonnees[1]>=0 and coordonnees[1]<currentState->getPlateau()->getSize()){
+                cout<< "Move character" <<endl;
+                currentState->getPersonnageActif()->deplacer(coordonnees[0],coordonnees[1]);
+              }
+              else{
+                cout<< "y invalide" <<endl;
+              }
+            }  
+            else{
+              cout<< "x invalide" <<endl;
+            }       
         }
         else if(move==RIGHT){  
-            coordonnees[1] = coordonnees[1]-1;  
-            currentState->getPersonnageActif()->deplacer(coordonnees[0],coordonnees[1]);
+            coordonnees[1] = coordonnees[1]-1;
+            if(coordonnees[0]>=0 and coordonnees[0]<currentState->getPlateau()->getSize()){
+              if (coordonnees[1]>=0 and coordonnees[1]<currentState->getPlateau()->getSize()){
+                cout<< "Move character" <<endl;
+                currentState->getPersonnageActif()->deplacer(coordonnees[0],coordonnees[1]);
+              }
+              else{
+                cout<< "y invalide" <<endl;
+              }
+            }  
+            else{
+              cout<< "x invalide" <<endl;
+            }  
         }
         else if(move==UP){
             coordonnees[0] = coordonnees[0]+1;
-            currentState->getPersonnageActif()->deplacer(coordonnees[0],coordonnees[1]);
+            if(coordonnees[0]>=0 and coordonnees[0]<currentState->getPlateau()->getSize()){
+              if (coordonnees[1]>=0 and coordonnees[1]<currentState->getPlateau()->getSize()){
+                cout<< "Move character" <<endl;
+                currentState->getPersonnageActif()->deplacer(coordonnees[0],coordonnees[1]);
+              }
+              else{
+                cout<< "y invalide" <<endl;
+              }
+            }  
+            else{
+              cout<< "x invalide" <<endl;
+            }
         }
         else if(move==DOWN){
             coordonnees[1] = coordonnees[1]+1;
-            currentState->getPersonnageActif()->deplacer(coordonnees[0],coordonnees[1]);
+            if(coordonnees[0]>=0 and coordonnees[0]<currentState->getPlateau()->getSize()){
+              if (coordonnees[1]>=0 and coordonnees[1]<currentState->getPlateau()->getSize()){
+                cout<< "Move character" <<endl;
+                currentState->getPersonnageActif()->deplacer(coordonnees[0],coordonnees[1]);
+              }
+              else{
+                cout<< "y invalide" <<endl;
+              }
+            }  
+            else{
+              cout<< "x invalide" <<endl;
+            }
         }
         else if(move==NONE){
             cout<<"Stay"<<endl;

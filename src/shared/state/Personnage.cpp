@@ -6,7 +6,7 @@ using namespace state;
 using namespace std;
 
 
-Personnage::Personnage(std::string nom, int id, Statistiques statistiquesBase, std::vector<Objet*> inventaire, Arme* arme, Classe* classe, Saison* saison, Cell* cell, std::vector<int> bonus, Statistiques statistiques, Plateau* plateau, bool played, bool alive, bool moved){
+Personnage::Personnage(std::string nom, int id, Statistiques* statistiquesBase, std::vector<Objet*> inventaire, Arme* arme, Classe* classe, Saison* saison, Cell* cell, std::vector<int> bonus, Statistiques* statistiques, Plateau* plateau, bool played, bool alive, bool moved){
     (*this).nom=nom;
     (*this).id=id;
     (*this).statistiquesBase=statistiquesBase;
@@ -34,7 +34,7 @@ void Personnage::setBonus(std::vector<int> x){
 
 void Personnage::attendre(){ 
     if ((*this).played != true){
-        (*this).statistiques.setPoint_mouvement(0);
+        (*this).statistiques->setPoint_mouvement(0);
         (*this).moved=true;
         (*this).played=true;
     }
@@ -102,6 +102,20 @@ void Personnage::echangerObjet(Personnage personnageB, Objet objet){
 
 
 int Personnage::deplacer(int x1, int y1){
+    int pm=this->statistiques->getPoint_mouvement();
+    int cost=this->cell->getCostPm();
+    if(cost<=pm){
+        this->cell->setOccupe(false);
+        this->cell->setPersonnage(NULL);
+        this->cell=this->plateau->getCase(x1,y1);
+        this->cell->setOccupe(true);
+        this->cell->setPersonnage(this);
+        return 1;
+    }
+    else{
+        std::cout<<"pas assez de PM"<<std::endl;
+        return -1;
+    }
     /*
     int reply;
     this->moved=false;
@@ -191,10 +205,10 @@ int Personnage::deplacer(int x1, int y1){
         //this->moved=false;
     }   
  return reply;
- */
+ /*
     if(this->moved==false){
         int pm;
-        pm=this->statistiques.getPoint_mouvement();
+        pm=this->statistiques->getPoint_mouvement();
         if(pm>0){
             Cell* Destination=this->plateau->getCase(x1,y1);
             Cell* tmpDestination;
@@ -270,7 +284,7 @@ int Personnage::deplacer(int x1, int y1){
                     }
 
                 }
-                pm=this->statistiques.getPoint_mouvement();
+                pm=this->statistiques->getPoint_mouvement();
             }
             this->moved=true;
             return 1;
@@ -283,7 +297,8 @@ int Personnage::deplacer(int x1, int y1){
     else{
         std::cout<<"Le personnage a déjà bougé"<<std::endl;
         return -1;
-    }  
+    }
+*/  
 }
 
 bool Personnage::getMoved(){
@@ -295,11 +310,11 @@ int Personnage::deplacer1Dist(Cell* dest,int pm){
         if(pm-dest->getCostPm()>=0){
             pm=pm-dest->getCostPm();
             this->cell=dest;
-            this->statistiques.setPoint_mouvement(pm);
+            this->statistiques->setPoint_mouvement(pm);
             return 1;
         }
         else{
-            this->statistiques.setPoint_mouvement(pm);
+            this->statistiques->setPoint_mouvement(pm);
             return 0;
         }
     }
@@ -336,9 +351,9 @@ if((*this).getAlive()==true and personnageD.getAlive()==true and (*this).getPlay
     if((*this).arme->getRange()==1) 
         {
             if(coordonnees_b==coordonne_1||coordonnees_b==coordonne_2||coordonnees_b==coordonne_3||coordonnees_b==coordonne_4){
-                personnageD.statistiques.setVie(personnageD.statistiques.getVie()-1);
+                personnageD.statistiques->setVie(personnageD.statistiques->getVie()-1);
                 (*this).setPlayed(true);
-                if (personnageD.statistiques.getVie()==0)
+                if (personnageD.statistiques->getVie()==0)
                 {
                    (*this).setAlive(false); 
                 }
@@ -351,9 +366,9 @@ if((*this).getAlive()==true and personnageD.getAlive()==true and (*this).getPlay
     else if ((*this).arme->getRange()==2){
        
         if(coordonnees_b==coordonne_1||coordonnees_b==coordonne_2||coordonnees_b==coordonne_3||coordonnees_b==coordonne_4){
-                personnageD.statistiques.setVie(personnageD.statistiques.getVie()-1);
+                personnageD.statistiques->setVie(personnageD.statistiques->getVie()-1);
                 (*this).setPlayed(true);
-                if (personnageD.statistiques.getVie()==0)
+                if (personnageD.statistiques->getVie()==0)
                 {
                    (*this).setAlive(false); 
                 }
@@ -363,9 +378,9 @@ if((*this).getAlive()==true and personnageD.getAlive()==true and (*this).getPlay
 
 
          else if(coordonnees_b==coordonne_5||coordonnees_b==coordonne_6||coordonnees_b==coordonne_7||coordonnees_b==coordonne_8||coordonnees_b==coordonne_9||coordonnees_b==coordonne_10||coordonnees_b==coordonne_11||coordonnees_b==coordonne_12){
-                personnageD.statistiques.setVie(personnageD.statistiques.getVie()-1);
+                personnageD.statistiques->setVie(personnageD.statistiques->getVie()-1);
                 (*this).setPlayed(true);
-                if (personnageD.statistiques.getVie()==0)
+                if (personnageD.statistiques->getVie()==0)
                 {
                    (*this).setAlive(false); 
                 }
@@ -403,7 +418,7 @@ void Personnage::print(){
     std::cout<<"moved="<<this->moved<<std::endl;
     std::cout<<"alive="<<this->alive<<std::endl;
     std::cout<<"id="<<this->id<<std::endl;
-    this->statistiques.print();
+    this->statistiques->print();
     std::cout<<"----------------------------------------"<<std::endl;
 }
     std::string nom;

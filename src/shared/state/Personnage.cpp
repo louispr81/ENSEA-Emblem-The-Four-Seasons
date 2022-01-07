@@ -347,6 +347,21 @@ int Personnage::deplacer1Dist(Cell* dest,int pm){
 
 
 void Personnage::attaquer (Personnage* personnageD){
+    int degatsAttaquant=this->statistiques->getForce();
+    int hpDefenseur=personnageD->statistiques->getVie();
+    personnageD->statistiques->setVie(hpDefenseur-degatsAttaquant);
+    if(personnageD->statistiques->getVie()<=0){
+        std::cout<<personnageD->getNom()<<" a été tué par "<<this->getNom()<<std::endl;
+        personnageD->setAlive(false);
+        personnageD->getCell()->setOccupe(false);
+        personnageD->getCell()->setPersonnage(NULL);
+        personnageD->setCell(NULL);
+    }
+    else{
+        std::cout<<personnageD->getNom()<<" a  "<<personnageD->statistiques->getVie()<<"HP après l'attaque de "<<this->getNom()<<std::endl;
+    }   
+    this->attendre(); 
+    /*
     std::vector<int> coordonne_a,coordonnees_b,coordonne_1,coordonne_2,coordonne_3,coordonne_4,coordonne_5,coordonne_6,coordonne_7,coordonne_8,coordonne_9,coordonne_10,coordonne_11,coordonne_12;
     coordonne_a=((*this).cell->getCoordonees());
     coordonnees_b=(personnageD->cell->getCoordonees());
@@ -419,6 +434,7 @@ if((*this).getAlive()==true and personnageD->getAlive()==true and (*this).getPla
 
 
 }
+*/
 }
 
 std::string Personnage::getPersonnageActif(){
@@ -431,12 +447,20 @@ ClasseId Personnage::getClasseId (){
 Cell* Personnage::getCell (){
     return (*this).cell;
 }
+void Personnage::setCell (Cell* cell){
+    this->cell=cell;
+}
 
 void Personnage::print(){
     std::cout<<"---------------PERSONNAGE---------------"<<std::endl;
     std::cout<<"nom="<<this->nom<<std::endl;
     std::cout<<"classe="<<this->classe->getNom()<<std::endl;
-    std::cout<<"coords= ("<<this->cell->getPtCell()->getCoordonees()[0]<<";"<<this->cell->getPtCell()->getCoordonees()[1]<<")"<<std::endl;
+    if(this->alive==true){
+        std::cout<<"coords= ("<<this->cell->getPtCell()->getCoordonees()[0]<<";"<<this->cell->getPtCell()->getCoordonees()[1]<<")"<<std::endl;
+    }
+    else{
+        std::cout<<"coords= NULL"<<std::endl;
+    }
     std::cout<<"moved="<<this->moved<<std::endl;
     std::cout<<"alive="<<this->alive<<std::endl;
     std::cout<<"id="<<this->id<<std::endl;

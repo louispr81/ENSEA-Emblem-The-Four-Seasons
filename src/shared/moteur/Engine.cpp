@@ -53,11 +53,10 @@ int Engine::update(CommandId cmd, MoveId move){
                         positionEnemy = joueurEnemy->getPersonnages()[i]->getCell()->getCoordonees();
                         if(position == positionEnemy){
                             ((CommandAttack*)this->currentCommands)->execute(joueurEnemy->getPersonnages()[i]);
-                        }
-                        else{
-                            cout<<"There isn't any enemy around you."<<endl;
+                            return 1;
                         }
                     }
+                    cout<<"There isn't any enemy here."<<endl;
                 }
                 else{
                     cout<<"You can't attack here."<<endl;
@@ -70,11 +69,10 @@ int Engine::update(CommandId cmd, MoveId move){
                         positionEnemy = joueurEnemy->getPersonnages()[i]->getCell()->getCoordonees();
                         if(position == positionEnemy){
                             ((CommandAttack*)this->currentCommands)->execute(joueurEnemy->getPersonnages()[i]);
-                        }
-                        else{
-                            cout<<"There isn't any enemy around you."<<endl;
+                            return 1;
                         }
                     }
+                    cout<<"There isn't any enemy here."<<endl;
                 }
                 else{
                     cout<<"You can't attack here."<<endl;
@@ -88,11 +86,10 @@ int Engine::update(CommandId cmd, MoveId move){
                         positionEnemy = joueurEnemy->getPersonnages()[i]->getCell()->getCoordonees();
                         if(position == positionEnemy){
                             ((CommandAttack*)this->currentCommands)->execute(joueurEnemy->getPersonnages()[i]);
-                        }
-                        else{
-                            cout<<"There isn't any enemy around you."<<endl;
+                            return 1;
                         }
                     }
+                    cout<<"There isn't any enemy here."<<endl;
                 }
                 else{
                     cout<<"You can't attack here."<<endl;
@@ -106,11 +103,10 @@ int Engine::update(CommandId cmd, MoveId move){
                         positionEnemy = joueurEnemy->getPersonnages()[i]->getCell()->getCoordonees();
                         if(position == positionEnemy){
                             ((CommandAttack*)this->currentCommands)->execute(joueurEnemy->getPersonnages()[i]);
-                        }
-                        else{
-                            cout<<"There isn't any enemy around you."<<endl;
-                        }
+                            return 1;
+                        }                        
                     }
+                    cout<<"There isn't any enemy here."<<endl;
                 }
                 else{
                     cout<<"You can't attack here."<<endl;
@@ -118,7 +114,7 @@ int Engine::update(CommandId cmd, MoveId move){
             break;
         }
 
-        return 0;
+        return -1;
     }
     if(cmd == MOVE){        
         this->currentCommands=this->listeCommandes[1];

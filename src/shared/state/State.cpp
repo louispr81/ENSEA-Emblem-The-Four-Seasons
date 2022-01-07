@@ -94,16 +94,16 @@ State::State(int size){
     }
     
     //Creation des statistiques des personnages
-    Statistiques* statistiquesA1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques*statistiquesM1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesC1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesCH1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesAR1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesA2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesM2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesC2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesCH2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesAR2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesA1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques*statistiquesM1=new Statistiques(20,20,16,16,10,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesC1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesCH1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesAR1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesA2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesM2=new Statistiques(20,20,16,16,10,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesC2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesCH2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesAR2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
     
     //Choix des cases des personnages
     Cell* caseA1=(*plateau).getCase(0,0)->getPtCell();
@@ -270,14 +270,14 @@ Personnage* State::getPersonnageActif(){
     if (this->gameover== false ){
         int i(0);
         for(i=0;i<this->joueur->getPersonnages().size();i++){
-            if(this->joueur->getPersonnages()[i]->getPlayed()==false){
+            if(this->joueur->getPersonnages()[i]->getPlayed()==false and this->joueur->getPersonnages()[i]->getAlive()==true){
                 return joueur->getPersonnages()[i];
             }
         }
         this->joueurSuivant();
         i=0;
         for(i=0;i<this->joueur->getPersonnages().size();i++){
-            if(this->joueur->getPersonnages()[i]->getPlayed()==false){
+            if(this->joueur->getPersonnages()[i]->getPlayed()==false and this->joueur->getPersonnages()[i]->getAlive()==true){
                 return joueur->getPersonnages()[i];
             }
         }

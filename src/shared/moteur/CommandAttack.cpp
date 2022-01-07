@@ -28,8 +28,8 @@ cout <<  target.getNom() << " a  " << target.statistiques.getVie()<< "  de vie "
 }*/
 void CommandAttack::execute(state::Personnage target){
     cout <<  currentState->getPersonnageActif()->getNom() << " attaque " << target.getNom() << endl;
-    cout <<  target.getNom() << " a  " << target.statistiques.getVie()<< "  de vie " << endl;
-    if (target.statistiques.getVie()<=0){
+    cout <<  target.getNom() << " a  " << target.statistiques->getVie()<< "  de vie " << endl;
+    if (target.statistiques->getVie()<=0){
         cout <<  target.getNom() << " est mort  " <<endl;
         target.setAlive(false);
     }

@@ -23,7 +23,7 @@ Json::Value CommandMove::serialize(){
 */
 void CommandMove::execute(MoveId move){
       if(currentState->getPersonnageActif()->getMoved()==true){    
-        cout<<currentState->getPersonnageActif()->getNom()<<" Can not be moved" << endl;
+        cout<<currentState->getPersonnageActif()->getNom()<<" Can not be moved: NO PM" << endl;
       }
       else{
         cout<<currentState->getPersonnageActif()->getNom()<<" Can be moved" << endl;
@@ -47,7 +47,7 @@ void CommandMove::execute(MoveId move){
             }       
         }
         else if(move==RIGHT){  
-            coordonnees[1] = coordonnees[1]-1;
+            coordonnees[0] = coordonnees[0]+1;
             if(coordonnees[0]>=0 and coordonnees[0]<currentState->getPlateau()->getSize()){
               if (coordonnees[1]>=0 and coordonnees[1]<currentState->getPlateau()->getSize()){
                 cout<< "Move character" <<endl;
@@ -62,7 +62,7 @@ void CommandMove::execute(MoveId move){
             }  
         }
         else if(move==UP){
-            coordonnees[0] = coordonnees[0]+1;
+            coordonnees[1] = coordonnees[1]-1;
             if(coordonnees[0]>=0 and coordonnees[0]<currentState->getPlateau()->getSize()){
               if (coordonnees[1]>=0 and coordonnees[1]<currentState->getPlateau()->getSize()){
                 cout<< "Move character" <<endl;

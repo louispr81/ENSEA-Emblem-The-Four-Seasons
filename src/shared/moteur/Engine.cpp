@@ -32,7 +32,6 @@ Command* Engine::getCommands(){
 }
 
 int Engine::update(CommandId cmd, MoveId move){
-    std::cout<<"update cmd launch"<<std::endl;
     if(cmd == ATTENDRE){
         this->currentCommands=this->listeCommandes[2];
         ((CommandAttendre*)this->currentCommands)->execute();

@@ -1,5 +1,5 @@
 #include "Engine.h"
-//#include <iostream>
+#include <iostream>
 
 
 using namespace state;
@@ -9,33 +9,121 @@ namespace moteur{
 Engine::Engine () {
     cout<<"Engine launched"<<endl;
 }
-/*
-Engine::Engine (state::State& currentState) {
+
+//doit avoir liste *commandes 
+Engine::Engine (state::State* currentState) {
     this->currentState=currentState;
+    std::vector<Command*> listeCommandes;
+    CommandAttack *attack = new CommandAttack(currentState);
+    CommandMove *move = new CommandMove(currentState);
+    CommandAttendre *attendre = new CommandAttendre(currentState);
+    this->listeCommandes.push_back(attack);
+    this->listeCommandes.push_back(move);
+    this->listeCommandes.push_back(attendre);
 }
-*/
-state::State& Engine::getState() {
+
+state::State* Engine::getState() {
     return this->currentState;
 }
 
-Command& Engine::getCommands(){
+Command* Engine::getCommands(){
    
-    return this->currentCommands;
+    return currentCommands;
 }
 
-void Engine::update(Command& cmd){
-    
-    if(cmd.getCommandId()==ATTENDRE){
-        cmd.execute(&this->getState());
+int Engine::update(CommandId cmd, MoveId move){
+    if(cmd == ATTENDRE){
+        this->currentCommands=this->listeCommandes[2];
+        ((CommandAttendre*)this->currentCommands)->execute();
+        return 2;
     }
-    if(cmd.getCommandId()==ATTACK){
-        cmd.execute(&this->getState());
-    }
-    if(cmd.getCommandId()==MOVE){
-        cmd.execute(&this->getState());
-    }
+    if(cmd == ATTACK){
+        this->currentCommands=this->listeCommandes[0];
+        cout<<"Select target"<<endl;
+        std::vector<int> position;
+        std::vector<int> positionEnemy;
+        state::Joueur* joueurEnemy;
+        position = currentState->getPersonnageActif()->getCell()->getCoordonees();
+        joueurEnemy = currentState->getJoueurs()[((currentState->getJoueur()->getId()-40)+1)%2];        
+        switch(move){
+            case LEFT:
+                position[0]=position[0]-1;
+                if(0<position[0]-1<= currentState->getPlateau()->getSize()){
+                    for(int i=0;i<joueurEnemy->getPersonnages().size();i++){
+                        positionEnemy = joueurEnemy->getPersonnages()[i]->getCell()->getCoordonees();
+                        if(position == positionEnemy){
+                            ((CommandAttack*)this->currentCommands)->execute(joueurEnemy->getPersonnages()[i]);
+                            return 1;
+                        }
+                    }
+                    cout<<"There isn't any enemy here."<<endl;
+                }
+                else{
+                    cout<<"You can't attack here."<<endl;
+                }
+                break;
+            case RIGHT:
+                position[0]=position[0]+1;
+                if(0<position[0]+1<= currentState->getPlateau()->getSize()){
+                    for(int i=0;i<joueurEnemy->getPersonnages().size();i++){
+                        positionEnemy = joueurEnemy->getPersonnages()[i]->getCell()->getCoordonees();
+                        if(position == positionEnemy){
+                            ((CommandAttack*)this->currentCommands)->execute(joueurEnemy->getPersonnages()[i]);
+                            return 1;
+                        }
+                    }
+                    cout<<"There isn't any enemy here."<<endl;
+                }
+                else{
+                    cout<<"You can't attack here."<<endl;
+                }
+            break;
 
-    
+            case UP:
+                position[1]=position[1]-1;
+                if(0<position[1]-1<= currentState->getPlateau()->getSize()){
+                    for(int i=0;i<joueurEnemy->getPersonnages().size();i++){
+                        positionEnemy = joueurEnemy->getPersonnages()[i]->getCell()->getCoordonees();
+                        if(position == positionEnemy){
+                            ((CommandAttack*)this->currentCommands)->execute(joueurEnemy->getPersonnages()[i]);
+                            return 1;
+                        }
+                    }
+                    cout<<"There isn't any enemy here."<<endl;
+                }
+                else{
+                    cout<<"You can't attack here."<<endl;
+                }
+            break;
+
+            case DOWN:
+                position[1]=position[1]+1;
+                if(0<position[1]+1<= currentState->getPlateau()->getSize()){
+                    for(int i=0;i<joueurEnemy->getPersonnages().size();i++){
+                        positionEnemy = joueurEnemy->getPersonnages()[i]->getCell()->getCoordonees();
+                        if(position == positionEnemy){
+                            ((CommandAttack*)this->currentCommands)->execute(joueurEnemy->getPersonnages()[i]);
+                            return 1;
+                        }                        
+                    }
+                    cout<<"There isn't any enemy here."<<endl;
+                }
+                else{
+                    cout<<"You can't attack here."<<endl;
+                }
+            break;
+        }
+
+        return -1;
+    }
+    if(cmd == MOVE){        
+        this->currentCommands=this->listeCommandes[1];
+        ((CommandMove*)(this->currentCommands))->execute(move);
+        return 1;
+    }
+    else{
+        return -1;
+    }  
 }
 Engine::~Engine(){
 

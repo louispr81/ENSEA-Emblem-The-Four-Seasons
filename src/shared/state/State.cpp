@@ -6,6 +6,9 @@ using namespace state;
 using namespace std;
 
 
+State::State(){
+    
+}
 State::State(int size){
     
     std::vector<Joueur*> joueurs;
@@ -35,16 +38,17 @@ State::State(int size){
     Plateau *plateau = new Plateau(size); 
 
     //Creation des statistiques
-    Statistiques statistiquesBaseA1;
-    Statistiques statistiquesBaseM1;
-    Statistiques statistiquesBaseC1;
-    Statistiques statistiquesBaseCH1;
-    Statistiques statistiquesBaseAR1;
-    Statistiques statistiquesBaseA2;
-    Statistiques statistiquesBaseM2;
-    Statistiques statistiquesBaseC2;
-    Statistiques statistiquesBaseCH2;
-    Statistiques statistiquesBaseAR2;
+    //Statistiques (int vie, int vie_max, int point_mouvement, int point_mouvement_max, int force, int intelligence, int vitesse, int defense, int resistance, int technique, int experience, int experience_max, int niveau);
+    Statistiques* statistiquesBaseA1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesBaseM1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesBaseC1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesBaseCH1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesBaseAR1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesBaseA2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesBaseM2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesBaseC2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesBaseCH2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesBaseAR2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
 
     //Creation des inventaires
     std::vector<Objet*> inventaireA1;
@@ -90,16 +94,16 @@ State::State(int size){
     }
     
     //Creation des statistiques des personnages
-    Statistiques statistiquesA1;
-    Statistiques statistiquesM1;
-    Statistiques statistiquesC1;
-    Statistiques statistiquesCH1;
-    Statistiques statistiquesAR1;
-    Statistiques statistiquesA2;
-    Statistiques statistiquesM2;
-    Statistiques statistiquesC2;
-    Statistiques statistiquesCH2;
-    Statistiques statistiquesAR2;
+    Statistiques* statistiquesA1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques*statistiquesM1=new Statistiques(20,20,16,16,10,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesC1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesCH1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesAR1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesA2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesM2=new Statistiques(20,20,16,16,10,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesC2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesCH2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesAR2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
     
     //Choix des cases des personnages
     Cell* caseA1=(*plateau).getCase(0,0)->getPtCell();
@@ -170,7 +174,41 @@ std::vector<Saison*> State::getListeSaison(){
 }
 void State::tourSuivant(){
    if ((*this).gameover== false ){
-        (*this).tour++;
+        this->tour=tour+1;
+        std::cout<<"Début du tour "<<this->tour<<std::endl;
+        int i(0);
+        for(i=0;i<this->joueurs[0]->getPersonnages().size();i++){
+            if(this->joueurs[0]->getPersonnages()[i]->getAlive()==true){
+                joueurs[0]->getPersonnages()[i]->setPlayed(false);
+                joueurs[0]->getPersonnages()[i]->setMoved(false);
+                joueurs[0]->getPersonnages()[i]->resetPm();
+            }
+        }
+        for(i=0;i<this->joueurs[1]->getPersonnages().size();i++){
+            if(this->joueurs[1]->getPersonnages()[i]->getAlive()==true){
+                joueurs[1]->getPersonnages()[i]->setPlayed(false);
+                joueurs[1]->getPersonnages()[i]->setMoved(false);
+                joueurs[1]->getPersonnages()[i]->resetPm();
+            }
+        }
+
+    }
+}
+void State::joueurSuivant(){
+    if ((*this).gameover== false ){
+        if(this->joueur->getId()==JOUEUR2){
+            std::cout<<"Fin du tour !"<<std::endl;
+            this->tourSuivant();
+            this->joueur=joueurs[0];
+        }
+        else if(this->joueur->getId()==JOUEUR1){
+            this->joueur=joueurs[1];
+        }
+        else{
+            perror("joueur suivant");
+            exit(1);
+        }
+        std::cout<<"Au tour de "<<this->joueur->getNom()<<std::endl;
     }
 }
 
@@ -182,8 +220,7 @@ void State::abandonner (Joueur joueur){
     }
     
 }
-void State::updateSaison (){
-       
+void State::updateSaison (){       
     if ((*this).gameover== false){
         switch((*(this->saison)).getId()){
             case PRINTEMPS:
@@ -230,14 +267,26 @@ Plateau* State::getPlateau (){
 }
 
 Personnage* State::getPersonnageActif(){
-    int i(0);
-    for(i=0;i<this->joueur->getPersonnages().size();i++){
-        if(this->joueur->getPersonnages()[i]->getPlayed()==false){
-            return joueur->getPersonnages()[i];
+    if (this->gameover== false ){
+        int i(0);
+        for(i=0;i<this->joueur->getPersonnages().size();i++){
+            if(this->joueur->getPersonnages()[i]->getPlayed()==false and this->joueur->getPersonnages()[i]->getAlive()==true){
+                return joueur->getPersonnages()[i];
+            }
+        }
+        this->joueurSuivant();
+        i=0;
+        for(i=0;i<this->joueur->getPersonnages().size();i++){
+            if(this->joueur->getPersonnages()[i]->getPlayed()==false and this->joueur->getPersonnages()[i]->getAlive()==true){
+                return joueur->getPersonnages()[i];
+            }
         }
     }
-    perror("Pas de personnage actif");
-    exit(1);
+    else{
+        std::cout<<"The game is over !"<<std::endl;
+        perror("GameOver");
+        exit(1);
+    }
 }
 
 
@@ -259,6 +308,10 @@ void State::print(){
     std::cout<<"----------------------------------------"<<std::endl;
     
 }
+Joueur* State::getJoueur(){
+    return this->joueur;
+}
+
 State::~State(){
     
 }

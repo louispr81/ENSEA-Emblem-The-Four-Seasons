@@ -44,8 +44,7 @@ int Engine::update(CommandId cmd, MoveId move){
         std::vector<int> positionEnemy;
         state::Joueur* joueurEnemy;
         position = currentState->getPersonnageActif()->getCell()->getCoordonees();
-        joueurEnemy = currentState->getJoueurs()[((currentState->getJoueur()->getId()-40)+1)%2];
-        
+        joueurEnemy = currentState->getJoueurs()[((currentState->getJoueur()->getId()-40)+1)%2];        
         switch(move){
             case LEFT:
                 position[0]=position[0]-1;
@@ -83,11 +82,39 @@ int Engine::update(CommandId cmd, MoveId move){
             break;
 
             case UP:
-
+                position[1]=position[1]-1;
+                if(0<position[1]-1<= currentState->getPlateau()->getSize()){
+                    for(int i=0;i<joueurEnemy->getPersonnages().size();i++){
+                        positionEnemy = joueurEnemy->getPersonnages()[i]->getCell()->getCoordonees();
+                        if(position == positionEnemy){
+                            ((CommandAttack*)this->currentCommands)->execute(joueurEnemy->getPersonnages()[i]);
+                        }
+                        else{
+                            cout<<"There isn't any enemy around you."<<endl;
+                        }
+                    }
+                }
+                else{
+                    cout<<"You can't attack here."<<endl;
+                }
             break;
 
             case DOWN:
-
+                position[1]=position[1]+1;
+                if(0<position[1]+1<= currentState->getPlateau()->getSize()){
+                    for(int i=0;i<joueurEnemy->getPersonnages().size();i++){
+                        positionEnemy = joueurEnemy->getPersonnages()[i]->getCell()->getCoordonees();
+                        if(position == positionEnemy){
+                            ((CommandAttack*)this->currentCommands)->execute(joueurEnemy->getPersonnages()[i]);
+                        }
+                        else{
+                            cout<<"There isn't any enemy around you."<<endl;
+                        }
+                    }
+                }
+                else{
+                    cout<<"You can't attack here."<<endl;
+                }
             break;
         }
 

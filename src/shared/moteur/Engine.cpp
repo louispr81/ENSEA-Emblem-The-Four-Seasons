@@ -39,11 +39,25 @@ int Engine::update(CommandId cmd, MoveId move){
         ((CommandAttendre*)this->currentCommands)->execute();
         return 2;
     }
-/*    if(cmd == ATTACK){
+    if(cmd == ATTACK){
         this->currentCommands=this->listeCommandes[0];
+        cout<<"Select target"<<endl;
+        std::vector<int> = position;
+        std::vector<int> = position_enemy;
+        state::Joueur joueur2;
+        position = currentState->getPersonnageActif()->getCell()->getCoordonees();
+        joueur2=currentState->getJoueurs()[((currentState->getJoueur()->getId()-40)+1)%2];
+        if(move == LEFT){
+            position[0]=position[0]-1;
+            for(i=0;i<->joueur2->getPersonnages().size();i++){
+                position_enemy = joueur2->getPersonnages()->
+                if(currentState)
+            }
+        }
+
         this->currentCommands->execute(target);
         return 0;
-    }*/
+    }
     if(cmd == MOVE){        
         this->currentCommands=this->listeCommandes[1];
         ((CommandMove*)this->currentCommands)->execute(move);

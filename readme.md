@@ -69,15 +69,24 @@ The game is played on a turn by turn basis, a player's turn ends when all his ch
  
 ### Permitted moves
  
-*There are ... moves possible ...*
+Players can with each character: 
+move->attack
+move->wait
+attack
+wait
+When the player has played with all his characters (which are automatically selected in order by the engine) it is the other player's turn
 
-#### move 1
+#### move 1 : wait
 
-*Players can make a "move 1" ...*
+press A
  
-#### move 2
+#### move 2 : attack
 
-*Players can make a "move 2" ...*
+press UP,LEFT,RIGHT or DOWN
+
+#### move 3 : moove
+
+press Z,Q,S or D
 
 <!-- GETTING STARTED -->
 ## Getting Started

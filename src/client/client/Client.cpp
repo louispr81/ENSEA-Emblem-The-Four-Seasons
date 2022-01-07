@@ -7,7 +7,7 @@ using namespace render;
 
 Client::Client (){
     State* state=new State(17);
-    Engine* engine=new Engine(/*state,currentCommands*/);
+    Engine* engine=new Engine(state);
     sf::Vector2u tileSize = sf::Vector2u(32,32);
     StateLayer* render = new StateLayer(tileSize, 17, 17, state);
     this->engine=engine;

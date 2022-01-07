@@ -21,6 +21,8 @@ void usage(char * argv0){
         cout << "state"<< " | ";;
         cout << "render"<< " | ";;
         cout << "engine"<< " | ";;
+        cout << "random_ai"<< " | ";;
+        cout << "heuristic_ai"<< " | ";;
         cout << "game";
     cout << " }" << endl;
 }
@@ -68,6 +70,12 @@ if (strcmp(argv[1],"hello") ==0 ){
         std::cout << "UP,DOWN,LEFT,RIGHT : attaquer " << std::endl;
 		client::Client *client= new Client;
         client->run();
+	}
+    else if (strcmp(argv[1],"random_ai") == 0){
+        std::cout << "Work in Progress" << std::endl;
+	}
+    else if (strcmp(argv[1],"heuristic_ai") == 0){
+        std::cout << "Work not started yet" << std::endl;
 	}
     else {
         std::cout << "Wrong command !" << std::endl ;

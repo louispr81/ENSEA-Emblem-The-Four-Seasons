@@ -38,6 +38,9 @@ void Personnage::attendre(){
         (*this).moved=true;
         (*this).played=true;
     }
+    else{
+        std::cout<<"this character has already played"<<std::endl;
+    }
 }
 
 void Personnage::setPlayed (bool played)
@@ -98,8 +101,6 @@ void Personnage::echangerObjet(Personnage personnageB, Objet objet){
     
     }
 }
-
-
 
 int Personnage::deplacer(int x1, int y1){
     Cell* dest=this->plateau->getCase(x1,y1);

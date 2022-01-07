@@ -32,6 +32,7 @@ void Client::run(){
                             break;
                         case sf::Keyboard::A:
                             std::cout << "the A key was pressed" << std::endl;
+                            engine->update(ATTENDRE,NONE);
                             render->windowPersonnages();
                             break;
                         case sf::Keyboard::Up:

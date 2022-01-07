@@ -102,6 +102,20 @@ void Personnage::echangerObjet(Personnage personnageB, Objet objet){
 
 
 int Personnage::deplacer(int x1, int y1){
+    int pm=this->statistiques->getPoint_mouvement();
+    int cost=this->cell->getCostPm();
+    if(cost<=pm){
+        this->cell->setOccupe(false);
+        this->cell->setPersonnage(NULL);
+        this->cell=this->plateau->getCase(x1,y1);
+        this->cell->setOccupe(true);
+        this->cell->setPersonnage(this);
+        return 1;
+    }
+    else{
+        std::cout<<"pas assez de PM"<<std::endl;
+        return -1;
+    }
     /*
     int reply;
     this->moved=false;
@@ -191,7 +205,7 @@ int Personnage::deplacer(int x1, int y1){
         //this->moved=false;
     }   
  return reply;
- */
+ /*
     if(this->moved==false){
         int pm;
         pm=this->statistiques->getPoint_mouvement();
@@ -283,7 +297,8 @@ int Personnage::deplacer(int x1, int y1){
     else{
         std::cout<<"Le personnage a déjà bougé"<<std::endl;
         return -1;
-    }  
+    }
+*/  
 }
 
 bool Personnage::getMoved(){

@@ -37,18 +37,22 @@ void Client::run(){
                             break;
                         case sf::Keyboard::Up:
                             std::cout << "the Up key was pressed" << std::endl;
+                            engine->update(ATTACK,UP);
                             render->windowPersonnages();
                             break;
                         case sf::Keyboard::Left:
                             std::cout << "the Left key was pressed" << std::endl;
+                            engine->update(ATTACK,LEFT);
                             render->windowPersonnages();
                             break; 
                         case sf::Keyboard::Right:
                             std::cout << "the Right key was pressed" << std::endl;
+                            engine->update(ATTACK,RIGHT);
                             render->windowPersonnages();
                             break;
                         case sf::Keyboard::Down:
                             std::cout << "the Down key was pressed" << std::endl;
+                            engine->update(ATTACK,DOWN);
                             render->windowPersonnages();
                             break;
                         case sf::Keyboard::Z:

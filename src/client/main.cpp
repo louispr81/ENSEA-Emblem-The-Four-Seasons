@@ -55,7 +55,7 @@ if (strcmp(argv[1],"hello") ==0 ){
         std::cout << "Les touches :" << std::endl;
         std::cout << "A : attendre (et valider la fin du tour du personnage)" << std::endl;
         std::cout << "Z,Q,S,D : se déplacer" << std::endl;
-        std::cout << "UP,DOWN,LEFT,RIGHT : attaquer (Work in Progress)" << std::endl;
+        std::cout << "UP,DOWN,LEFT,RIGHT : attaquer " << std::endl;
 		client::Client *client= new Client;
         client->run();
 
@@ -65,7 +65,7 @@ if (strcmp(argv[1],"hello") ==0 ){
         std::cout << "Les touches :" << std::endl;
         std::cout << "A : attendre (et valider la fin du tour du personnage)" << std::endl;
         std::cout << "Z,Q,S,D : se déplacer" << std::endl;
-        std::cout << "UP,DOWN,LEFT,RIGHT : attaquer (Work in Progress)" << std::endl;
+        std::cout << "UP,DOWN,LEFT,RIGHT : attaquer " << std::endl;
 		client::Client *client= new Client;
         client->run();
 	}

@@ -43,9 +43,12 @@ void Personnage::attendre(){
     }
 }
 
-void Personnage::setPlayed (bool played)
-{
+void Personnage::setPlayed (bool played){
     (*this).played=played;
+}
+
+void Personnage::setMoved (bool moved){
+    this->moved=moved;
 }
 
 std::string Personnage::getNom(){

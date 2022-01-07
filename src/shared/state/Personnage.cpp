@@ -6,7 +6,7 @@ using namespace state;
 using namespace std;
 
 
-Personnage::Personnage(std::string nom, int id, Statistiques statistiquesBase, std::vector<Objet*> inventaire, Arme* arme, Classe* classe, Saison* saison, Cell* cell, std::vector<int> bonus, Statistiques statistiques, Plateau* plateau, bool played, bool alive, bool moved){
+Personnage::Personnage(std::string nom, int id, Statistiques* statistiquesBase, std::vector<Objet*> inventaire, Arme* arme, Classe* classe, Saison* saison, Cell* cell, std::vector<int> bonus, Statistiques statistiques, Plateau* plateau, bool played, bool alive, bool moved){
     (*this).nom=nom;
     (*this).id=id;
     (*this).statistiquesBase=statistiquesBase;

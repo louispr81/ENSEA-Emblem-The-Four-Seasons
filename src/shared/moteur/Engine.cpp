@@ -32,22 +32,21 @@ Command* Engine::getCommands(){
     return currentCommands;
 }
 
-int Engine::update(CommandId cmd){
+int Engine::update(CommandId cmd, MoveId move){
     
     if(cmd == ATTENDRE){
         this->currentCommands=this->listeCommandes[2];
-        currentCommands->execute();
+        ((CommandAttendre*)this->currentCommands)->execute();
         return 2;
     }
-    if(cmd == ATTACK){
+/*    if(cmd == ATTACK){
         this->currentCommands=this->listeCommandes[0];
-        this->currentCommands->execute(state::Personnage target);
+        this->currentCommands->execute(target);
         return 0;
-    }
-    if(cmd == MOVE){
-        //demander x et y cin
+    }*/
+    if(cmd == MOVE){        
         this->currentCommands=this->listeCommandes[1];
-        this->currentCommands->execute(int x,int y);
+        ((CommandMove*)this->currentCommands)->execute(move);
         return 1;
     }
     else{

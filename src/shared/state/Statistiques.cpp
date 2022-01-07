@@ -4,6 +4,23 @@ using namespace state;
 
 
 Statistiques::Statistiques (){}
+
+Statistiques::Statistiques (int vie, int vie_max, int point_mouvement, int point_mouvement_max, int force, int intelligence, int vitesse, int defense, int resistance, int technique, int experience, int experience_max, int niveau){
+    this->vie=vie;
+    this->vie_max=vie_max;
+    this->point_mouvement=point_mouvement;
+    this->point_mouvement_max=point_mouvement_max;
+    this->force=force;
+    this->intelligence=intelligence;
+    this->vitesse=vitesse;
+    this->defense=defense;
+    this->resistance=resistance;
+    this->technique=technique;
+    this->experience=experience;
+    this->experience_max=experience_max;
+    this->niveau=niveau;
+}
+
 Statistiques::~Statistiques (){}
 
 

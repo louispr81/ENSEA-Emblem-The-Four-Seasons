@@ -21,6 +21,8 @@ void usage(char * argv0){
         cout << "state"<< " | ";;
         cout << "render"<< " | ";;
         cout << "engine"<< " | ";;
+        cout << "random_ai"<< " | ";;
+        cout << "heuristic_ai"<< " | ";;
         cout << "game";
     cout << " }" << endl;
 }
@@ -51,14 +53,29 @@ if (strcmp(argv[1],"hello") ==0 ){
         (*rendu).windowExemple();
 	}
     else if (strcmp(argv[1],"engine") == 0){
-		std::cout << "Work in Progress" << std::endl;
-
+        std::cout << "Lancement de l'ENGINE" << std::endl;
+        std::cout << "Les touches :" << std::endl;
+        std::cout << "A : attendre (et valider la fin du tour du personnage)" << std::endl;
+        std::cout << "Z,Q,S,D : se déplacer" << std::endl;
+        std::cout << "UP,DOWN,LEFT,RIGHT : attaquer " << std::endl;
+		client::Client *client= new Client;
+        client->run();
 
 	}
     else if (strcmp(argv[1],"game") == 0){
         std::cout << "Lancement du CLIENT" << std::endl;
+        std::cout << "Les touches :" << std::endl;
+        std::cout << "A : attendre (et valider la fin du tour du personnage)" << std::endl;
+        std::cout << "Z,Q,S,D : se déplacer" << std::endl;
+        std::cout << "UP,DOWN,LEFT,RIGHT : attaquer " << std::endl;
 		client::Client *client= new Client;
         client->run();
+	}
+    else if (strcmp(argv[1],"random_ai") == 0){
+        std::cout << "Work in Progress" << std::endl;
+	}
+    else if (strcmp(argv[1],"heuristic_ai") == 0){
+        std::cout << "Work not started yet" << std::endl;
 	}
     else {
         std::cout << "Wrong command !" << std::endl ;

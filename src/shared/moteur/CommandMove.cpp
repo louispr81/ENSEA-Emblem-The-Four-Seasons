@@ -6,55 +6,95 @@ using namespace std;
 using namespace state;
 
 namespace moteur{   
+CommandMove::CommandMove(){
 
-CommandMove::CommandMove(int x,int y){
-  id = MOVE;
-  this->x = x;
-  this->y = y;
 }
 
+CommandMove::CommandMove(state::State* currentState){
+  id = MOVE;
+  this->currentState=currentState;
+}
+/*
 Json::Value CommandMove::serialize(){
     Json::Value newCommand;
     newCommand["id"]=id;
     return newCommand;
 }
-
-void CommandMove::execute(state::State &state){
-  cout<< "Move character" <<endl;
-      if(state.getPersonnageActif()->getMoved()==true){    
-        cout<<state.getPersonnageActif() <<" has been moved" << endl;
+*/
+void CommandMove::execute(MoveId move){
+      if(currentState->getPersonnageActif()->getMoved()==true){    
+        cout<<currentState->getPersonnageActif()->getNom()<<" Can not be moved: NO PM" << endl;
       }
       else{
-        cout<<state.getPersonnageActif()<<"has not been moved" << endl;
+        cout<<currentState->getPersonnageActif()->getNom()<<" Can be moved" << endl;
+      
+      //currentState->getPersonnageActif()->deplacer(x,y);
+        std::vector<int> coordonnees;
+        coordonnees = currentState->getPersonnageActif()->getCell()->getCoordonees();
+        if (move==LEFT){  
+            coordonnees[0] = coordonnees[0]-1;
+            if(coordonnees[0]>=0 and coordonnees[0]<currentState->getPlateau()->getSize()){
+              if (coordonnees[1]>=0 and coordonnees[1]<currentState->getPlateau()->getSize()){
+                cout<< "Move character" <<endl;
+                currentState->getPersonnageActif()->deplacer(coordonnees[0],coordonnees[1]);
+              }
+              else{
+                cout<< "y invalide" <<endl;
+              }
+            }  
+            else{
+              cout<< "x invalide" <<endl;
+            }       
+        }
+        else if(move==RIGHT){  
+            coordonnees[0] = coordonnees[0]+1;
+            if(coordonnees[0]>=0 and coordonnees[0]<currentState->getPlateau()->getSize()){
+              if (coordonnees[1]>=0 and coordonnees[1]<currentState->getPlateau()->getSize()){
+                cout<< "Move character" <<endl;
+                currentState->getPersonnageActif()->deplacer(coordonnees[0],coordonnees[1]);
+              }
+              else{
+                cout<< "y invalide" <<endl;
+              }
+            }  
+            else{
+              cout<< "x invalide" <<endl;
+            }  
+        }
+        else if(move==UP){
+            coordonnees[1] = coordonnees[1]-1;
+            if(coordonnees[0]>=0 and coordonnees[0]<currentState->getPlateau()->getSize()){
+              if (coordonnees[1]>=0 and coordonnees[1]<currentState->getPlateau()->getSize()){
+                cout<< "Move character" <<endl;
+                currentState->getPersonnageActif()->deplacer(coordonnees[0],coordonnees[1]);
+              }
+              else{
+                cout<< "y invalide" <<endl;
+              }
+            }  
+            else{
+              cout<< "x invalide" <<endl;
+            }
+        }
+        else if(move==DOWN){
+            coordonnees[1] = coordonnees[1]+1;
+            if(coordonnees[0]>=0 and coordonnees[0]<currentState->getPlateau()->getSize()){
+              if (coordonnees[1]>=0 and coordonnees[1]<currentState->getPlateau()->getSize()){
+                cout<< "Move character" <<endl;
+                currentState->getPersonnageActif()->deplacer(coordonnees[0],coordonnees[1]);
+              }
+              else{
+                cout<< "y invalide" <<endl;
+              }
+            }  
+            else{
+              cout<< "x invalide" <<endl;
+            }
+        }
+        else if(move==NONE){
+            cout<<"Stay"<<endl;
+        }
       }
-
-      state::Personnage *personnage;
-      if(Command::getCommandId()==MOVE){
-        
-        if (CommandMove::getMoveId()==LEFT){  
-            this->x = x-1;         
-            personnage->deplacer(this->x,this->y);
-        }
-        else if(CommandMove::getMoveId()==RIGHT){  
-            this->y = y-1;  
-            personnage->deplacer(this->x,this->y);
-        }
-        else if(CommandMove::getMoveId()==UP){
-            this->x = x+1;
-            personnage->deplacer(this->x,this->y);
-        }
-        else if(CommandMove::getMoveId()==DOWN){
-            this->y = y+1;
-            personnage->deplacer(this->x,this->y);
-        }
-      }
-
-
 }
-
-MoveId CommandMove::getMoveId(){
-  return this->moveId;
-}
-
 
 }

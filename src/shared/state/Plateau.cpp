@@ -10,7 +10,7 @@
             (*coordonees).push_back(j);
             (*coordonees).push_back(i);
             if (i==size/2 and j!=size/2){
-                Cell *cell= new Cell(NULL, RIVER, *coordonees,NULL, true, 1, false);
+                Cell *cell= new Cell(NULL, RIVER, *coordonees,NULL, false, 1, false);
                 cell->setPtCell(cell);
                 liste_case.push_back(cell);
             }

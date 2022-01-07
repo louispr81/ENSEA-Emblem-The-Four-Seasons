@@ -37,6 +37,7 @@ void Personnage::attendre(){
         (*this).statistiques->setPoint_mouvement(0);
         (*this).moved=true;
         (*this).played=true;
+        std::cout<<"Fin du tour de "<<this->nom<<std::endl;
     }
     else{
         std::cout<<"this character has already played"<<std::endl;

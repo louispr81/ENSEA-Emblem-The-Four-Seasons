@@ -175,6 +175,7 @@ std::vector<Saison*> State::getListeSaison(){
 void State::tourSuivant(){
    if ((*this).gameover== false ){
         this->tour=tour+1;
+        std::cout<<"Début du tour "<<this->tour<<std::endl;
         int i(0);
         for(i=0;i<this->joueurs[0]->getPersonnages().size();i++){
             if(this->joueurs[0]->getPersonnages()[i]->getAlive()==true){
@@ -195,7 +196,19 @@ void State::tourSuivant(){
 }
 void State::joueurSuivant(){
     if ((*this).gameover== false ){
-        this->joueur=this->joueurs[(this->joueur->getId()-40+1)%2];
+        if(this->joueur->getId()==JOUEUR2){
+            std::cout<<"Fin du tour !"<<std::endl;
+            this->tourSuivant();
+            this->joueur=joueurs[0];
+        }
+        else if(this->joueur->getId()==JOUEUR1){
+            this->joueur=joueurs[1];
+        }
+        else{
+            perror("joueur suivant");
+            exit(1);
+        }
+        std::cout<<"Au tour de "<<this->joueur->getNom()<<std::endl;
     }
 }
 
@@ -261,17 +274,6 @@ Personnage* State::getPersonnageActif(){
                 return joueur->getPersonnages()[i];
             }
         }
-        std::cout<<"Au tour du joueur 2 !"<<std::endl;
-        this->joueurSuivant();
-        i=0;
-        for(i=0;i<this->joueur->getPersonnages().size();i++){
-            if(this->joueur->getPersonnages()[i]->getPlayed()==false){
-                return joueur->getPersonnages()[i];
-            }
-        }
-        std::cout<<"Fin du tour !"<<std::endl;
-        this->tourSuivant();
-        std::cout<<"Au tour du joueur 1 !"<<std::endl;
         this->joueurSuivant();
         i=0;
         for(i=0;i<this->joueur->getPersonnages().size();i++){

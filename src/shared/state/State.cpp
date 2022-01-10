@@ -267,6 +267,7 @@ Plateau* State::getPlateau (){
 }
 
 Personnage* State::getPersonnageActif(){
+    this->checkGameOver();
     if (this->gameover== false ){
         int i(0);
         for(i=0;i<this->joueur->getPersonnages().size();i++){
@@ -310,6 +311,33 @@ void State::print(){
 }
 Joueur* State::getJoueur(){
     return this->joueur;
+}
+
+void State::checkGameOver(){
+    int sum(0);
+    int i(0);
+    for(i=0;i<this->getJoueurs()[0]->getPersonnages().size();i++){
+        if(this->getJoueurs()[0]->getPersonnages()[i]->getAlive()==true){
+            sum++;
+        }
+    }
+    if(sum==0){
+        std::cout<<"Victoire de "<<this->getJoueurs()[1]->getNom()<<std::endl;
+        std::cout<<"FIN DU JEU"<<std::endl;
+        this->gameover=true;
+    }
+    int sum(0);
+    int i(0);
+    for(i=0;i<this->getJoueurs()[1]->getPersonnages().size();i++){
+        if(this->getJoueurs()[1]->getPersonnages()[i]->getAlive()==true){
+            sum++;
+        }
+    }
+    if(sum==0){
+        std::cout<<"Victoire de "<<this->getJoueurs()[0]->getNom()<<std::endl;
+        std::cout<<"FIN DU JEU"<<std::endl;
+        this->gameover=true;
+    }
 }
 
 State::~State(){

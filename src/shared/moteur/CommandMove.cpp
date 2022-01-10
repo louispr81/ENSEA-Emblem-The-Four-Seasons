@@ -91,4 +91,7 @@ void CommandMove::execute(MoveId move){
       }
 }
 
+MoveId CommandMove::getMoveId(){
+    return moveId;
+}
 }

@@ -24,4 +24,7 @@ Diagram1.dia.autosave:Zone.Identifier
 .vscode/dryrun.log
 .vscode/targets.log
 src/moteur.dia.autosave
+<<<<<<< HEAD
+=======
 .vscode/*
+>>>>>>> 17c037b9c53fe613a471e7e7004049b9e936b477

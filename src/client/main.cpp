@@ -73,6 +73,8 @@ if (strcmp(argv[1],"hello") ==0 ){
 	}
     else if (strcmp(argv[1],"random_ai") == 0){
         std::cout << "Work in Progress" << std::endl;
+        client::Client *client= new Client;
+        client->runIARandom();
 	}
     else if (strcmp(argv[1],"heuristic_ai") == 0){
         std::cout << "Work not started yet" << std::endl;

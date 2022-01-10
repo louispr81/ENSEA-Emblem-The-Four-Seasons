@@ -9,11 +9,11 @@ using namespace ai;
 RandomAI::RandomAI(){
 
 }
-    
+ /*   
 void generateCommand(){
     //[a,b]  (rand() % (b-a+1))+ a 
     int commandSelect;
-    commandSelect=(rand() % (moteur::engine.size()+1));
+    commandSelect=(rand() % (moteur::Engine->getListCommand().size()+1));
 
 }
 void getCommandId(){
@@ -23,7 +23,7 @@ void getMoveId(){
     return moveId;
 }
 
-
-Random::~RandomAI(){
+*/
+RandomAI::~RandomAI(){
 
 }

@@ -326,8 +326,8 @@ void State::checkGameOver(){
         std::cout<<"FIN DU JEU"<<std::endl;
         this->gameover=true;
     }
-    int sum(0);
-    int i(0);
+    sum=0;
+    i=0;
     for(i=0;i<this->getJoueurs()[1]->getPersonnages().size();i++){
         if(this->getJoueurs()[1]->getPersonnages()[i]->getAlive()==true){
             sum++;

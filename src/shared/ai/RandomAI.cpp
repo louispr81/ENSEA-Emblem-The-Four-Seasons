@@ -12,16 +12,13 @@ RandomAI::RandomAI(Engine* engine){
  
 void RandomAI::generateCommand(){
     //[a,b]  (rand() % (b-a+1))+ a 
-    cout<<"1"<<std::endl;
     this->commandId=(rand() % (engine->getListCommand().size()));    
-    cout<<"2"<<std::endl;
-    this->moveId=(rand() % 5); 
-    cout<<"3"<<std::endl;
     if(this->commandId == 0 || this->commandId == 1){
-        cout<<"4"<<std::endl;
         this->moveId=(rand() % 4)+1;
+    }
+    else{
+        this->moveId=0;
     }       
-    cout<<"IA OK"<<std::endl;
 }
 int RandomAI::getCommandId(){
     return this->commandId;

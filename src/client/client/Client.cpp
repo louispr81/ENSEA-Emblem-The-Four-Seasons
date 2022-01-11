@@ -177,13 +177,29 @@ void Client::runAIRandom(){
                     }
                 }
                 else if(state->getJoueur()->getId()==JOUEUR2){
-                    CommandId commandId;
-                    MoveId moveId;
-                    randomAI->generateCommand();
-                    commandId=(CommandId)randomAI->getCommandId();
-                    moveId=(MoveId)randomAI->getMoveId();
-                    engine->update(commandId,moveId); 
-                    render->windowPersonnages();
+                    switch (event.type){
+                        case sf::Event::Closed:
+                            render->getWindow()->close();
+                            break;
+                        default:
+                            CommandId commandId;
+                            MoveId moveId;
+                            randomAI->generateCommand();
+                            commandId=(CommandId)randomAI->getCommandId();
+                            moveId=(MoveId)randomAI->getMoveId();
+                            engine->update(commandId,moveId); 
+                            if(commandId==ATTENDRE){
+                                render->windowCell();
+                            }
+                            else if(commandId==ATTACK or commandId==MOVE){
+                                render->windowPersonnages();
+                            }
+                            else{
+                                perror("invalid command id ");
+                                exit(1);
+                            }
+                            break;
+                    }
                 }
             }
             else{

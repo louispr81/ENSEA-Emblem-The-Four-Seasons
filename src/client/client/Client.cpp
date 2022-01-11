@@ -85,7 +85,18 @@ void Client::run(){
                 }
             }
             else{
-                render->getWindow()->close();
+                switch (event.type){
+                    case sf::Event::Closed:
+                        render->getWindow()->close();
+                        break;
+                    case sf::Keyboard::Escape:
+                        std::cout << "the Escape key was pressed" << std::endl;
+                        state->~State();
+                        State* state=new State(17);
+                        this->state=state;
+                        break;
+                }
+                render->windowGameOver();
             }
         }
     }
@@ -175,7 +186,12 @@ void Client::runIARandom(){
                 }
             }
             else{
-                render->getWindow()->close();
+                switch (event.type){
+                    case sf::Event::Closed:
+                        render->getWindow()->close();
+                        break;
+                }
+                render->windowGameOver();
             }
         }
     }

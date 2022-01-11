@@ -12,10 +12,10 @@ Client::Client (){
     sf::Vector2u tileSize = sf::Vector2u(32,32);
     StateLayer* render = new StateLayer(tileSize, 17, 17, state);
     RandomAI* randomAI = new RandomAI(engine);
+    this->randomAI=randomAI;
     this->engine=engine;
     this->state=state;
     this->render=render;
-    this->randomAI=randomAI;
 }
 
 void Client::run(){
@@ -105,10 +105,9 @@ void Client::run(){
     }
 }
 
-void Client::runAIRandom(){
+void Client::runVsAIRandom(){
     sf::Event event;
     int cmd;
-    bool display(false);
     render->windowInit();
     while (render->getWindow()->isOpen()){ 
         while (render->getWindow()->pollEvent(event)){
@@ -191,7 +190,7 @@ void Client::runAIRandom(){
             if(state->getGameover()==false){
                 CommandId commandId;
                 MoveId moveId;
-                randomAI->generateCommand();
+                this->randomAI->generateCommand();
                 commandId=(CommandId)randomAI->getCommandId();
                 moveId=(MoveId)randomAI->getMoveId();
                 engine->update(commandId,moveId); 

@@ -110,7 +110,7 @@ void Client::runAIRandom(){
     int cmd;
     bool display(false);
     render->windowInit();
-    while (render->getWindow()->isOpen()){
+    while (render->getWindow()->isOpen()){ 
         while (render->getWindow()->pollEvent(event)){
             if(state->getGameover()==false){
                 if(state->getJoueur()->getId()==JOUEUR1){
@@ -176,31 +176,7 @@ void Client::runAIRandom(){
                             break;
                     }
                 }
-                else if(state->getJoueur()->getId()==JOUEUR2){
-                    switch (event.type){
-                        case sf::Event::Closed:
-                            render->getWindow()->close();
-                            break;
-                        default:
-                            CommandId commandId;
-                            MoveId moveId;
-                            randomAI->generateCommand();
-                            commandId=(CommandId)randomAI->getCommandId();
-                            moveId=(MoveId)randomAI->getMoveId();
-                            engine->update(commandId,moveId); 
-                            if(commandId==ATTENDRE){
-                                render->windowCell();
-                            }
-                            else if(commandId==ATTACK or commandId==MOVE){
-                                render->windowPersonnages();
-                            }
-                            else{
-                                perror("invalid command id ");
-                                exit(1);
-                            }
-                            break;
-                    }
-                }
+                
             }
             else{
                 switch (event.type){
@@ -208,6 +184,29 @@ void Client::runAIRandom(){
                         render->getWindow()->close();
                         break;
                 }
+                render->windowGameOver();
+            }
+        }
+        if(state->getJoueur()->getId()==JOUEUR2){
+            if(state->getGameover()==false){
+                CommandId commandId;
+                MoveId moveId;
+                randomAI->generateCommand();
+                commandId=(CommandId)randomAI->getCommandId();
+                moveId=(MoveId)randomAI->getMoveId();
+                engine->update(commandId,moveId); 
+                if(commandId==ATTENDRE){
+                    render->windowCell();
+                }
+                else if(commandId==ATTACK or commandId==MOVE){
+                    render->windowPersonnages();
+                }
+                else{
+                    perror("invalid command id ");
+                    exit(1);
+                }
+            }
+            else{
                 render->windowGameOver();
             }
         }

@@ -34,5 +34,6 @@ void CommandAttack::execute(state::Personnage* target){
     }
     cout <<  currentState->getPersonnageActif()->getNom() << " attaque " << target->getNom() << endl;
     currentState->getPersonnageActif()->attaquer(target);
+    currentState->getPersonnageActif();
 }
 }

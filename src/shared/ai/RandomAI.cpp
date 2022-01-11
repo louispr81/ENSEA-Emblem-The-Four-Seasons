@@ -6,8 +6,8 @@ using namespace state;
 using namespace moteur;
 using namespace ai;
 
-RandomAI::RandomAI(){
-
+RandomAI::RandomAI(Engine* engine){
+    this->engine=engine;
 }
  
 void RandomAI::generateCommand(){

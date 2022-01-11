@@ -14,6 +14,7 @@ CommandAttendre::CommandAttendre(state::State* currentState){
 
 void CommandAttendre::execute(){
     currentState->getPersonnageActif()->attendre();
+    currentState->getPersonnageActif();
 }
 
 }

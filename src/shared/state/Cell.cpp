@@ -29,6 +29,10 @@ void Cell::setCostPm (int costPm){
     (*this).costPm=costPm;
 }
 
+void Cell::setId (CellId id){
+    this->type=id;
+}
+
 void Cell::setPersonnage (Personnage* personnage){
     (*this).personnage=personnage;
 }

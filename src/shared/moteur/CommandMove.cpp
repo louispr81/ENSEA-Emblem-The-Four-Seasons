@@ -89,6 +89,7 @@ void CommandMove::execute(MoveId move){
             cout<<"Stay"<<endl;
         }
       }
+    currentState->getPersonnageActif();
 }
 
 MoveId CommandMove::getMoveId(){

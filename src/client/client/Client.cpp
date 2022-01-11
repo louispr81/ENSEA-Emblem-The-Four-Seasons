@@ -4,15 +4,18 @@ using namespace client;
 using namespace state;
 using namespace moteur;
 using namespace render;
+using namespace ai;
 
 Client::Client (){
     State* state=new State(17);
     Engine* engine=new Engine(state);
     sf::Vector2u tileSize = sf::Vector2u(32,32);
     StateLayer* render = new StateLayer(tileSize, 17, 17, state);
+    RandomAI* randomAI = new RandomAI(engine);
     this->engine=engine;
     this->state=state;
     this->render=render;
+    this->randomAI=randomAI;
 }
 
 void Client::run(){
@@ -85,13 +88,24 @@ void Client::run(){
                 }
             }
             else{
-                render->getWindow()->close();
+                switch (event.type){
+                    case sf::Event::Closed:
+                        render->getWindow()->close();
+                        break;
+                    case sf::Keyboard::Escape:
+                        std::cout << "the Escape key was pressed" << std::endl;
+                        state->~State();
+                        State* state=new State(17);
+                        this->state=state;
+                        break;
+                }
+                render->windowGameOver();
             }
         }
     }
 }
 
-void Client::runIARandom(){
+void Client::runAIRandom(){
     sf::Event event;
     int cmd;
     bool display(false);
@@ -163,19 +177,38 @@ void Client::runIARandom(){
                     }
                 }
                 else if(state->getJoueur()->getId()==JOUEUR2){
-                    if(display==true){
-                        std::cout<<"Au tour de l'IA"<<std::endl;
-                        display=true;
+                    switch (event.type){
+                        case sf::Event::Closed:
+                            render->getWindow()->close();
+                            break;
+                        default:
+                            CommandId commandId;
+                            MoveId moveId;
+                            randomAI->generateCommand();
+                            commandId=(CommandId)randomAI->getCommandId();
+                            moveId=(MoveId)randomAI->getMoveId();
+                            engine->update(commandId,moveId); 
+                            if(commandId==ATTENDRE){
+                                render->windowCell();
+                            }
+                            else if(commandId==ATTACK or commandId==MOVE){
+                                render->windowPersonnages();
+                            }
+                            else{
+                                perror("invalid command id ");
+                                exit(1);
+                            }
+                            break;
                     }
-                    //randomIa->generateCommand()
-                    //commandId=randomIa->getCommandId()
-                    //moveId=randomIa->getMoveId()
-                    //engine->update(commandId,moveId); 
-                    //render->windowPersonnages();
                 }
             }
             else{
-                render->getWindow()->close();
+                switch (event.type){
+                    case sf::Event::Closed:
+                        render->getWindow()->close();
+                        break;
+                }
+                render->windowGameOver();
             }
         }
     }

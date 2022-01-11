@@ -177,13 +177,14 @@ void State::tourSuivant(){
         this->tour=tour+1;
         std::cout<<"Début du tour "<<this->tour<<std::endl;
         int i(0);
+        this->updateSaison();
         for(i=0;i<this->joueurs[0]->getPersonnages().size();i++){
             if(this->joueurs[0]->getPersonnages()[i]->getAlive()==true){
                 joueurs[0]->getPersonnages()[i]->setPlayed(false);
                 joueurs[0]->getPersonnages()[i]->setMoved(false);
                 joueurs[0]->getPersonnages()[i]->resetPm();
             }
-        }
+        } 
         for(i=0;i<this->joueurs[1]->getPersonnages().size();i++){
             if(this->joueurs[1]->getPersonnages()[i]->getAlive()==true){
                 joueurs[1]->getPersonnages()[i]->setPlayed(false);
@@ -191,7 +192,6 @@ void State::tourSuivant(){
                 joueurs[1]->getPersonnages()[i]->resetPm();
             }
         }
-
     }
 }
 void State::joueurSuivant(){
@@ -222,7 +222,7 @@ void State::abandonner (Joueur joueur){
 }
 void State::updateSaison (){       
     if ((*this).gameover== false){
-        switch((*(this->saison)).getId()){
+        switch(this->saison->getId()){
             case PRINTEMPS:
                 (*this).saison=(*this).listeSaison[1];
                 break;
@@ -235,10 +235,17 @@ void State::updateSaison (){
             case HIVER:
                 (*this).saison=(*this).listeSaison[0]; 
                 break;
-            
             default:
                 cout<<"Invalid selection \n";
-            break;
+                break;
+        }
+        std::cout<<"La saison : "<<this->saison->getNom()<<" commence !"<<std::endl;
+        int i(0);
+        for(i;i<this->plateau->getSize();i++){
+            int j(0);
+            for(j;j<this->plateau->getSize();j++){
+                this->saison->updateCell(this->plateau->getCase(i,j));
+            }
         }
     }
     else{
@@ -267,6 +274,7 @@ Plateau* State::getPlateau (){
 }
 
 Personnage* State::getPersonnageActif(){
+    this->checkGameOver();
     if (this->gameover== false ){
         int i(0);
         for(i=0;i<this->joueur->getPersonnages().size();i++){
@@ -310,6 +318,33 @@ void State::print(){
 }
 Joueur* State::getJoueur(){
     return this->joueur;
+}
+
+void State::checkGameOver(){
+    int sum(0);
+    int i(0);
+    for(i=0;i<this->getJoueurs()[0]->getPersonnages().size();i++){
+        if(this->getJoueurs()[0]->getPersonnages()[i]->getAlive()==true){
+            sum++;
+        }
+    }
+    if(sum==0){
+        std::cout<<"Victoire de "<<this->getJoueurs()[1]->getNom()<<std::endl;
+        std::cout<<"FIN DU JEU"<<std::endl;
+        this->gameover=true;
+    }
+    sum=0;
+    i=0;
+    for(i=0;i<this->getJoueurs()[1]->getPersonnages().size();i++){
+        if(this->getJoueurs()[1]->getPersonnages()[i]->getAlive()==true){
+            sum++;
+        }
+    }
+    if(sum==0){
+        std::cout<<"Victoire de "<<this->getJoueurs()[0]->getNom()<<std::endl;
+        std::cout<<"FIN DU JEU"<<std::endl;
+        this->gameover=true;
+    }
 }
 
 State::~State(){

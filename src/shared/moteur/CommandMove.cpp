@@ -14,13 +14,7 @@ CommandMove::CommandMove(state::State* currentState){
   id = MOVE;
   this->currentState=currentState;
 }
-/*
-Json::Value CommandMove::serialize(){
-    Json::Value newCommand;
-    newCommand["id"]=id;
-    return newCommand;
-}
-*/
+
 void CommandMove::execute(MoveId move){
       if(currentState->getPersonnageActif()->getMoved()==true){    
         cout<<currentState->getPersonnageActif()->getNom()<<" Can not be moved: NO PM" << endl;
@@ -95,6 +89,10 @@ void CommandMove::execute(MoveId move){
             cout<<"Stay"<<endl;
         }
       }
+    currentState->getPersonnageActif();
 }
 
+MoveId CommandMove::getMoveId(){
+    return moveId;
+}
 }

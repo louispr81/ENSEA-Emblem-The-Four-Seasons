@@ -96,7 +96,7 @@ void StateLayer::windowInit(){
 }
 
 void StateLayer::windowCell(){
-    // on crée la fenêtre
+    std::cout<<"RENDER CELL"<<std::endl;
     (*this).plateauId=(*this).getPlateauIdFromState();
     map->load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
     window->clear();

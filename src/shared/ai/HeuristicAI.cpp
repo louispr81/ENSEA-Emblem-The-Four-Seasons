@@ -18,12 +18,11 @@ void HeuristicAI::generateCommand(){
     std::vector<int> positionEnemy;
     std::vector<int> distanceEnemy;
     state::Joueur* joueurEnemy;
+    int distanceMin;
     joueurEnemy = state->getJoueurs()[((state->getJoueur()->getId()-40)+1)%2];
-
-
 //https://en.cppreference.com/w/cpp/algorithm/max_element
 
-    if(state->getPersonnageActif()->getStatistic()->getPoint_movement()>0){
+    if(state->getPersonnageActif()->getStatistic()->getPoint_mouvement()>0){
         position = state->getPersonnageActif()->getCell()->getCoordonees();
         for(int i=0;i<joueurEnemy->getPersonnages().size();i++){
             if(joueurEnemy->getPersonnages()[i]->getAlive()==true){
@@ -38,6 +37,7 @@ void HeuristicAI::generateCommand(){
             //    if(joueurEnemy->getPersonnages[i])
             //    positionEnemy = joueurEnemy->getPersonnages()[i]->getCell()->getCoordonees();
             }
+        //distanceMin = std::min_element(distanceEnemy.begin(), distanceEnemy.end());
         }
     }
 

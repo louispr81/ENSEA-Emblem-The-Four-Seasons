@@ -26,6 +26,10 @@ state::State* Engine::getState() {
     return this->currentState;
 }
 
+void Engine::setState(state::State*) {
+    this->currentState=state;
+}
+
 Command* Engine::getCommands(){
    
     return currentCommands;

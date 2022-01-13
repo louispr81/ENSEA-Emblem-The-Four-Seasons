@@ -108,6 +108,11 @@ void StateLayer::windowInit(){
     window->display();
 }
 
+void StateLayer::windowReset(){
+    window->clear();
+    window->display();
+}
+
 void StateLayer::windowCell(){
     std::cout<<"RENDER CELL"<<std::endl;
     (*this).plateauId=(*this).getPlateauIdFromState();

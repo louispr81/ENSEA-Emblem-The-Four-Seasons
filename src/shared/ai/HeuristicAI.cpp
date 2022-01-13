@@ -18,28 +18,55 @@ void HeuristicAI::generateCommand(){
     std::vector<int> positionEnemy;
     std::vector<int> distanceEnemy;
     state::Joueur* joueurEnemy;
+    int signeX,signeY;
     int distanceMin;
+    int distanceXmin,distanceYmin;
+    int distanceMinIndex;
     joueurEnemy = state->getJoueurs()[((state->getJoueur()->getId()-40)+1)%2];
-//https://en.cppreference.com/w/cpp/algorithm/max_element
 
-    if(state->getPersonnageActif()->getStatistic()->getPoint_mouvement()>0){
-        position = state->getPersonnageActif()->getCell()->getCoordonees();
-        for(int i=0;i<joueurEnemy->getPersonnages().size();i++){
-            if(joueurEnemy->getPersonnages()[i]->getAlive()==true){
-                int distanceX;
-                int distanceY;
-                int distance;
-                positionEnemy = joueurEnemy->getPersonnages()[i]->getCell()->getCoordonees();
-                distanceX = abs(positionEnemy[0]-position[0]);
-                distanceY = abs(positionEnemy[1]-position[1]);
-                distance = sqrt(pow(distanceX,2)+pow(distanceY,2));
-            //    distanceEnemy.push_back(distance);
-            //    if(joueurEnemy->getPersonnages[i])
-            //    positionEnemy = joueurEnemy->getPersonnages()[i]->getCell()->getCoordonees();
+    commandId = 1; // move
+    position = state->getPersonnageActif()->getCell()->getCoordonees();
+    for(int i=0;i<joueurEnemy->getPersonnages().size();i++){
+        if(joueurEnemy->getPersonnages()[i]->getAlive()==true){
+            int distance,distanceX,distanceY;            
+            distanceMin = distanceEnemy[0];            
+            positionEnemy = joueurEnemy->getPersonnages()[i]->getCell()->getCoordonees();
+            distanceX = abs(positionEnemy[0]-position[0]);
+            distanceY = abs(positionEnemy[1]-position[1]);
+            if((positionEnemy[0]-position[0])>0){
+                signeX = 1;
             }
-        //distanceMin = std::min_element(distanceEnemy.begin(), distanceEnemy.end());
+            else{
+                signeX = -1;
+            }
+            if((positionEnemy[1]-position[1])>0){
+                signeY = 1;
+            }
+            else{
+                signeY = -1;
+            }
+            distance = sqrt(pow(distanceX,2)+pow(distanceY,2));
+            distanceEnemy.push_back(distance);
+            //find the closest enemy
+            if(i>0 && distanceEnemy[i]<distanceMin){
+                distanceMinIndex = i;
+                distanceMin = distanceEnemy[i];
+                distanceXmin=distanceX;
+                distanceYmin=distanceY;
+            }
         }
     }
+
+    int pm;
+    pm=state->getPersonnageActif()->getStatistic()->getPoint_mouvement();
+    
+    while(pm>0){
+        if(distanceXmin>distanceYmin){
+            
+        }
+    }
+    
+    //state->getPersonnageActif()->deplacer((position[0]+(signeX)*distanceXmin),(position[1]+(signeY)*distanceYmin));
 
 
 }

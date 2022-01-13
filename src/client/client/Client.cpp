@@ -96,7 +96,8 @@ void Client::run(){
                         std::cout << "the Escape key was pressed" << std::endl;
                         state->~State();
                         State* state=new State(17);
-                        this->state=state;
+                        render->setState(state);
+                        engine->setState(state);
                         break;
                 }
                 render->windowGameOver();

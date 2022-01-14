@@ -43,7 +43,6 @@ int Engine::update(CommandId cmd, MoveId move){
     }
     if(cmd == ATTACK){
         this->currentCommands=this->listeCommandes[1];
-        cout<<"Select target"<<endl;
         std::vector<int> position;
         std::vector<int> positionEnemy;
         state::Joueur* joueurEnemy;

@@ -95,12 +95,12 @@ State::State(int size){
     
     //Creation des statistiques des personnages
     Statistiques* statistiquesA1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
-    Statistiques*statistiquesM1=new Statistiques(20,20,16,16,10,1,1,1,1,1,0,100,1);
+    Statistiques*statistiquesM1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
     Statistiques* statistiquesC1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
     Statistiques* statistiquesCH1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
     Statistiques* statistiquesAR1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
     Statistiques* statistiquesA2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesM2=new Statistiques(20,20,16,16,10,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesM2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
     Statistiques* statistiquesC2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
     Statistiques* statistiquesCH2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
     Statistiques* statistiquesAR2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
@@ -290,11 +290,13 @@ Personnage* State::getPersonnageActif(){
             }
         }
     }
+    /*
     else{
         std::cout<<"The game is over !"<<std::endl;
         perror("GameOver");
         exit(1);
     }
+    */
 }
 
 
@@ -330,7 +332,7 @@ void State::checkGameOver(){
     }
     if(sum==0){
         std::cout<<"Victoire de "<<this->getJoueurs()[1]->getNom()<<std::endl;
-        std::cout<<"FIN DU JEU"<<std::endl;
+        this->winner=this->getJoueurs()[1];
         this->gameover=true;
     }
     sum=0;
@@ -342,11 +344,18 @@ void State::checkGameOver(){
     }
     if(sum==0){
         std::cout<<"Victoire de "<<this->getJoueurs()[0]->getNom()<<std::endl;
+        this->winner=this->getJoueurs()[0];
         std::cout<<"FIN DU JEU"<<std::endl;
         this->gameover=true;
     }
 }
 
+Joueur* State::getWinner(){
+    return this->winner;
+}
+
 State::~State(){
-    
+    delete[] this->joueur;
+    delete[] this->plateau;
+    delete[] this->saison;
 }

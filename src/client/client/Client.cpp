@@ -4,12 +4,17 @@ using namespace client;
 using namespace state;
 using namespace moteur;
 using namespace render;
+using namespace ai;
 
 Client::Client (){
     State* state=new State(17);
     Engine* engine=new Engine(state);
     sf::Vector2u tileSize = sf::Vector2u(32,32);
     StateLayer* render = new StateLayer(tileSize, 17, 17, state);
+    RandomAI* randomAI = new RandomAI(engine);
+    HeuristicAI* heuristicAI=new HeuristicAI(engine, state);
+    this->heuristicAI=heuristicAI;
+    this->randomAI=randomAI;
     this->engine=engine;
     this->state=state;
     this->render=render;
@@ -24,158 +29,349 @@ void Client::run(){
             if(state->getGameover()==false){
                 switch (event.type){
                     case sf::Event::Closed:
-                        render->getWindow()->close();
-                        break;
+                        {render->getWindow()->close();
+                        break;}
                     case sf::Event::KeyPressed:
-                        switch (event.key.code){
-                            case sf::Keyboard::Escape:
+                        {switch (event.key.code){
+                            case sf::Keyboard::Escape:{
                                 std::cout << "the Escape key was pressed" << std::endl;
                                 break;
-                            case sf::Keyboard::A:
+                            }
+                            case sf::Keyboard::A:{
                                 std::cout << "the A key was pressed" << std::endl;
                                 engine->update(ATTENDRE,NONE);
                                 render->windowCell();
                                 break;
-                            case sf::Keyboard::Up:
+                            }
+                            case sf::Keyboard::Up:{
                                 std::cout << "the Up key was pressed" << std::endl;
                                 engine->update(ATTACK,UP);
                                 render->windowPersonnages();
                                 break;
+                            }
                             case sf::Keyboard::Left:
-                                std::cout << "the Left key was pressed" << std::endl;
+                                {std::cout << "the Left key was pressed" << std::endl;
                                 engine->update(ATTACK,LEFT);
                                 render->windowPersonnages();
-                                break; 
+                                break; }
                             case sf::Keyboard::Right:
-                                std::cout << "the Right key was pressed" << std::endl;
+                                {std::cout << "the Right key was pressed" << std::endl;
                                 engine->update(ATTACK,RIGHT);
                                 render->windowPersonnages();
-                                break;
+                                break;}
                             case sf::Keyboard::Down:
-                                std::cout << "the Down key was pressed" << std::endl;
+                                {std::cout << "the Down key was pressed" << std::endl;
                                 engine->update(ATTACK,DOWN);
                                 render->windowPersonnages();
-                                break;
+                                break;}
                             case sf::Keyboard::Z:
-                                std::cout << "the Z key was pressed" << std::endl;
+                                {std::cout << "the Z key was pressed" << std::endl;
                                 engine->update(MOVE,UP);
                                 render->windowPersonnages();                            
-                                break;
+                                break;}
                             case sf::Keyboard::Q:
-                                std::cout << "the Q key was pressed" << std::endl;
+                                {std::cout << "the Q key was pressed" << std::endl;
                                 engine->update(MOVE,LEFT);
                                 render->windowPersonnages();
-                                break; 
+                                break;} 
                             case sf::Keyboard::D:
-                                std::cout << "the D key was pressed" << std::endl;
+                                {std::cout << "the D key was pressed" << std::endl;
                                 engine->update(MOVE,RIGHT);
                                 render->windowPersonnages();
-                                break;
+                                break;}
                             case sf::Keyboard::S:
-                                std::cout << "the S key was pressed" << std::endl;
+                                {std::cout << "the S key was pressed" << std::endl;
                                 engine->update(MOVE,DOWN);
                                 render->windowPersonnages();
-                                break; 
+                                break; }
                             default:
-                                break;       
+                                {break; }      
                         }
-                        break;
+                        break;}
                     default:
-                        break;
+                        {break;}
                 }
             }
             else{
-                render->getWindow()->close();
+                switch (event.type){
+                    case sf::Event::Closed:
+                        {this->render->getWindow()->close();
+                        break;}
+                    case sf::Event::KeyPressed:
+                        {switch (event.key.code){
+                            case sf::Keyboard::Escape:
+                                {std::cout << "the Escape key was pressed" << std::endl;
+                                //this->state->~State();
+                                State* newState=new State(17);
+                                this->render->setState(newState);
+                                this->engine->setState(newState);
+                                this->state=newState;
+                                render->windowReset();
+                                break;}
+                            case sf::Keyboard::A:
+                                {std::cout << "the A key was pressed" << std::endl;
+                                break;}
+                            default:
+                                {break;}
+                        }
+                        break;}
+                    default:
+                        {break;}
+                }
+                this->render->windowGameOver();
             }
         }
     }
 }
 
-void Client::runIARandom(){
+void Client::runVsAIRandom(){
     sf::Event event;
     int cmd;
-    bool display(false);
     render->windowInit();
-    while (render->getWindow()->isOpen()){
+    while (render->getWindow()->isOpen()){ 
         while (render->getWindow()->pollEvent(event)){
             if(state->getGameover()==false){
                 if(state->getJoueur()->getId()==JOUEUR1){
                     switch (event.type){
                         case sf::Event::Closed:
-                            render->getWindow()->close();
-                            break;
+                           { render->getWindow()->close();
+                            break;}
                         case sf::Event::KeyPressed:
-                            switch (event.key.code){
+                            {switch (event.key.code){
                                 case sf::Keyboard::Escape:
-                                    std::cout << "the Escape key was pressed" << std::endl;
-                                    break;
+                                    {std::cout << "the Escape key was pressed" << std::endl;
+                                    break;}
                                 case sf::Keyboard::A:
-                                    std::cout << "the A key was pressed" << std::endl;
+                                    {std::cout << "the A key was pressed" << std::endl;
                                     engine->update(ATTENDRE,NONE);
                                     render->windowCell();
-                                    break;
+                                    break;}
                                 case sf::Keyboard::Up:
-                                    std::cout << "the Up key was pressed" << std::endl;
+                                    {std::cout << "the Up key was pressed" << std::endl;
                                     engine->update(ATTACK,UP);
                                     render->windowPersonnages();
-                                    break;
+                                    break;}
                                 case sf::Keyboard::Left:
-                                    std::cout << "the Left key was pressed" << std::endl;
+                                    {std::cout << "the Left key was pressed" << std::endl;
                                     engine->update(ATTACK,LEFT);
                                     render->windowPersonnages();
-                                    break; 
+                                    break;}
                                 case sf::Keyboard::Right:
-                                    std::cout << "the Right key was pressed" << std::endl;
+                                    {std::cout << "the Right key was pressed" << std::endl;
                                     engine->update(ATTACK,RIGHT);
                                     render->windowPersonnages();
-                                    break;
+                                    break;}
                                 case sf::Keyboard::Down:
-                                    std::cout << "the Down key was pressed" << std::endl;
+                                    {std::cout << "the Down key was pressed" << std::endl;
                                     engine->update(ATTACK,DOWN);
                                     render->windowPersonnages();
-                                    break;
+                                    break;}
                                 case sf::Keyboard::Z:
-                                    std::cout << "the Z key was pressed" << std::endl;
+                                    {std::cout << "the Z key was pressed" << std::endl;
                                     engine->update(MOVE,UP);
                                     render->windowPersonnages();                            
-                                    break;
+                                    break;}
                                 case sf::Keyboard::Q:
-                                    std::cout << "the Q key was pressed" << std::endl;
+                                    {std::cout << "the Q key was pressed" << std::endl;
                                     engine->update(MOVE,LEFT);
                                     render->windowPersonnages();
-                                    break; 
+                                    break; }
                                 case sf::Keyboard::D:
-                                    std::cout << "the D key was pressed" << std::endl;
+                                    {std::cout << "the D key was pressed" << std::endl;
                                     engine->update(MOVE,RIGHT);
                                     render->windowPersonnages();
-                                    break;
+                                    break;}
                                 case sf::Keyboard::S:
-                                    std::cout << "the S key was pressed" << std::endl;
+                                    {std::cout << "the S key was pressed" << std::endl;
                                     engine->update(MOVE,DOWN);
                                     render->windowPersonnages();
-                                    break; 
+                                    break; }
                                 default:
-                                    break;       
+                                    {break;}       
                             }
-                            break;
+                            break;}
                         default:
-                            break;
+                            {break;}
                     }
                 }
-                else if(state->getJoueur()->getId()==JOUEUR2){
-                    if(display==true){
-                        std::cout<<"Au tour de l'IA"<<std::endl;
-                        display=true;
-                    }
-                    //randomIa->generateCommand()
-                    //commandId=randomIa->getCommandId()
-                    //moveId=randomIa->getMoveId()
-                    //engine->update(commandId,moveId); 
-                    //render->windowPersonnages();
+                
+            }
+            else{
+                switch (event.type){
+                    case sf::Event::Closed:
+                        {this->render->getWindow()->close();
+                        break;}
+                    case sf::Event::KeyPressed:
+                        {switch (event.key.code){
+                            case sf::Keyboard::Escape:
+                                {std::cout << "the Escape key was pressed" << std::endl;
+                                //this->state->~State();
+                                State* newState=new State(17);
+                                this->render->setState(newState);
+                                this->engine->setState(newState);
+                                this->state=newState;
+                                render->windowReset();
+                                break;}
+                            case sf::Keyboard::A:
+                                {std::cout << "the A key was pressed" << std::endl;
+                                break;}
+                            default:
+                                {break;}
+                        }
+                        break;}
+                    default:
+                        {break;}
+                }
+                render->windowGameOver();
+            }
+        }
+        if(state->getJoueur()->getId()==JOUEUR2){
+            if(state->getGameover()==false){
+                CommandId commandId;
+                MoveId moveId;
+                this->randomAI->generateCommand();
+                commandId=(CommandId)randomAI->getCommandId();
+                moveId=(MoveId)randomAI->getMoveId();
+                engine->update(commandId,moveId); 
+                if(commandId==ATTENDRE){
+                    render->windowCell();
+                }
+                else if(commandId==ATTACK or commandId==MOVE){
+                    render->windowPersonnages();
+                }
+                else{
+                    perror("invalid command id ");
+                    exit(1);
                 }
             }
             else{
-                render->getWindow()->close();
+                render->windowGameOver();
+            }
+        }
+    }
+}
+void Client::runVsAIHeuristic(){
+    sf::Event event;
+    int cmd;
+    render->windowInit();
+    while (render->getWindow()->isOpen()){ 
+        while (render->getWindow()->pollEvent(event)){
+            if(state->getGameover()==false){
+                if(state->getJoueur()->getId()==JOUEUR1){
+                    switch (event.type){
+                        case sf::Event::Closed:
+                           { render->getWindow()->close();
+                            break;}
+                        case sf::Event::KeyPressed:
+                            {switch (event.key.code){
+                                case sf::Keyboard::Escape:
+                                    {std::cout << "the Escape key was pressed" << std::endl;
+                                    break;}
+                                case sf::Keyboard::A:
+                                    {std::cout << "the A key was pressed" << std::endl;
+                                    engine->update(ATTENDRE,NONE);
+                                    render->windowCell();
+                                    break;}
+                                case sf::Keyboard::Up:
+                                    {std::cout << "the Up key was pressed" << std::endl;
+                                    engine->update(ATTACK,UP);
+                                    render->windowPersonnages();
+                                    break;}
+                                case sf::Keyboard::Left:
+                                    {std::cout << "the Left key was pressed" << std::endl;
+                                    engine->update(ATTACK,LEFT);
+                                    render->windowPersonnages();
+                                    break;}
+                                case sf::Keyboard::Right:
+                                    {std::cout << "the Right key was pressed" << std::endl;
+                                    engine->update(ATTACK,RIGHT);
+                                    render->windowPersonnages();
+                                    break;}
+                                case sf::Keyboard::Down:
+                                    {std::cout << "the Down key was pressed" << std::endl;
+                                    engine->update(ATTACK,DOWN);
+                                    render->windowPersonnages();
+                                    break;}
+                                case sf::Keyboard::Z:
+                                    {std::cout << "the Z key was pressed" << std::endl;
+                                    engine->update(MOVE,UP);
+                                    render->windowPersonnages();                            
+                                    break;}
+                                case sf::Keyboard::Q:
+                                    {std::cout << "the Q key was pressed" << std::endl;
+                                    engine->update(MOVE,LEFT);
+                                    render->windowPersonnages();
+                                    break; }
+                                case sf::Keyboard::D:
+                                    {std::cout << "the D key was pressed" << std::endl;
+                                    engine->update(MOVE,RIGHT);
+                                    render->windowPersonnages();
+                                    break;}
+                                case sf::Keyboard::S:
+                                    {std::cout << "the S key was pressed" << std::endl;
+                                    engine->update(MOVE,DOWN);
+                                    render->windowPersonnages();
+                                    break; }
+                                default:
+                                    {break;}       
+                            }
+                            break;}
+                        default:
+                            {break;}
+                    }
+                }
+                
+            }
+            else{
+                switch (event.type){
+                    case sf::Event::Closed:
+                        {this->render->getWindow()->close();
+                        break;}
+                    case sf::Event::KeyPressed:
+                        {switch (event.key.code){
+                            case sf::Keyboard::Escape:
+                                {std::cout << "the Escape key was pressed" << std::endl;
+                                //this->state->~State();
+                                State* newState=new State(17);
+                                this->render->setState(newState);
+                                this->engine->setState(newState);
+                                this->state=newState;
+                                render->windowReset();
+                                break;}
+                            case sf::Keyboard::A:
+                                {std::cout << "the A key was pressed" << std::endl;
+                                break;}
+                            default:
+                                {break;}
+                        }
+                        break;}
+                    default:
+                        {break;}
+                }
+                render->windowGameOver();
+            }
+        }
+        if(state->getJoueur()->getId()==JOUEUR2){
+            if(state->getGameover()==false){
+                CommandId commandId;
+                MoveId moveId;
+                this->heuristicAI->generateCommand();
+                commandId=(CommandId)heuristicAI->getCommandId();
+                moveId=(MoveId)heuristicAI->getMoveId();
+                engine->update(commandId,moveId); 
+                if(commandId==ATTENDRE){
+                    render->windowCell();
+                }
+                else if(commandId==ATTACK or commandId==MOVE){
+                    render->windowPersonnages();
+                }
+                else{
+                    perror("invalid command id ");
+                    exit(1);
+                }
+            }
+            else{
+                render->windowGameOver();
             }
         }
     }

@@ -26,6 +26,10 @@ state::State* Engine::getState() {
     return this->currentState;
 }
 
+void Engine::setState(state::State* state) {
+    this->currentState=state;
+}
+
 Command* Engine::getCommands(){
    
     return currentCommands;
@@ -39,7 +43,6 @@ int Engine::update(CommandId cmd, MoveId move){
     }
     if(cmd == ATTACK){
         this->currentCommands=this->listeCommandes[1];
-        cout<<"Select target"<<endl;
         std::vector<int> position;
         std::vector<int> positionEnemy;
         state::Joueur* joueurEnemy;
@@ -127,7 +130,7 @@ int Engine::update(CommandId cmd, MoveId move){
     if(cmd == MOVE){        
         this->currentCommands=this->listeCommandes[0];
         ((CommandMove*)(this->currentCommands))->execute(move);
-        return 1;
+        return 0;
     }
     else{
         return -1;

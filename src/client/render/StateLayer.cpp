@@ -81,6 +81,19 @@ void StateLayer::windowInit(){
     (*this).actListePersonnageId();
     (*this).actXFromState();
     (*this).actYFromState();
+    if (!font.loadFromFile("res/god-of-war.ttf")){
+        perror("failed to load font");
+        exit(1);
+    }
+    this->font=font;
+    sf::Text text;
+    text.setFont(font); // font is a sf::Font
+    text.setString("Victoire de ");
+    text.setCharacterSize(50); // in pixels, not points!
+    text.setFillColor(sf::Color::Black);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(2*tileSize.x,(this->state->getPlateau()->getSize()/2-1)*tileSize.y);
+    this->textGameOver=text;
     sf::RenderWindow* window=new sf::RenderWindow(sf::VideoMode((*this).width*tileSize.x, (*this).height*tileSize.y), "ENSEA Emblem: The Four Seasons");
     this->window=window;
     Surface* map= new Surface();
@@ -95,8 +108,12 @@ void StateLayer::windowInit(){
     window->display();
 }
 
+void StateLayer::windowReset(){
+    window->clear();
+    window->display();
+}
+
 void StateLayer::windowCell(){
-    std::cout<<"RENDER CELL"<<std::endl;
     (*this).plateauId=(*this).getPlateauIdFromState();
     map->load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
     window->clear();
@@ -115,6 +132,22 @@ void StateLayer::windowPersonnages(){
     window->clear();
     window->draw(*map);
     window->draw(*personnages);
+    window->display();
+}
+
+void StateLayer::windowGameOver(){
+    // on crée la fenêtre
+    (*this).actListePersonnageId();
+    (*this).actXFromState(); 
+    (*this).actYFromState();
+    std::string stringGameOver("Victoire de ");
+    stringGameOver.append(this->state->getWinner()->getNom());
+    this->textGameOver.setString(stringGameOver);
+    personnages->load("res/personnages.png", (*this).tileSize, (*this).listePersonnageCoordX, (*this).listePersonnageId, (*this).listePersonnageCoordY);
+    window->clear();
+    window->draw(*map);
+    window->draw(*personnages);
+    window->draw(this->textGameOver);
     window->display();
 }
 

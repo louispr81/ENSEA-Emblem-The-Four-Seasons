@@ -50,7 +50,7 @@ void HeuristicAI::generateCommand(){
                 distanceMinIndex = i;
                 distanceMin = distanceEnemy[i];
                 distanceXmin=distanceX;
-                distanceYmin=distanceY;
+                distanceYmin=distanceY; 
             }
         }
     }

@@ -57,17 +57,14 @@ void HeuristicAI::generateCommand(){
 
     int pm;
     pm=state->getPersonnageActif()->getStatistic()->getPoint_mouvement();
-    if(distanceXmin == 1){
+    if(distanceXmin == 1 && distanceYmin == 1){
         commandId = 1; //attack
         if(signeX == 1){
-            moveId = 2;
+            moveId = 2; 
         }
         else{
             moveId = 1;
         }
-    }
-    else if(distanceYmin == 1){
-        commandId = 1;
         if(signeY == 1){
             moveId = 4;
         }
@@ -97,6 +94,7 @@ void HeuristicAI::generateCommand(){
         }
         else{
             commandId = 2; //attendre
+            moveId = 0;
         }
     }
 }

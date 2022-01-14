@@ -26,6 +26,7 @@ cout <<  target.getNom() << " a  " << target.statistiques.getVie()<< "  de vie "
 
     }
 }*/
+
 void CommandAttack::execute(state::Personnage* target){
     cout <<  target->getNom() << " a  " << target->statistiques->getVie()<< "  de vie " << endl;
     if (target->statistiques->getVie()<=0){

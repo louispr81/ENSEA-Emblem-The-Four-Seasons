@@ -27,7 +27,6 @@ void HeuristicAI::generateCommand(){
     for(int i=0;i<joueurEnemy->getPersonnages().size();i++){
         if(joueurEnemy->getPersonnages()[i]->getAlive()==true){
             int distance,distanceX,distanceY;            
-            distanceMin = distanceEnemy[0];            
             positionEnemy = joueurEnemy->getPersonnages()[i]->getCell()->getCoordonees();
             distanceX = abs(positionEnemy[0]-position[0]);
             distanceY = abs(positionEnemy[1]-position[1]);
@@ -45,6 +44,7 @@ void HeuristicAI::generateCommand(){
             }
             distance = sqrt(pow(distanceX,2)+pow(distanceY,2));
             distanceEnemy.push_back(distance);
+            distanceMin = distanceEnemy[0];
             //find the closest enemy
             if(i>0 && distanceEnemy[i]<distanceMin){
                 distanceMinIndex = i;

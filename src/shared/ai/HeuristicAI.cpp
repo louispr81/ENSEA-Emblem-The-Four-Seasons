@@ -16,6 +16,7 @@ HeuristicAI::HeuristicAI(moteur::Engine* engine, state::State* state){
 void HeuristicAI::generateCommand(){
     std::vector<int> position;
     std::vector<int> positionEnemy;
+    std::vector<state::Personnage*> personnageAlive;
     state::Joueur* joueurEnemy;
     int signeX,signeY;
     int distanceMin;
@@ -24,18 +25,40 @@ void HeuristicAI::generateCommand(){
     int distance,distanceX,distanceY; 
     joueurEnemy = state->getJoueurs()[((state->getJoueur()->getId()-40)+1)%2];
     position = state->getPersonnageActif()->getCell()->getCoordonees();
+    cout<<state->getPersonnageActif()->getNom()<<endl;
     for(int i=0;i<joueurEnemy->getPersonnages().size();i++){         
-        if(joueurEnemy->getPersonnages()[i]->getAlive()==true){                     
-            positionEnemy = joueurEnemy->getPersonnages()[i]->getCell()->getCoordonees();
-            distanceX = abs(positionEnemy[0]-position[0]);
-            distanceY = abs(positionEnemy[1]-position[1]);
-            std::cout<<"xEnemy="<<positionEnemy[0]<<std::endl;
-            std::cout<<"yEnemy="<<positionEnemy[1]<<std::endl;
-            std::cout<<"xPlayer="<<position[0]<<std::endl;
-            std::cout<<"yPlayer="<<position[1]<<std::endl;
-            if((positionEnemy[0]-position[0])>=0){  
-                signeX = 1;  // x, left
-            }
+        if(joueurEnemy->getPersonnages()[i]->getAlive()==true){   
+            personnageAlive.push_back(joueurEnemy->getPersonnages()[i]);
+        }
+    }
+    for(int i=0;i<personnageAlive.size();i++){                  
+        positionEnemy = personnageAlive[i]->getCell()->getCoordonees();
+        distanceX = abs(positionEnemy[0]-position[0]);
+        distanceY = abs(positionEnemy[1]-position[1]);
+        distance = distanceX+distanceY;           
+        //find the closest enemy                
+        if(i>0 && distance < distanceMin){
+            distanceMinIndex = i;
+            distanceMin = distance;
+            distanceXmin=distanceX;
+            distanceYmin=distanceY;
+        }
+        else if(i==0){
+            distanceMinIndex = i;
+            distanceMin = distance;
+            distanceXmin=distanceX;
+            distanceYmin=distanceY;
+        }
+        else{
+            distanceMin = distanceMin;
+            distanceXmin=distanceXmin;
+            distanceYmin=distanceYmin;
+        }
+    }
+    positionEnemy = personnageAlive[distanceMinIndex]->getCell()->getCoordonees();
+    if((positionEnemy[0]-position[0])>=0){  
+        signeX = 1;  // x, left
+    }
             else{
                 signeX = -1; // x, right
             }
@@ -45,33 +68,6 @@ void HeuristicAI::generateCommand(){
             else{
                 signeY = -1; // y, up 
             }
-            distance = sqrt(pow(distanceX,2)+pow(distanceY,2));           
-            //find the closest enemy                
-            if(i>0 && distance < distanceMin){
-                distanceMinIndex = i;
-                distanceMin = distance;
-                distanceXmin=distanceX;
-                distanceYmin=distanceY;
-            }
-            else if(i==0){
-                distanceMinIndex = i;
-                distanceMin = distance;
-                distanceXmin=distanceX;
-                distanceYmin=distanceY;
-            }
-            else{
-                distanceMin = distanceMin;
-                distanceXmin=distanceXmin;
-                distanceYmin=distanceYmin;
-            }
-        }
-    }
-        cout << "distanceY avant = " << distanceYmin << endl;
-        cout << "distanceX avant = " << distanceXmin << endl;
-        cout << "signeX = "<< signeX << endl;
-        cout << "signeY = "<< signeY << endl;
-        cout << "enemy = "<<distanceMinIndex<<endl;
-        
 
     int pm;
     pm=state->getPersonnageActif()->getStatistic()->getPoint_mouvement();
@@ -95,14 +91,9 @@ void HeuristicAI::generateCommand(){
             }
         }
         else{
-            cout << "dx=" <<distanceXmin<<endl;
-            cout << "dy=" <<distanceYmin<<endl;
-            cout << "signeX=" <<signeX<<endl;
-            cout << "signeY=" <<signeY<<endl;
             commandId = 0; // move 
             if(pm > 0){
                 if(distanceXmin>=distanceYmin && signeX==1 ){  // x > y, dx > 0
-                cout <<"move"<<endl;
                     if(state->getPlateau()->getCase(position[0]+1,position[1])->getOccupe()==false && state->getPlateau()->getCase(position[0]+1,position[1])->getWalkable()==true){
                         moveId = 2;//RIGHT;
                     }
@@ -144,9 +135,6 @@ void HeuristicAI::generateCommand(){
                 moveId = 0;
             }
         }
-        cout << "distanceY = " << distanceYmin << endl;
-        cout << "distanceX = " << distanceXmin << endl;
-
     }
     else{
         cout << "distance error"<<endl;

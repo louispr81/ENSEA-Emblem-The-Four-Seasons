@@ -114,7 +114,6 @@ void StateLayer::windowReset(){
 }
 
 void StateLayer::windowCell(){
-    std::cout<<"RENDER CELL"<<std::endl;
     (*this).plateauId=(*this).getPlateauIdFromState();
     map->load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
     window->clear();

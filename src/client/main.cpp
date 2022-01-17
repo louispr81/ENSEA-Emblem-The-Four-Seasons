@@ -23,6 +23,8 @@ void usage(char * argv0){
         cout << "engine"<< " | ";;
         cout << "random_ai"<< " | ";;
         cout << "heuristic_ai"<< " | ";;
+        cout << "rollback"<< " | ";;
+        cout << "deep_ai"<< " | ";;
         cout << "game";
     cout << " }" << endl;
 }
@@ -72,12 +74,18 @@ if (strcmp(argv[1],"hello") ==0 ){
         client->run();
 	}
     else if (strcmp(argv[1],"random_ai") == 0){
-        std::cout << "Work in Progress" << std::endl;
         client::Client *client= new Client;
         client->runVsAIRandom();
 	}
     else if (strcmp(argv[1],"heuristic_ai") == 0){
-        std::cout << "Work not started yet" << std::endl;
+        client::Client *client= new Client;
+        client->runVsAIHeuristic();
+	}
+    else if (strcmp(argv[1],"rollback") == 0){
+        std::cout << "Work in Progress" << std::endl;
+	}
+    else if (strcmp(argv[1],"deep_ai") == 0){
+        std::cout << "Work in Progress" << std::endl;
 	}
     else {
         std::cout << "Wrong command !" << std::endl ;

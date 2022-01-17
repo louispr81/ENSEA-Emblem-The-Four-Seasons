@@ -450,7 +450,9 @@ Cell* Personnage::getCell (){
 void Personnage::setCell (Cell* cell){
     this->cell=cell;
 }
-
+Statistiques* Personnage::getStatistic (){
+    return this->statistiques;
+}
 void Personnage::print(){
     std::cout<<"---------------PERSONNAGE---------------"<<std::endl;
     std::cout<<"nom="<<this->nom<<std::endl;
@@ -467,20 +469,7 @@ void Personnage::print(){
     this->statistiques->print();
     std::cout<<"----------------------------------------"<<std::endl;
 }
-    std::string nom;
-    int id;
-    Statistiques statistiquesBase;
-    std::vector<Objet*> inventaire;
-    Arme* arme;
-    Classe* classe;
-    Saison* saison;
-    bool alive     = true;
-    bool played     = false;
-    std::vector<int> bonus;
-    Statistiques statistiques;
-    Cell* cell;
-    Plateau* plateau;
-    bool moved     = false;
+
 Personnage::~Personnage(){
    // delete[] tab_arme;
 }

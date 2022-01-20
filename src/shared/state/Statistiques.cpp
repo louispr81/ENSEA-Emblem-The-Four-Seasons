@@ -103,6 +103,30 @@ int Statistiques::getExperience_max (){
 int Statistiques::getNiveau (){
     return (*this).niveau;
 }
+std::vector<int> Statistiques::getListStatistique(){
+    std::vector<int> listStatistique;
+    listStatistique.push_back(this->vie);
+    listStatistique.push_back(this->vie_max);
+    listStatistique.push_back(this->point_mouvement_max);
+    listStatistique.push_back(this->force);
+    listStatistique.push_back(this->intelligence);
+    listStatistique.push_back(this->vitesse);
+    listStatistique.push_back(this->defense);
+    listStatistique.push_back(this->resistance);
+    listStatistique.push_back(this->technique);
+    return listStatistique;
+}
+void Statistiques::setListStatistique(std::vector<int> listStatistique){
+    this->vie=listStatistique[0]; 
+    this->vie_max=listStatistique[1];
+    this->point_mouvement_max=listStatistique[2];
+    this->force=listStatistique[3];
+    this->intelligence=listStatistique[4];
+    this->vitesse=listStatistique[5];
+    this->defense=listStatistique[6];
+    this->resistance=listStatistique[7];
+    this->technique=listStatistique[8];
+}
 void Statistiques::print(){
     std::cout<<"---------------STATISTIQUES---------------"<<std::endl;
     std::cout<<"niveau="<<this->niveau<<std::endl;

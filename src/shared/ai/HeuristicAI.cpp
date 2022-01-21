@@ -94,7 +94,7 @@ void HeuristicAI::generateCommand(){
             commandId = 0; // move 
             if(pm > 0){
                 if(distanceXmin>=distanceYmin && signeX==1 ){  // x > y, dx > 0
-                    if(state->getPlateau()->getCase(position[0]+1,position[1])->getOccupe()==false && state->getPlateau()->getCase(position[0]+1,position[1])->getWalkable()==true){
+                    if(state->getPlateau()->getCase(position[0]+1,position[1])->getOccupe()==false && state->getPlateau()->getCase(position[0]+1,position[1])->getWalkable()==true && pm-state->getPlateau()->getCase(position[0]+1,position[1])->getCostPm()>=0 ){
                         moveId = 2;//RIGHT;
                     }
                     else{
@@ -103,7 +103,7 @@ void HeuristicAI::generateCommand(){
                     }
                 }
                 else if(distanceXmin>=distanceYmin && signeX==-1 ){  // x > y, dx < 0
-                    if(state->getPlateau()->getCase(position[0]-1,position[1])->getOccupe()==false && state->getPlateau()->getCase(position[0]-1,position[1])->getWalkable()==true){
+                    if(state->getPlateau()->getCase(position[0]-1,position[1])->getOccupe()==false && state->getPlateau()->getCase(position[0]-1,position[1])->getWalkable()==true && pm-state->getPlateau()->getCase(position[0]-1,position[1])->getCostPm()>=0){
                         moveId = 1;//LEFT;
                     }
                     else{
@@ -112,7 +112,7 @@ void HeuristicAI::generateCommand(){
                     }                  
                 }
                 else if(distanceXmin<=distanceYmin && signeY==1 ){  // x < y, dx > 0
-                    if(state->getPlateau()->getCase(position[0],position[1]+1)->getOccupe()==false && state->getPlateau()->getCase(position[0],position[1]+1)->getWalkable()==true){
+                    if(state->getPlateau()->getCase(position[0],position[1]+1)->getOccupe()==false && state->getPlateau()->getCase(position[0],position[1]+1)->getWalkable()==true && pm-state->getPlateau()->getCase(position[0],position[1]+1)->getCostPm()>=0){
                         moveId = 4;//DOWN;
                     }
                     else{
@@ -121,7 +121,7 @@ void HeuristicAI::generateCommand(){
                     }
                 }
                 else if(distanceXmin<=distanceYmin && signeY==-1 ){  // x < y, dx < 0
-                    if(state->getPlateau()->getCase(position[0],position[1]-1)->getOccupe()==false && state->getPlateau()->getCase(position[0],position[1]-1)->getWalkable()==true){
+                    if(state->getPlateau()->getCase(position[0],position[1]-1)->getOccupe()==false && state->getPlateau()->getCase(position[0],position[1]-1)->getWalkable()==true && pm-state->getPlateau()->getCase(position[0],position[1]-1)->getCostPm()>=0){
                         moveId = 3;//UP;
                     }
                     else{

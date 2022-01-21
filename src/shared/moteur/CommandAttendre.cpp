@@ -1,5 +1,5 @@
 #include "CommandAttendre.h"
-
+#include <iostream>
 using namespace std;
 using namespace state;
 
@@ -15,6 +15,6 @@ CommandAttendre::CommandAttendre(state::State* currentState){
 void CommandAttendre::execute(){
     currentState->getPersonnageActif()->attendre();
     currentState->getPersonnageActif();
+    std::cout<<"Au tour de "<<currentState->getPersonnageActif()->getNom()<<std::endl;
 }
-
 }

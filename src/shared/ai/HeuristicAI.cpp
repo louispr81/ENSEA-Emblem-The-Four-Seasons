@@ -91,40 +91,41 @@ void HeuristicAI::generateCommand(){
             }
         }
         else{
-            commandId = 0; // move
-            int decal = (state->getPlateau()->getSize())/2;
-            if((position[1]-decal)*(positionEnemy[1]-decal)<0){ // 2 cote
-                for(int i = 0; i < state->getPlateau()->getSize(); i++){
-                    if(state->getPlateau()->getCase(i,decal)->getType() == state::BRIDGE){
-                        distanceXmin = abs(i-position[0]);
-                        distanceYmin = abs(decal-position[1]);
-                        if(i-position[0] >= 0){ //right
-                            signeX = 1;
-                        }
-                        else{
-                            signeX = -1;
-                        }
-                        if(decal-position[1] >=0){
-                            signeY = 1;
-                        }
-                        else{
-                            signeY = -1;
+            if(pm > 0){
+                commandId = 0; // move
+                int decal = (state->getPlateau()->getSize())/2;
+                if((position[1]-decal)*(positionEnemy[1]-decal)<0){ // 2 cote
+                    for(int i = 0; i < state->getPlateau()->getSize(); i++){
+                        if(state->getPlateau()->getCase(i,decal)->getType() == state::BRIDGE){
+                            distanceXmin = abs(i-position[0]);
+                            distanceYmin = abs(decal-position[1]);
+                            if(i-position[0] >= 0){ //right
+                                signeX = 1;
+                            }
+                            else{
+                                signeX = -1;
+                            }
+                            if(decal-position[1] >=0){
+                                signeY = 1;
+                            }
+                            else{
+                                signeY = -1;
+                            }
                         }
                     }
-                }
-            } 
-            else if((position[1]-decal) == 0){
-                if(signeY == -1 && state->getPlateau()->getCase(position[0],position[1]-1)->getOccupe()==false){
-                    moveId = 3; //up
-                    return;
-                }
-                else if(signeY == 1 && state->getPlateau()->getCase(position[0],position[1]+1)->getOccupe()==false){
-                    moveId = 4; //down
-                    return;
+                } 
+                else if((position[1]-decal) == 0){
+                    if(signeY == -1 && state->getPlateau()->getCase(position[0],position[1]-1)->getOccupe()==false){
+                        moveId = 3; //up
+                        return;
+                    }
+                    else if(signeY == 1 && state->getPlateau()->getCase(position[0],position[1]+1)->getOccupe()==false){
+                        moveId = 4; //down
+                        return;
 
+                    }
                 }
-            }
-            if(pm > 0){
+            
                 if(distanceXmin>=distanceYmin && signeX==1 ){  // x > y, dx > 0
                     if(state->getPlateau()->getCase(position[0]+1,position[1])->getOccupe()==false && state->getPlateau()->getCase(position[0]+1,position[1])->getWalkable()==true && pm-state->getPlateau()->getCase(position[0]+1,position[1])->getCostPm()>=0 ){
                         moveId = 2;//RIGHT;

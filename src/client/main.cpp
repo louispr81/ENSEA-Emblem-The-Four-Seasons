@@ -25,7 +25,11 @@ void usage(char * argv0){
         cout << "heuristic_ai"<< " | ";;
         cout << "rollback"<< " | ";;
         cout << "deep_ai"<< " | ";;
-        cout << "game";
+        cout << "randomVsrandom"<< " | ";;
+        cout << "heuristicVsrandom"<< " | ";;
+        cout << "heuristicVsheuristic"<< " | ";;
+        cout << "100xrandomVsheuristic"<< " | ";;
+        cout << "game1v1";
     cout << " }" << endl;
 }
 
@@ -64,7 +68,7 @@ if (strcmp(argv[1],"hello") ==0 ){
         client->run();
 
 	}
-    else if (strcmp(argv[1],"game") == 0){
+    else if (strcmp(argv[1],"game1v1") == 0){
         std::cout << "Lancement du CLIENT" << std::endl;
         std::cout << "Les touches :" << std::endl;
         std::cout << "A : attendre (et valider la fin du tour du personnage)" << std::endl;
@@ -86,6 +90,22 @@ if (strcmp(argv[1],"hello") ==0 ){
 	}
     else if (strcmp(argv[1],"deep_ai") == 0){
         std::cout << "Work in Progress" << std::endl;
+	}
+    else if (strcmp(argv[1],"randomVsrandom") == 0){
+        client::Client *client= new Client;
+        client->randomVsRandomRender();
+	}
+    else if (strcmp(argv[1],"heuristicVsrandom") == 0){
+        client::Client *client= new Client;
+        client->randomVsHeuristicRender();
+	}
+    else if (strcmp(argv[1],"heuristicVsheuristic") == 0){
+        client::Client *client= new Client;
+        client->heuristicVsHeuristicRender();
+	}
+    else if (strcmp(argv[1],"100xrandomVsheuristic") == 0){
+        client::Client *client= new Client;
+        client->randomVsHeuristic100();
 	}
     else {
         std::cout << "Wrong command !" << std::endl ;

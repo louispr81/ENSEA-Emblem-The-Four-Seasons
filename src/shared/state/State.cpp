@@ -23,7 +23,9 @@ State::State(int size){
     // Creation des bonus des saisons (pour le moment les 4 ont le meme)
     bonus.push_back(0);
     bonus.push_back(0);
-    for (int i=0; i<10; ++i){
+    bonus.push_back(0);
+    bonus.push_back(0);
+    for (int i=0; i<8; ++i){
         bonus.push_back(1);
     }
     // Creation des 4 saisons

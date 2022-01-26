@@ -90,6 +90,10 @@ void CommandMove::execute(MoveId move){
         }
       }
     currentState->getPersonnageActif();
+    if(currentState->getGameover()==false){
+      std::cout<<"Au tour de "<<currentState->getPersonnageActif()->getNom()<<std::endl;
+    }
+    
 }
 
 MoveId CommandMove::getMoveId(){

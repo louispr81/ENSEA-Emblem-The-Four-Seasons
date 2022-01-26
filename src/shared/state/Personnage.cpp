@@ -336,13 +336,26 @@ int Personnage::deplacer1Dist(Cell* dest,int pm){
     else{
         return -1;
     }
+
 }
 
-void Personnage::attaquer (Personnage* personnageD){ //statistique base rajouter
-    int degatsAttaquant=this->statistiques->getForce();
+void Personnage::attaquer (Personnage* personnageD){ 
+    int degatsAttaquant;
+    if(this->statistiques->getVitesse()>=personnageD->getStatistic()->getVitesse()+3){   
+        std::cout<<this->nom<<" attaque 2 fois !"<<std::endl; 
+        degatsAttaquant=this->degat(personnageD);
+        degatsAttaquant=this->degat(personnageD)+degatsAttaquant;
+    }
+    else{
+        degatsAttaquant=this->degat(personnageD);
+    }
     int hpDefenseur=personnageD->statistiques->getVie();
     personnageD->statistiques->setVie(hpDefenseur-degatsAttaquant);
+    personnageD->statistiquesBase->setVie(hpDefenseur-degatsAttaquant);
     if(personnageD->statistiques->getVie()<=0){
+        this->statistiques->setExperience(this->statistiques->getExperience()+this->statistiques->getExperience_max());
+        this->statistiquesBase->setExperience(this->statistiques->getExperience()+this->statistiques->getExperience_max());
+        this->levelUp();
         std::cout<<personnageD->getNom()<<" a été tué par "<<this->getNom()<<std::endl;
         personnageD->setAlive(false);
         personnageD->getCell()->setOccupe(false);
@@ -350,6 +363,9 @@ void Personnage::attaquer (Personnage* personnageD){ //statistique base rajouter
         personnageD->setCell(NULL);
     }
     else{
+        this->statistiques->setExperience(this->statistiques->getExperience()+this->statistiques->getExperience_max()/2);
+        this->statistiquesBase->setExperience(this->statistiques->getExperience()+this->statistiques->getExperience_max()/2);
+        this->levelUp();
         std::cout<<personnageD->getNom()<<" a  "<<personnageD->statistiques->getVie()<<"HP après l'attaque de "<<this->getNom()<<std::endl;
     }   
     this->attendre(); 
@@ -464,102 +480,112 @@ int Personnage::degat(Personnage* target){
         probDegat == 1;
     }
     randomValue = rand()%101; // random value from 0-100
-    if(randomValue >= 100*probDegat){
+    if(randomValue <= 100*probDegat){
         if(this->classe->getId() == MAGE){
-            degat = (this->statistiques->getIntelligence() - target->statistiques->getResistance()) / 2;
+            degat = (this->statistiques->getIntelligence() - target->statistiques->getResistance()/2) ;
         }
         else{
-            degat = (this->statistiques->getForce() - target->statistiques->getDefense()) / 2;
+            degat = (this->statistiques->getForce() - target->statistiques->getDefense()/2) ;
         }
-        cout<<"Dammage -"<<degat<<endl;
+        cout<<"Dammage ="<<degat<<endl;
     }
     else{
         degat = 0;
         cout<<"Miss"<<endl;
     }
+    if(degat<=0){
+        degat=0;
+    }
     return degat;
 }
 
 void Personnage::levelUp(){
-    srand((unsigned)time(NULL));
-    this->statistiques->setNiveau(1);
-
-    for(int i = 1; i < this->statistiques->getExperience_max(); i++){
-        if(this->statistiques->getExperience()>=100){
-            this->statistiques->setExperience(this->statistiques->getExperience()-100);
-            this->statistiquesBase->setExperience(this->statistiques->getExperience()-100);
-            this->statistiques->setNiveau(i+1);
-            this->statistiquesBase->setNiveau(i+1);
-            
-            float randomGain;
-            std::vector<int> listStatTmp;
-
-            for(int j = 0; j < this->classe->getProbaGainStats().size(); j++){               
-                randomGain = (rand()%101)/100;
-                //float sumProb = 0;
-                //sumProb = sumProb + this->classe->getProbaGainStats()[j];
-                if(randomGain <= this->classe->getProbaGainStats()[j]){
-                    listStatTmp[j] = this->statistiquesBase->getListStatistique()[j]+1;
-                    listStatTmp[j] = this->statistiques->getListStatistique()[j]+1;
-                }
+    srand((unsigned)time(NULL)); 
+    while(this->statistiques->getExperience()>=this->statistiques->getExperience_max()){
+        this->statistiques->setExperience(this->statistiques->getExperience()-this->statistiques->getExperience_max());
+        this->statistiquesBase->setExperience(this->statistiquesBase->getExperience()-this->statistiques->getExperience_max());
+        this->statistiques->setNiveau(this->statistiques->getNiveau()+1);
+        this->statistiquesBase->setNiveau(this->statistiquesBase->getNiveau()+1);
+        std::cout<<this->nom<<" passe niveau "<<this->statistiques->getNiveau()<<std::endl;
+        float randomGain;
+        std::vector<int> listStatTmp;
+        std::vector<int> listStatBaseTmp;
+        listStatTmp=this->statistiques->getListStatistique();
+        listStatBaseTmp=this->statistiquesBase->getListStatistique();
+        for(int j = 0; j < this->classe->getProbaGainStats().size(); j++){          
+            randomGain = ((float)(rand()%101))/(float)100;
+            //float sumProb = 0;
+            //sumProb = sumProb + this->classe->getProbaGainStats()[j];
+            if(randomGain <= this->classe->getProbaGainStats()[j]){
+                std::cout<<"+1 "<<"stat numero : "<<j<<std::endl;
+                listStatTmp[j] = this->statistiquesBase->getListStatistique()[j]+1;
+                listStatBaseTmp[j] = this->statistiquesBase->getListStatistique()[j]+1;
             }
-            this->statistiques->setListStatistique(listStatTmp);
-
-            //calculer probabilite d'avoir une competance
-            /*
-            if(0 <= randomGain < prob[0]){
-                this->statistiques->setVie_max(this->statistiques->getVie_max()+1);
-                this->statistiques->setVie(this->statistiques->getVie()+1);
-            }
-            else if(prob[0] < randomGain < prob[1]){
-                this->statistiques->setPoint_mouvement_max(this->statistiques->getPoint_mouvement_max()+1);
-            }
-            else if(prob[1] < randomGain < prob[2]){
-                this->statistiques->setForce(this->statistiques->getForce()+1);
-            }
-            else if(prob[2] < randomGain < prob[3]){
-                this->statistiques->setIntelligence(this->statistiques->getIntelligence()+1);
-            }
-            else if(prob[3] < randomGain < prob[4]){
-                this->statistiques->setVitesse(this->statistiques->getVitesse()+1);
-            }
-            else if(prob[4] < randomGain < prob[5]){
-                this->statistiques->setDefense(this->statistiques->getDefense()+1);
-            }
-            else if(prob[5] < randomGain < prob[6]){
-                this->statistiques->setResistance(this->statistiques->getResistance()+1);
-            }
-            else if(prob[6] < randomGain < prob[7]){
-                this->statistiques->setTechnique(this->statistiques->getTechnique()+1);
-            }
-            else if(prob[7] < randomGain <= 1){
-                cout<<"You are unluckyyyyy, you get nothing !!!"<<endl;
-            }
-            else{
-                cout<<"error calcul probGainState"<<endl;
-            }*/
+        }  
+        this->statistiques->setListStatistique(listStatTmp);
+        this->statistiquesBase->setListStatistique(listStatBaseTmp);
+        //calculer probabilite d'avoir une competance
+        /*
+        if(0 <= randomGain < prob[0]){
+            this->statistiques->setVie_max(this->statistiques->getVie_max()+1);
+            this->statistiques->setVie(this->statistiques->getVie()+1);
         }
+        else if(prob[0] < randomGain < prob[1]){
+            this->statistiques->setPoint_mouvement_max(this->statistiques->getPoint_mouvement_max()+1);
+        }
+        else if(prob[1] < randomGain < prob[2]){
+            this->statistiques->setForce(this->statistiques->getForce()+1);
+        }
+        else if(prob[2] < randomGain < prob[3]){
+            this->statistiques->setIntelligence(this->statistiques->getIntelligence()+1);
+        }
+        else if(prob[3] < randomGain < prob[4]){
+            this->statistiques->setVitesse(this->statistiques->getVitesse()+1);
+        }
+        else if(prob[4] < randomGain < prob[5]){
+            this->statistiques->setDefense(this->statistiques->getDefense()+1);
+        }
+        else if(prob[5] < randomGain < prob[6]){
+            this->statistiques->setResistance(this->statistiques->getResistance()+1);
+        }
+        else if(prob[6] < randomGain < prob[7]){
+            this->statistiques->setTechnique(this->statistiques->getTechnique()+1);
+        }
+        else if(prob[7] < randomGain <= 1){
+            cout<<"You are unluckyyyyy, you get nothing !!!"<<endl;
+        }
+        else{
+            cout<<"error calcul probGainState"<<endl;
+        }*/
     }
+
     
 }
 
 void Personnage::gainBonusSaison(Saison* saison){
-    if(this->saison->getId() == saison->getId()){
-        std::vector<int> listStatTmp;
-        for(int i = 0; i < this->saison->getBonus().size(); i++){
-            listStatTmp[i] = this->statistiques->getListStatistique()[i]+this->saison->getBonus()[i]; 
+    if(this->saison!=NULL){
+        if(this->saison->getId() == saison->getId()){
+            std::vector<int> listStatTmp;
+            listStatTmp=this->statistiquesBase->getListStatistique();
+            for(int i = 0; i < this->saison->getBonus().size(); i++){
+                listStatTmp[i] = this->statistiquesBase->getListStatistique()[i]+this->saison->getBonus()[i]; 
+            }
+            this->statistiques->setListStatistique(listStatTmp);
+            std::cout<<this->nom<<" bonus saison !"<<std::endl;
         }
-        this->statistiques->setListStatistique(listStatTmp);
-    }
-    else if(this->saison->getSaisonOppId()==saison->getId()){
-        std::vector<int> listStatTmp;
-        for(int i = 0; i < this->saison->getBonus().size(); i++){
-            listStatTmp[i] = this->statistiques->getListStatistique()[i]-this->saison->getBonus()[i]; 
+        else if(this->saison->getSaisonOppId()==saison->getId()){
+            std::vector<int> listStatTmp;
+            listStatTmp=this->statistiquesBase->getListStatistique();
+            for(int i = 0; i < this->saison->getBonus().size(); i++){
+                listStatTmp[i] = this->statistiquesBase->getListStatistique()[i]-this->saison->getBonus()[i]; 
+            }
+            this->statistiques->setListStatistique(listStatTmp);
+            std::cout<<this->nom<<" malus saison !"<<std::endl;
         }
-        this->statistiques->setListStatistique(listStatTmp);
-    }
-    else{
-        this->statistiques->setListStatistique(this->statistiquesBase->getListStatistique());
+        else{
+            this->statistiques->setListStatistique(this->statistiquesBase->getListStatistique());
+
+        }
     }
 }
 Personnage::~Personnage(){

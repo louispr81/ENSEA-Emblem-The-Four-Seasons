@@ -634,6 +634,7 @@ void Client::randomVsHeuristic100(){
 void Client::threadGame(){
     sf::Event event;
     int cmd;
+    engine->runEngineThread();
     render->windowInit();
     while (render->getWindow()->isOpen()){
         while (render->getWindow()->pollEvent(event)){
@@ -650,50 +651,41 @@ void Client::threadGame(){
                             }
                             case sf::Keyboard::A:{
                                 std::cout << "the A key was pressed" << std::endl;
-                                engine->update(ATTENDRE,NONE);
-                                render->windowCell();
+                                engine->updateListCommandToExecute(ATTENDRE,NONE);
                                 break;
                             }
                             case sf::Keyboard::Up:{
                                 std::cout << "the Up key was pressed" << std::endl;
-                                engine->update(ATTACK,UP);
-                                render->windowPersonnages();
+                                engine->updateListCommandToExecute(ATTACK,UP);
                                 break;
                             }
                             case sf::Keyboard::Left:
                                 {std::cout << "the Left key was pressed" << std::endl;
-                                engine->update(ATTACK,LEFT);
-                                render->windowPersonnages();
+                                engine->updateListCommandToExecute(ATTACK,LEFT);
                                 break; }
                             case sf::Keyboard::Right:
                                 {std::cout << "the Right key was pressed" << std::endl;
-                                engine->update(ATTACK,RIGHT);
-                                render->windowPersonnages();
+                                engine->updateListCommandToExecute(ATTACK,RIGHT);
                                 break;}
                             case sf::Keyboard::Down:
                                 {std::cout << "the Down key was pressed" << std::endl;
-                                engine->update(ATTACK,DOWN);
-                                render->windowPersonnages();
+                                engine->updateListCommandToExecute(ATTACK,DOWN);
                                 break;}
                             case sf::Keyboard::Z:
                                 {std::cout << "the Z key was pressed" << std::endl;
-                                engine->update(MOVE,UP);
-                                render->windowPersonnages();                            
+                                engine->updateListCommandToExecute(MOVE,UP);                       
                                 break;}
                             case sf::Keyboard::Q:
                                 {std::cout << "the Q key was pressed" << std::endl;
-                                engine->update(MOVE,LEFT);
-                                render->windowPersonnages();
+                                engine->updateListCommandToExecute(MOVE,LEFT);
                                 break;} 
                             case sf::Keyboard::D:
                                 {std::cout << "the D key was pressed" << std::endl;
-                                engine->update(MOVE,RIGHT);
-                                render->windowPersonnages();
+                                engine->updateListCommandToExecute(MOVE,RIGHT);
                                 break;}
                             case sf::Keyboard::S:
                                 {std::cout << "the S key was pressed" << std::endl;
-                                engine->update(MOVE,DOWN);
-                                render->windowPersonnages();
+                                engine->updateListCommandToExecute(MOVE,DOWN);
                                 break; }
                             default:
                                 {break; }      
@@ -702,29 +694,13 @@ void Client::threadGame(){
                     default:
                         {break;}
                 }
+                render->windowCell();
+                render->windowPersonnages();
             }
             else{
                 switch (event.type){
                     case sf::Event::Closed:
                         {this->render->getWindow()->close();
-                        break;}
-                    case sf::Event::KeyPressed:
-                        {switch (event.key.code){
-                            case sf::Keyboard::Escape:
-                                {std::cout << "the Escape key was pressed" << std::endl;
-                                //this->state->~State();
-                                State* newState=new State(17);
-                                this->render->setState(newState);
-                                this->engine->setState(newState);
-                                this->state=newState;
-                                render->windowReset();
-                                break;}
-                            case sf::Keyboard::A:
-                                {std::cout << "the A key was pressed" << std::endl;
-                                break;}
-                            default:
-                                {break;}
-                        }
                         break;}
                     default:
                         {break;}

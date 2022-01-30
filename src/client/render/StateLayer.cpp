@@ -2,6 +2,7 @@
 #include <iostream>
 using namespace render;
 using namespace state;
+using namespace std;
 
 StateLayer::StateLayer(sf::Vector2u tileSize, unsigned int width, unsigned int height, state::State* state){
     (*this).tileSize=tileSize;
@@ -68,6 +69,7 @@ void StateLayer::windowExemple(){
         window->clear();
         window->draw(*map);
         window->draw(*personnages);
+        
         window->display();
     }
 }
@@ -99,9 +101,10 @@ void StateLayer::windowInit(){
     Surface* map= new Surface();
     this->map=map;
     Personnages* personnages = new Personnages();
-    this->personnages=personnages;
+    this->personnages=personnages; 
     map->load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
     personnages->load("res/personnages.png", (*this).tileSize, (*this).listePersonnageCoordX, (*this).listePersonnageId, (*this).listePersonnageCoordY);
+                 
     window->clear();
     window->draw(*map);
     window->draw(*personnages);

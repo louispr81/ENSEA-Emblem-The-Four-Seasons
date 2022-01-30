@@ -24,6 +24,7 @@ void usage(char * argv0){
         cout << "heuristicVsrandom"<< " | ";;
         cout << "heuristicVsheuristic"<< " | ";;
         cout << "100xrandomVsheuristic"<< " | ";;
+        cout << "thread"<< " | ";;
         cout << "game1v1";
     cout << " }" << endl;
 }
@@ -101,6 +102,10 @@ if (strcmp(argv[1],"hello") ==0 ){
     else if (strcmp(argv[1],"100xrandomVsheuristic") == 0){
         client::Client *client= new Client(false);
         client->randomVsHeuristic100();
+	}
+    else if (strcmp(argv[1],"thread") == 0){
+        client::Client *client= new Client(true);
+        client->threadGame();
 	}
     else {
         std::cout << "Wrong command !" << std::endl ;

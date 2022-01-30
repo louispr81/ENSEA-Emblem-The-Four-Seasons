@@ -634,7 +634,7 @@ void Client::randomVsHeuristic100(){
 void Client::threadGame(){
     sf::Event event;
     int cmd;
-    engine->runEngineThread();
+    std::thread thread(&Engine::runEngineThread,this->engine);
     render->windowInit();
     while (render->getWindow()->isOpen()){
         while (render->getWindow()->pollEvent(event)){

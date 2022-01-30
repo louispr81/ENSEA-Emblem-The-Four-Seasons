@@ -1,5 +1,7 @@
 #include "Surface.h"
+#include <iostream>
 using namespace render;
+using namespace std;
 
 
 bool Surface::load(const std::string& tileset, sf::Vector2u tileSize, std::vector<int> tiles, unsigned int width, unsigned int height)
@@ -46,7 +48,45 @@ bool Surface::load(const std::string& tileset, sf::Vector2u tileSize, std::vecto
     return true;
 }
 
+bool Surface::loadStat(const std::string& tileset, sf::Vector2u tileSize, unsigned int width, unsigned int height){
+    static sf::Texture m_tileset;
+    static sf::VertexArray m_vertices;
+    // on charge la texture du tileset
+    if (!m_tileset.loadFromFile(tileset))
+        return false;
 
+    // on redimensionne le tableau de vertex pour qu'il puisse contenir tout le niveau
+    m_vertices.setPrimitiveType(sf::Quads);
+    m_vertices.resize((width * height * 4 ) + 4);
+
+    sf::Vertex* quad = &m_vertices[(17 + 17* width) * 4];
+    // on définit ses quatre coins
+    /*
+    quad[0].position = sf::Vector2f((width+1)*tileSize.x,0);
+    quad[1].position = sf::Vector2f((1.5*width) * tileSize.x, 0);
+    quad[2].position = sf::Vector2f((1.5*width) * tileSize.x, (height + 1) * tileSize.y);
+    quad[3].position = sf::Vector2f((width+1)*tileSize.x, (height + 1) * tileSize.y);
+*/
+
+    quad[0].position = sf::Vector2f(0,0);
+    quad[1].position = sf::Vector2f(10, 0);
+    quad[2].position = sf::Vector2f(10, 10);
+    quad[3].position = sf::Vector2f(0,10);
+            std::cout<<"000000000000="<<width*tileSize.x<<std::endl;
+            std::cout<<"111111111111="<<(1.5*width) * tileSize.x<<std::endl;
+            std::cout<<"222222222222="<<height * tileSize.y<<std::endl;
+         
+    // on définit ses quatre coordonnées de texture
+    quad[0].texCoords = sf::Vector2f(0, 0);
+    quad[1].texCoords = sf::Vector2f(344, 0);
+    quad[2].texCoords = sf::Vector2f(344, 462);
+    quad[3].texCoords = sf::Vector2f(0,  462);
+
+
+    this->m_tileset=m_tileset;
+    this->m_vertices=m_vertices;
+    return true;
+}
 
 void Surface::draw(sf::RenderTarget& target, sf::RenderStates states) const{
     // on applique la transformation

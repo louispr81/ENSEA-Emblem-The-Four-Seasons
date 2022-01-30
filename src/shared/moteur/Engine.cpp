@@ -152,10 +152,25 @@ Engine::Engine (state::State* currentState,std::mutex* mutex) {
     this->mutex=mutex;
 }
 void Engine::updateListCommandToExecute(CommandId cmd, MoveId move){
-
-
+    std::vector<int> listCmdMove;
+    listCmdMove.push_back((int)cmd);
+    listCmdMove.push_back((int)move);
+    mutex->lock();
+    this->listeCommandToExecute.push_back(listCmdMove);
+    mutex->unlock();
 }
 
+void Engine::runEngineThread(){
+    while(1){
+        if(this->listeCommandToExecute.size()>0){
+            std::vector<int> cmd= this->listeCommandToExecute[0];
+            Engine::update((CommandId)cmd[0],(MoveId)cmd[1]);
+            mutex->lock();
+            this->listeCommandToExecute.erase(listeCommandToExecute.begin());
+            mutex->unlock();
+        }
+    }
+}
 
 
 Engine::~Engine(){

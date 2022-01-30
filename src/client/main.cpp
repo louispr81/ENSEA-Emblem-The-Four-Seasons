@@ -9,11 +9,6 @@ using namespace state;
 using namespace render;
 using namespace client;
 
-
-using namespace std;
-using namespace state;
-
-
 void usage(char * argv0){
     cout << "Usage: " << argv0 << " COMMAND" << endl;
     cout << "\tCOMMAND := { ";

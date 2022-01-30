@@ -48,7 +48,7 @@ void StateLayer::windowExemple(){
     (*this).actListePersonnageId();
     (*this).actXFromState(); 
     (*this).actYFromState();
-    sf::RenderWindow* window=new sf::RenderWindow(sf::VideoMode(1.5*(*this).width*tileSize.x, (*this).height*tileSize.y), "ENSEA Emblem: The Four Seasons");
+    sf::RenderWindow* window=new sf::RenderWindow(sf::VideoMode((*this).width*tileSize.x, (*this).height*tileSize.y), "ENSEA Emblem: The Four Seasons");
     this->window=window;
     Surface* map= new Surface();
     this->map=map;
@@ -96,7 +96,7 @@ void StateLayer::windowInit(){
     text.setStyle(sf::Text::Bold);
     text.setPosition(2*tileSize.x,(this->state->getPlateau()->getSize()/2-1)*tileSize.y);
     this->textGameOver=text;
-    sf::RenderWindow* window=new sf::RenderWindow(sf::VideoMode(1.5*(*this).width*tileSize.x, (*this).height*tileSize.y), "ENSEA Emblem: The Four Seasons");
+    sf::RenderWindow* window=new sf::RenderWindow(sf::VideoMode((*this).width*tileSize.x, (*this).height*tileSize.y), "ENSEA Emblem: The Four Seasons");
     this->window=window;
     Surface* map= new Surface();
     this->map=map;

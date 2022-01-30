@@ -64,7 +64,7 @@ if (strcmp(argv[1],"hello") ==0 ){
         std::cout << "A : attendre (et valider la fin du tour du personnage)" << std::endl;
         std::cout << "Z,Q,S,D : se déplacer" << std::endl;
         std::cout << "UP,DOWN,LEFT,RIGHT : attaquer " << std::endl;
-		client::Client *client= new Client;
+		client::Client *client= new Client(false);
         client->run();
 
 	}
@@ -74,15 +74,15 @@ if (strcmp(argv[1],"hello") ==0 ){
         std::cout << "A : attendre (et valider la fin du tour du personnage)" << std::endl;
         std::cout << "Z,Q,S,D : se déplacer" << std::endl;
         std::cout << "UP,DOWN,LEFT,RIGHT : attaquer " << std::endl;
-		client::Client *client= new Client;
+		client::Client *client= new Client(false);
         client->run();
 	}
     else if (strcmp(argv[1],"random_ai") == 0){
-        client::Client *client= new Client;
+        client::Client *client= new Client(false);
         client->runVsAIRandom();
 	}
     else if (strcmp(argv[1],"heuristic_ai") == 0){
-        client::Client *client= new Client;
+        client::Client *client= new Client(false);
         client->runVsAIHeuristic();
 	}
     else if (strcmp(argv[1],"rollback") == 0){
@@ -92,19 +92,19 @@ if (strcmp(argv[1],"hello") ==0 ){
         std::cout << "Work in Progress" << std::endl;
 	}
     else if (strcmp(argv[1],"randomVsrandom") == 0){
-        client::Client *client= new Client;
+        client::Client *client= new Client(false);
         client->randomVsRandomRender();
 	}
     else if (strcmp(argv[1],"heuristicVsrandom") == 0){
-        client::Client *client= new Client;
+        client::Client *client= new Client(false);
         client->randomVsHeuristicRender();
 	}
     else if (strcmp(argv[1],"heuristicVsheuristic") == 0){
-        client::Client *client= new Client;
+        client::Client *client= new Client(false);
         client->heuristicVsHeuristicRender();
 	}
     else if (strcmp(argv[1],"100xrandomVsheuristic") == 0){
-        client::Client *client= new Client;
+        client::Client *client= new Client(false);
         client->randomVsHeuristic100();
 	}
     else {

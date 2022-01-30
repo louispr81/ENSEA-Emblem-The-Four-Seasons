@@ -54,11 +54,8 @@ void StateLayer::windowExemple(){
     this->map=map;
     Personnages* personnages = new Personnages();
     this->personnages=personnages;
-    Surface* papierStat= new Surface();
-    this->papierStat=papierStat;
     map->load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
     personnages->load("res/personnages.png", (*this).tileSize, (*this).listePersonnageCoordX, (*this).listePersonnageId, (*this).listePersonnageCoordY);
-    papierStat->loadStat("res/papier_344462.png",(*this).tileSize,(*this).width, (*this).height);
     while (window->isOpen()){
         // on gère les évènements
         sf::Event event;
@@ -70,9 +67,8 @@ void StateLayer::windowExemple(){
         // on dessine le niveau
         
         window->clear();
-        window->draw(*papierStat);
-        //window->draw(*map);
-        //window->draw(*personnages);
+        window->draw(*map);
+        window->draw(*personnages);
         
         window->display();
     }
@@ -123,11 +119,9 @@ void StateLayer::windowReset(){
 void StateLayer::windowCell(){
     (*this).plateauId=(*this).getPlateauIdFromState();
     map->load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
-    papierStat->loadStat("res/papier_344462.png",(*this).tileSize,(*this).width, (*this).height);
     window->clear();
     window->draw(*map);
     window->draw(*personnages);
-    window->draw(*papierStat);
     window->display();
 }
 
@@ -141,7 +135,6 @@ void StateLayer::windowPersonnages(){
     window->clear();
     window->draw(*map);
     window->draw(*personnages);
-    window->draw(*papierStat);
     window->display();
 }
 
@@ -157,7 +150,6 @@ void StateLayer::windowGameOver(){
     window->clear();
     window->draw(*map);
     window->draw(*personnages);
-    window->draw(*papierStat);
     window->draw(this->textGameOver);
     window->display();
 }

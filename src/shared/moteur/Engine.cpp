@@ -135,6 +135,9 @@ int Engine::update(CommandId cmd, MoveId move){
         return -1;
     }  
 }
+std::vector<Command*> Engine::getListCommand(){
+    return listeCommandes;
+}
 Engine::Engine (state::State* currentState,std::mutex* mutex) {
     this->currentState=currentState;
     std::vector<Command*> listeCommandes;
@@ -153,9 +156,7 @@ void Engine::updateListCommandToExecute(CommandId cmd, MoveId move){
 
 }
 
-std::vector<Command*> Engine::getListCommand(){
-    return listeCommandes;
-}
+
 
 Engine::~Engine(){
 

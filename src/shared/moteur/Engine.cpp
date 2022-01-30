@@ -1,6 +1,6 @@
 #include "Engine.h"
 #include <iostream>
-
+#include <mutex>
 
 using namespace state;
 using namespace std;
@@ -10,7 +10,6 @@ Engine::Engine () {
     cout<<"Engine launched"<<endl;
 }
 
-//doit avoir liste *commandes 
 Engine::Engine (state::State* currentState) {
     this->currentState=currentState;
     std::vector<Command*> listeCommandes;
@@ -135,6 +134,23 @@ int Engine::update(CommandId cmd, MoveId move){
     else{
         return -1;
     }  
+}
+Engine::Engine (state::State* currentState,std::mutex* mutex) {
+    this->currentState=currentState;
+    std::vector<Command*> listeCommandes;
+    CommandMove *move = new CommandMove(currentState);
+    CommandAttack *attack = new CommandAttack(currentState);
+    CommandAttendre *attendre = new CommandAttendre(currentState);
+    std::vector<std::vector<int>> listeCommandToExecute;
+    this->listeCommandes.push_back(move);
+    this->listeCommandes.push_back(attack);
+    this->listeCommandes.push_back(attendre);
+    this->listeCommandToExecute=listeCommandToExecute;
+    this->mutex=mutex;
+}
+void Engine::updateListCommandToExecute(CommandId cmd, MoveId move){
+
+
 }
 
 std::vector<Command*> Engine::getListCommand(){

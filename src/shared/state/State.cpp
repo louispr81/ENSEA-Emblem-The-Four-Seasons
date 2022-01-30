@@ -21,7 +21,11 @@ State::State(int size){
     (*this).joueurs=joueurs;
 
     // Creation des bonus des saisons (pour le moment les 4 ont le meme)
-    for (int i=0; i<12; ++i){
+    bonus.push_back(0);
+    bonus.push_back(0);
+    bonus.push_back(0);
+    bonus.push_back(0);
+    for (int i=0; i<8; ++i){
         bonus.push_back(1);
     }
     // Creation des 4 saisons
@@ -39,16 +43,16 @@ State::State(int size){
 
     //Creation des statistiques
     //Statistiques (int vie, int vie_max, int point_mouvement, int point_mouvement_max, int force, int intelligence, int vitesse, int defense, int resistance, int technique, int experience, int experience_max, int niveau);
-    Statistiques* statistiquesBaseA1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesBaseM1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesBaseC1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesBaseCH1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesBaseAR1=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesBaseA2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesBaseM2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesBaseC2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesBaseCH2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesBaseAR2=new Statistiques(20,20,5,5,1,1,1,1,1,1,0,100,1);
+    Statistiques* statistiquesBaseA1=new Statistiques(20,20,18,18,8,5,12,2,1,15,0,100,1); //pv pm str int sp def res tec
+    Statistiques*statistiquesBaseM1=new Statistiques(10,10,10,10,1,20,8,2,15,9,0,100,1);
+    Statistiques* statistiquesBaseC1=new Statistiques(35,35,12,12,12,0,7,15,3,10,0,100,1);
+    Statistiques* statistiquesBaseCH1=new Statistiques(28,28,23,23,14,5,8,14,3,11,0,100,1);
+    Statistiques* statistiquesBaseAR1=new Statistiques(20,20,16,16,11,7,14,7,5,25,0,100,1);
+    Statistiques* statistiquesBaseA2=new Statistiques(20,20,18,18,8,5,12,2,1,15,0,100,1); //pv pm str int sp def res tec
+    Statistiques*statistiquesBaseM2=new Statistiques(10,10,10,10,1,20,8,2,15,9,0,100,1);
+    Statistiques* statistiquesBaseC2=new Statistiques(35,35,12,12,12,0,7,15,3,10,0,100,1);
+    Statistiques* statistiquesBaseCH2=new Statistiques(28,28,23,23,14,5,8,14,3,11,0,100,1);
+    Statistiques* statistiquesBaseAR2=new Statistiques(20,20,16,16,11,7,14,7,5,25,0,100,1);
 
     //Creation des inventaires
     std::vector<Objet*> inventaireA1;
@@ -76,11 +80,55 @@ State::State(int size){
 
     //Creation des tableaux de probabilités d'augmentation d'une statistique
     std::vector<float> probaGainStatsA;
+    probaGainStatsA.push_back(-1); //vie
+    probaGainStatsA.push_back(0.5); //viemax
+    probaGainStatsA.push_back(0.9); //pm max
+    probaGainStatsA.push_back(0.8);  //force
+    probaGainStatsA.push_back(0.2); //int
+    probaGainStatsA.push_back(0.8);  // vit
+    probaGainStatsA.push_back(0.2);   //def
+    probaGainStatsA.push_back(0.1);   //res
+    probaGainStatsA.push_back(1);   //tec
     std::vector<float> probaGainStatsM;
+    probaGainStatsM.push_back(-1); //vie
+    probaGainStatsM.push_back(0.4); //viemax
+    probaGainStatsM.push_back(0.5); //pm max
+    probaGainStatsM.push_back(0.1);  //force
+    probaGainStatsM.push_back(1); //int
+    probaGainStatsM.push_back(0.8);  // vit
+    probaGainStatsM.push_back(0.2);   //def
+    probaGainStatsM.push_back(0.9);   //res
+    probaGainStatsM.push_back(0.5);   //tec
     std::vector<float> probaGainStatsC;
+    probaGainStatsM.push_back(-1); //vie
+    probaGainStatsM.push_back(1); //viemax
+    probaGainStatsM.push_back(0.3); //pm max
+    probaGainStatsM.push_back(0.9);  //force
+    probaGainStatsM.push_back(0.1); //int
+    probaGainStatsM.push_back(0.4);  // vit
+    probaGainStatsM.push_back(1);   //def
+    probaGainStatsM.push_back(0.2);   //res
+    probaGainStatsM.push_back(0.5);   //tec
     std::vector<float> probaGainStatsCH;
+    probaGainStatsCH.push_back(-1); //vie
+    probaGainStatsCH.push_back(0.8); //viemax
+    probaGainStatsCH.push_back(1); //pm max
+    probaGainStatsCH.push_back(0.8);  //force
+    probaGainStatsCH.push_back(0.2); //int
+    probaGainStatsCH.push_back(0.3);  // vit
+    probaGainStatsCH.push_back(0.8);   //def
+    probaGainStatsCH.push_back(0.1);   //res
+    probaGainStatsCH.push_back(0.5);   //tec
     std::vector<float> probaGainStatsAR;
-    
+    probaGainStatsAR.push_back(-1); //vie
+    probaGainStatsAR.push_back(0.8); //viemax
+    probaGainStatsAR.push_back(0.8); //pm max
+    probaGainStatsAR.push_back(0.75);  //force
+    probaGainStatsAR.push_back(0.2); //int
+    probaGainStatsAR.push_back(0.5);  // vit
+    probaGainStatsAR.push_back(0.4);   //def
+    probaGainStatsAR.push_back(0.5);   //res
+    probaGainStatsAR.push_back(1);   //tec
     //Creation des classes
     Classe *assassin = new Classe(ClasseId::ASSASSIN, "Assassin", probaGainStatsA);
     Classe *mage = new Classe(ClasseId::MAGE, "Mage", probaGainStatsM);
@@ -89,21 +137,23 @@ State::State(int size){
     Classe *combattant = new Classe(ClasseId::COMBATTANT, "Combattant", probaGainStatsC);
    
     // Creation des bonus les personnages(pour le moment les 4 ont le meme)
-    for (int i=0; i<12; ++i){
+    bonusP.push_back(0);
+    bonusP.push_back(0);
+    for (int i=0; i<10; ++i){
         bonusP.push_back(1);
     }
     
-    //Creation des statistiques des personnages
-    Statistiques* statistiquesA1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
-    Statistiques*statistiquesM1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesC1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesCH1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesAR1=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesA2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesM2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesC2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesCH2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
-    Statistiques* statistiquesAR2=new Statistiques(20,20,16,16,20,1,1,1,1,1,0,100,1);
+    //Creation des statistiques des personnages 
+    Statistiques* statistiquesA1=new Statistiques(20,20,18,18,8,5,12,2,1,15,0,100,1); //pv pm str int sp def res tec
+    Statistiques*statistiquesM1=new Statistiques(10,10,10,10,1,20,8,2,15,9,0,100,1);
+    Statistiques* statistiquesC1=new Statistiques(35,35,12,12,12,0,7,15,3,10,0,100,1);
+    Statistiques* statistiquesCH1=new Statistiques(28,28,23,23,14,5,8,14,3,11,0,100,1);
+    Statistiques* statistiquesAR1=new Statistiques(20,20,16,16,11,7,14,7,5,25,0,100,1);
+    Statistiques* statistiquesA2=new Statistiques(20,20,18,18,8,5,12,2,1,15,0,100,1); //pv pm str int sp def res tec
+    Statistiques*statistiquesM2=new Statistiques(10,10,10,10,1,20,8,2,15,9,0,100,1);
+    Statistiques* statistiquesC2=new Statistiques(35,35,12,12,12,0,7,15,3,10,0,100,1);
+    Statistiques* statistiquesCH2=new Statistiques(28,28,23,23,14,5,8,14,3,11,0,100,1);
+    Statistiques* statistiquesAR2=new Statistiques(20,20,16,16,11,7,14,7,5,25,0,100,1);
     
     //Choix des cases des personnages
     Cell* caseA1=(*plateau).getCase(0,0)->getPtCell();
@@ -160,12 +210,20 @@ State::State(int size){
     this->joueurs.push_back(joueur1);
     this->joueurs.push_back(joueur2);
 
+    
     //Atributs
     (*this).tour=1;
     (*this).gameover=false;
     (*this).joueur=joueur1;
     (*this).saison=printemps;
     (*this).plateau=plateau;
+    int i(0);
+    for(i=0;i<this->joueurs[0]->getPersonnages().size();i++){
+            this->joueurs[0]->getPersonnages()[i]->gainBonusSaison(this->saison);
+        }
+    for(i=0;i<this->joueurs[1]->getPersonnages().size();i++){
+            this->joueurs[1]->getPersonnages()[i]->gainBonusSaison(this->saison);
+        }
     
 }
 
@@ -246,6 +304,12 @@ void State::updateSaison (){
             for(j;j<this->plateau->getSize();j++){
                 this->saison->updateCell(this->plateau->getCase(i,j));
             }
+        }
+        for(i=0;i<this->joueurs[0]->getPersonnages().size();i++){
+            this->joueurs[0]->getPersonnages()[i]->gainBonusSaison(this->saison);
+        }
+        for(i=0;i<this->joueurs[1]->getPersonnages().size();i++){
+            this->joueurs[1]->getPersonnages()[i]->gainBonusSaison(this->saison);
         }
     }
     else{

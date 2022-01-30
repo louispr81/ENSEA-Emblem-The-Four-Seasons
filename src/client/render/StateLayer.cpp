@@ -2,6 +2,7 @@
 #include <iostream>
 using namespace render;
 using namespace state;
+using namespace std;
 
 StateLayer::StateLayer(sf::Vector2u tileSize, unsigned int width, unsigned int height, state::State* state){
     (*this).tileSize=tileSize;
@@ -47,7 +48,7 @@ void StateLayer::windowExemple(){
     (*this).actListePersonnageId();
     (*this).actXFromState(); 
     (*this).actYFromState();
-    sf::RenderWindow* window=new sf::RenderWindow(sf::VideoMode((*this).width*tileSize.x, (*this).height*tileSize.y), "ENSEA Emblem: The Four Seasons");
+    sf::RenderWindow* window=new sf::RenderWindow(sf::VideoMode(1.5*(*this).width*tileSize.x, (*this).height*tileSize.y), "ENSEA Emblem: The Four Seasons");
     this->window=window;
     Surface* map= new Surface();
     this->map=map;
@@ -68,6 +69,7 @@ void StateLayer::windowExemple(){
         window->clear();
         window->draw(*map);
         window->draw(*personnages);
+        
         window->display();
     }
 }
@@ -94,14 +96,15 @@ void StateLayer::windowInit(){
     text.setStyle(sf::Text::Bold);
     text.setPosition(2*tileSize.x,(this->state->getPlateau()->getSize()/2-1)*tileSize.y);
     this->textGameOver=text;
-    sf::RenderWindow* window=new sf::RenderWindow(sf::VideoMode((*this).width*tileSize.x, (*this).height*tileSize.y), "ENSEA Emblem: The Four Seasons");
+    sf::RenderWindow* window=new sf::RenderWindow(sf::VideoMode(1.5*(*this).width*tileSize.x, (*this).height*tileSize.y), "ENSEA Emblem: The Four Seasons");
     this->window=window;
     Surface* map= new Surface();
     this->map=map;
     Personnages* personnages = new Personnages();
-    this->personnages=personnages;
+    this->personnages=personnages; 
     map->load("res/cases.png", (*this).tileSize, (*this).plateauId, (*this).width, (*this).height);
     personnages->load("res/personnages.png", (*this).tileSize, (*this).listePersonnageCoordX, (*this).listePersonnageId, (*this).listePersonnageCoordY);
+                 
     window->clear();
     window->draw(*map);
     window->draw(*personnages);

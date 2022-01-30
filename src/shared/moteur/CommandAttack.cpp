@@ -36,5 +36,8 @@ void CommandAttack::execute(state::Personnage* target){
     cout <<  currentState->getPersonnageActif()->getNom() << " attaque " << target->getNom() << endl;
     currentState->getPersonnageActif()->attaquer(target);
     currentState->getPersonnageActif();
+    if(currentState->getGameover()==false){
+      std::cout<<"Au tour de "<<currentState->getPersonnageActif()->getNom()<<std::endl;
+    }
 }
 }

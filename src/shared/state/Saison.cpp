@@ -97,6 +97,9 @@ SaisonId Saison::getSaisonOppId(){
 std::string Saison::getNom(){
     return (*this).nom;
 }
+std::vector<int> Saison::getBonus(){
+    return this->bonus;
+}
 Saison::~Saison(){
     
 }

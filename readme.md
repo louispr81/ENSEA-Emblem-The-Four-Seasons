@@ -240,7 +240,7 @@ Distributed under the *license* License. See [LICENSE][license-url] for more inf
 [issues-url]: https://github.com/louispr81/pradineswangbenmira/issues
 
 [license-shield]: https://img.shields.io/github/license/louispr81/pradineswangbenmira.svg?style=flat-square
-[license-url]: https://github.com/louispr81/pradineswangbenmira/blob/add-license-1/LICENSE
+[license-url]: https://github.com/louispr81/pradineswangbenmira/blob/master/LICENSE
 
 [cpp-ver-shield]: https://img.shields.io/badge/C%2B%2B-11-blue.svg
 [cpp-ver]: https://en.wikipedia.org/wiki/C%2B%2B11

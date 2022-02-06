@@ -239,7 +239,7 @@ Distributed under the *license* License. See [LICENSE][license-url] for more inf
 [issues-shield]: https://img.shields.io/github/issues/louispr81/pradineswangbenmira.svg?style=flat-square
 [issues-url]: https://github.com/louispr81/pradineswangbenmira/issues
 
-[license-shield]: https://img.shields.io/github/license/louispr81/pradineswangbenmira.svg?style=flat-square
+[license-shield]: https://img.shields.io/github/license/louispr81/pradineswangbenmira
 [license-url]: https://github.com/louispr81/pradineswangbenmira/blob/master/LICENSE
 
 [cpp-ver-shield]: https://img.shields.io/badge/C%2B%2B-11-blue.svg

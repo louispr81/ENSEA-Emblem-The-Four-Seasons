@@ -7,9 +7,9 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-# ENSEA PLT Project 2021-2022: ENSEA Emblem: The Four Seasons
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c-plus-plus.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+# ENSEA PLT Project 2021-2022: ENSEA Emblem: The Four Seasons
 <p align="center">
  
   <!-- logo of the project/game here -->
@@ -245,7 +245,7 @@ Distributed under the *license* License. See [LICENSE][license-url] for more inf
 [cpp-ver-shield]: https://img.shields.io/badge/C%2B%2B-11-blue.svg
 [cpp-ver]: https://en.wikipedia.org/wiki/C%2B%2B11
 
-[build-status-shield]: https://github.com/louispr81/pradineswangbenmira/workflows/CI/badge.svg
+[build-status-shield]: https://img.shields.io/appveyor/build/louispr81/pradineswangbenmira?style=plastic
 [build-status]: https://github.com/louispr81/pradineswangbenmira/actions
 
 [version-shield]: https://img.shields.io/badge/version-0.0-blue.svg?cacheSeconds=2592000
